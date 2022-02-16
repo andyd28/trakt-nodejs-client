@@ -13,13 +13,13 @@ class Trakt {
 		this.redirect_uri = options.redirect_uri ?? "urn:ietf:wg:oauth:2.0:oob";
     }
     
-    private parseEndpoint(endpoint: string, params: {[key: string]: any}): string {
+    private parseEndpoint(endpoint: string, params: Record<string, any>): string {
         const matches = /{(.+)}/g.exec(endpoint);
 
         if(!matches)
             return endpoint;
 
-        for (var im = 0;im< matches?.length ?? 0; im++) {
+        for (var im = 0; im < matches.length; im++) {
             const repl = matches[im];
             // If querystring
             if (repl[0] === "?") {
@@ -1634,7 +1634,8 @@ class Trakt {
                 json: {
                     "movies": params.movies,
 					"shows": params.shows,
-					"seasons": params.seasons
+					"seasons": params.seasons,
+					"users": params.users
                 },                          
             });
 
@@ -1654,7 +1655,8 @@ class Trakt {
                 json: {
                     "movies": params.movies,
 					"shows": params.shows,
-					"seasons": params.seasons
+					"seasons": params.seasons,
+					"users": params.users
                 },                          
             });
 
@@ -1961,6 +1963,9 @@ class Trakt {
 	};
 
 }
+
+
+export default Trakt;
 
 export interface TraktOptions {
 	client_id: string;
@@ -2454,7 +2459,7 @@ export interface TraktUsersApproveOrDenyFollowerRequestsParams {
 }
     
 export interface TraktUsersHiddenItemsParams { 
-	section: "calendar"|"recommendations";
+	section: "calendar"|"recommendations"|"comments";
 	type?: string;
 }
     
@@ -2463,7 +2468,7 @@ export interface TraktUsersAddHiddenItemsParams {
 }
     
 export interface TraktUsersRemoveHiddenItemsParams { 
-	section: "calendar"|"recommendations";
+	section: "calendar"|"recommendations"|"comments";
 }
     
 export interface TraktUsersProfileParams { 
@@ -2720,12 +2725,14 @@ export interface TraktUsersAddHiddenItemsBody {
 	movies?: Array<any>;
 	shows?: Array<any>;
 	seasons?: Array<any>;
+	users?: Array<any>;
 }
     
 export interface TraktUsersRemoveHiddenItemsBody { 
 	movies?: Array<any>;
 	shows?: Array<any>;
 	seasons?: Array<any>;
+	users?: Array<any>;
 }
     
 export interface TraktUsersListsBody { 
