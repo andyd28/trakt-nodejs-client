@@ -25,7 +25,7 @@ declare class Trakt {
             headers: import("http").IncomingHttpHeaders;
             body: any;
         }>;
-        deviceCode: (params: TraktAuthenticationDeviceCodeBody) => Promise<{
+        deviceCode: () => Promise<{
             headers: import("http").IncomingHttpHeaders;
             body: any;
         }>;
@@ -698,8 +698,6 @@ export interface TraktOptions {
 }
 export interface TraktAuthenticationAuthorizeParams {
     response_type: string;
-    client_id: string;
-    redirect_uri: string;
     state?: string;
     signup?: string;
 }
@@ -1193,23 +1191,15 @@ export interface TraktUsersStatsParams {
 }
 export interface TraktAuthenticationGetTokenBody {
     code: string;
-    client_id: string;
-    client_secret: string;
 }
 export interface TraktAuthenticationRefreshTokenBody {
     refresh_token: string;
-    client_id: string;
-    client_secret: string;
-    redirect_uri: string;
     grant_type?: string;
 }
 export interface TraktAuthenticationRevokeTokenBody {
     token: string;
-    client_id: string;
-    client_secret: string;
 }
 export interface TraktAuthenticationDeviceCodeBody {
-    client_id: string;
 }
 export interface TraktCommentsCommentsBody {
     item: "movie" | "show" | "season" | "episode" | "or list object. (see examples &#8594;)";

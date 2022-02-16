@@ -1,4 +1,4 @@
-import * as fs from "fs";
+const fs = require("fs");
 
 const output = fs.readFileSync("data.json", { encoding: "utf8", flag: "r" });
 const data = JSON.parse(output);
@@ -8,7 +8,11 @@ const classOptionalValues = ["", "urn:ietf:wg:oauth:2.0:oob", "code", "", ""];
 const classStaticValues = ["grant_type"];
 const classAllValues = [...classRequiredOptions, ...classOptionalOptions];
 
-const toPascalCase = (...args: string[]) => args.map((s) => s[0].toUpperCase() + s.substring(1)).join("");
+const toPascalCase = (...args: string[]) => args.map((s) => {
+    if(!s[0]) return "";
+    
+    return s[0].toUpperCase() + s.substring(1)
+}).join("");
 
 const openGroup = (groupName: string) => "\t" + groupName + " = {";
 
@@ -18,11 +22,12 @@ const createInterfaceName = (groupName: string, methodName: string, suffix: stri
 
 const addParametersInterface = (interfaceName: string, params: Record<string, MethodParameter>) => {
     var paramString = Object.keys(params)
+        .filter(key => classAllValues.indexOf(key) < 0)
         .map((key) => {
             const value = params[key];
-            let t = value.type;
+            let t = value?.type ?? "any";
 
-            switch (value.type) {
+            switch (t) {
                 case "integer":
                 case "float":
                 case "flloat":
@@ -33,11 +38,11 @@ const addParametersInterface = (interfaceName: string, params: Record<string, Me
                     break;
             }
 
-            if (value.values.length > 0) {
+            if (value && value.values && value.values.length > 0) {
                 t = t == "number" ? value.values.join("|") : '"' + value.values.join('"|"') + '"';
             }
 
-            return "\n\t" + key + (value.required ? ": " : "?: ") + t + ";";
+            return "\n\t" + key + ((value?.required ?? false) ? ": " : "?: ") + t + ";";
         })
         .join("");
 
@@ -94,7 +99,7 @@ const addMethod = (groupName: string, methodName: string, method: any) => {
                 if (!rx.test(value)) return `"${key}": "${value}"`;
 
                 value = value.replace(rx, (match: any, p1: any, p2: any) => {
-                    if (!!p1) return `"${p1}" + this.${p2}`;
+                    if (match && !!p1) return `"${p1}" + this.${p2}`;
 
                     return `this.${p2}`;
                 });
@@ -142,7 +147,7 @@ ${classOptionalOptions.map((opt) => `\t\tthis.${opt} = options.${opt} ?? "${clas
         for (var im = 0; im < matches.length; im++) {
             const repl = matches[im];
             // If querystring
-            if (repl[0] === "?") {
+            if (repl && repl[0] === "?") {
                 const sourceArray = repl.substring(1).split(",");
                 const destArray = [];
                 for (const s in sourceArray) {
@@ -150,7 +155,7 @@ ${classOptionalOptions.map((opt) => `\t\tthis.${opt} = options.${opt} ?? "${clas
                 }
 
                 endpoint = endpoint.replace("{" + repl + "}", "?" + destArray.join("&"));
-            } else {
+            } else if(repl) {
                 endpoint = endpoint.replace("{" + repl + "}", params[repl]);
             }
         }

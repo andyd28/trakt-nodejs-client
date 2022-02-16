@@ -22,7 +22,7 @@ class Trakt {
         for (var im = 0; im < matches.length; im++) {
             const repl = matches[im];
             // If querystring
-            if (repl[0] === "?") {
+            if (repl && repl[0] === "?") {
                 const sourceArray = repl.substring(1).split(",");
                 const destArray = [];
                 for (const s in sourceArray) {
@@ -30,7 +30,7 @@ class Trakt {
                 }
 
                 endpoint = endpoint.replace("{" + repl + "}", "?" + destArray.join("&"));
-            } else {
+            } else if(repl) {
                 endpoint = endpoint.replace("{" + repl + "}", params[repl]);
             }
         }
@@ -96,7 +96,7 @@ class Trakt {
 
             return { headers, body: JSON.parse(body) };
         },
-        deviceCode: async (params: TraktAuthenticationDeviceCodeBody) => {
+        deviceCode: async () => {
             const endpoint = "/oauth/device/code";
             const route = endpoint;
 
@@ -1976,8 +1976,6 @@ export interface TraktOptions {
     
 export interface TraktAuthenticationAuthorizeParams { 
 	response_type: string;
-	client_id: string;
-	redirect_uri: string;
 	state?: string;
 	signup?: string;
 }
@@ -2599,26 +2597,18 @@ export interface TraktUsersStatsParams {
     
 export interface TraktAuthenticationGetTokenBody { 
 	code: string;
-	client_id: string;
-	client_secret: string;
 }
     
 export interface TraktAuthenticationRefreshTokenBody { 
 	refresh_token: string;
-	client_id: string;
-	client_secret: string;
-	redirect_uri: string;
 	grant_type?: string;
 }
     
 export interface TraktAuthenticationRevokeTokenBody { 
 	token: string;
-	client_id: string;
-	client_secret: string;
 }
     
 export interface TraktAuthenticationDeviceCodeBody { 
-	client_id: string;
 }
     
 export interface TraktCommentsCommentsBody { 
