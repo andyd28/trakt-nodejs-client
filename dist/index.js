@@ -1,10 +1,11 @@
 import got from "got";
 class Trakt {
     constructor(options) {
+        this.baseUrl = "https://api.trakt.tv";
         this.authentication = {
             authorize: async (params) => {
                 const endpoint = "/oauth/authorize{?response_type,client_id,redirect_uri,state}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -12,7 +13,7 @@ class Trakt {
             },
             getToken: async (params) => {
                 const endpoint = "/oauth/device/token";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     json: {
@@ -25,7 +26,7 @@ class Trakt {
             },
             refreshToken: async (params) => {
                 const endpoint = "/oauth/token";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     json: {
@@ -33,14 +34,14 @@ class Trakt {
                         "client_id": this.client_id,
                         "client_secret": this.client_secret,
                         "redirect_uri": this.redirect_uri,
-                        "grant_type": "[object Object]"
+                        "grant_type": params.grant_type
                     },
                 });
                 return { headers, body: JSON.parse(body) };
             },
             revokeToken: async (params) => {
                 const endpoint = "/oauth/revoke";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     json: {
@@ -53,7 +54,7 @@ class Trakt {
             },
             deviceCode: async () => {
                 const endpoint = "/oauth/device/code";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "POST",
                     json: {
@@ -66,7 +67,7 @@ class Trakt {
         this.calendars = {
             myShows: async (params) => {
                 const endpoint = "/calendars/my/shows/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -74,7 +75,7 @@ class Trakt {
             },
             myNewShows: async (params) => {
                 const endpoint = "/calendars/my/shows/new/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -82,7 +83,7 @@ class Trakt {
             },
             mySeasonPremieres: async (params) => {
                 const endpoint = "/calendars/my/shows/premieres/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -90,7 +91,7 @@ class Trakt {
             },
             myMovies: async (params) => {
                 const endpoint = "/calendars/my/movies/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -98,7 +99,7 @@ class Trakt {
             },
             myDVD: async (params) => {
                 const endpoint = "/calendars/my/dvd/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -106,7 +107,7 @@ class Trakt {
             },
             allShows: async (params) => {
                 const endpoint = "/calendars/all/shows/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -114,7 +115,7 @@ class Trakt {
             },
             allNewShows: async (params) => {
                 const endpoint = "/calendars/all/shows/new/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -122,7 +123,7 @@ class Trakt {
             },
             allSeasonPremieres: async (params) => {
                 const endpoint = "/calendars/all/shows/premieres/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -130,7 +131,7 @@ class Trakt {
             },
             allMovies: async (params) => {
                 const endpoint = "/calendars/all/movies/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -138,7 +139,7 @@ class Trakt {
             },
             allDVD: async (params) => {
                 const endpoint = "/calendars/all/dvd/{start_date}/{days}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -148,7 +149,7 @@ class Trakt {
         this.checkin = {
             checkin: async () => {
                 const endpoint = "/checkin";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -158,7 +159,7 @@ class Trakt {
         this.certifications = {
             list: async (params) => {
                 const endpoint = "/certifications/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -168,7 +169,7 @@ class Trakt {
         this.comments = {
             comments: async (params) => {
                 const endpoint = "/comments";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -187,7 +188,7 @@ class Trakt {
             },
             comment: async (params) => {
                 const endpoint = "/comments/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -195,7 +196,7 @@ class Trakt {
             },
             replies: async (params) => {
                 const endpoint = "/comments/{id}/replies";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -212,7 +213,7 @@ class Trakt {
             },
             item: async (params) => {
                 const endpoint = "/comments/{id}/item";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -220,7 +221,7 @@ class Trakt {
             },
             likes: async (params) => {
                 const endpoint = "/comments/{id}/likes";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -228,7 +229,7 @@ class Trakt {
             },
             like: async (params) => {
                 const endpoint = "/comments/{id}/like";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -236,7 +237,7 @@ class Trakt {
             },
             trending: async (params) => {
                 const endpoint = "/comments/trending/{comment_type}/{type}{?include_replies}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -244,7 +245,7 @@ class Trakt {
             },
             recent: async (params) => {
                 const endpoint = "/comments/recent/{comment_type}/{type}{?include_replies}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -252,7 +253,7 @@ class Trakt {
             },
             updates: async (params) => {
                 const endpoint = "/comments/updates/{comment_type}/{type}{?include_replies}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -262,7 +263,7 @@ class Trakt {
         this.countries = {
             list: async (params) => {
                 const endpoint = "/countries/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -272,7 +273,7 @@ class Trakt {
         this.genres = {
             list: async (params) => {
                 const endpoint = "/genres/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -282,7 +283,7 @@ class Trakt {
         this.languages = {
             list: async (params) => {
                 const endpoint = "/lists/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -290,7 +291,7 @@ class Trakt {
             },
             trending: async () => {
                 const endpoint = "/movies/trending";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -298,7 +299,7 @@ class Trakt {
             },
             popular: async () => {
                 const endpoint = "/movies/popular";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -306,7 +307,7 @@ class Trakt {
             },
             listLikes: async (params) => {
                 const endpoint = "/lists/{id}/likes";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -314,7 +315,7 @@ class Trakt {
             },
             listItems: async (params) => {
                 const endpoint = "/lists/{id}/items/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -322,7 +323,7 @@ class Trakt {
             },
             listComments: async (params) => {
                 const endpoint = "/lists/{id}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -330,7 +331,7 @@ class Trakt {
             },
             recommended: async (params) => {
                 const endpoint = "/movies/recommended/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -338,7 +339,7 @@ class Trakt {
             },
             played: async (params) => {
                 const endpoint = "/movies/played/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -346,7 +347,7 @@ class Trakt {
             },
             watched: async (params) => {
                 const endpoint = "/movies/watched/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -354,7 +355,7 @@ class Trakt {
             },
             collected: async (params) => {
                 const endpoint = "/movies/collected/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -362,7 +363,7 @@ class Trakt {
             },
             anticipated: async () => {
                 const endpoint = "/movies/anticipated";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -370,7 +371,7 @@ class Trakt {
             },
             boxOffice: async () => {
                 const endpoint = "/movies/boxoffice";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -378,7 +379,7 @@ class Trakt {
             },
             updates: async (params) => {
                 const endpoint = "/movies/updates/{start_date}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -386,7 +387,7 @@ class Trakt {
             },
             updatedIDs: async (params) => {
                 const endpoint = "/movies/updates/id/{start_date}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -394,7 +395,7 @@ class Trakt {
             },
             summary: async (params) => {
                 const endpoint = "/movies/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -402,7 +403,7 @@ class Trakt {
             },
             aliases: async (params) => {
                 const endpoint = "/movies/{id}/aliases";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -410,7 +411,7 @@ class Trakt {
             },
             releases: async (params) => {
                 const endpoint = "/movies/{id}/releases/{country}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -418,7 +419,7 @@ class Trakt {
             },
             translations: async (params) => {
                 const endpoint = "/movies/{id}/translations/{language}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -426,7 +427,7 @@ class Trakt {
             },
             comments: async (params) => {
                 const endpoint = "/movies/{id}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -434,7 +435,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/movies/{id}/lists/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -442,7 +443,7 @@ class Trakt {
             },
             people: async (params) => {
                 const endpoint = "/movies/{id}/people";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -450,7 +451,7 @@ class Trakt {
             },
             ratings: async (params) => {
                 const endpoint = "/movies/{id}/ratings";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -458,7 +459,7 @@ class Trakt {
             },
             related: async (params) => {
                 const endpoint = "/movies/{id}/related";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -466,7 +467,7 @@ class Trakt {
             },
             stats: async (params) => {
                 const endpoint = "/movies/{id}/stats";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -474,7 +475,7 @@ class Trakt {
             },
             watching: async (params) => {
                 const endpoint = "/movies/{id}/watching";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -484,7 +485,7 @@ class Trakt {
         this.networks = {
             list: async () => {
                 const endpoint = "/networks";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -494,7 +495,7 @@ class Trakt {
         this.people = {
             summary: async (params) => {
                 const endpoint = "/people/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -502,7 +503,7 @@ class Trakt {
             },
             movies: async (params) => {
                 const endpoint = "/people/{id}/movies";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -510,7 +511,7 @@ class Trakt {
             },
             shows: async (params) => {
                 const endpoint = "/people/{id}/shows";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -518,7 +519,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/people/{id}/lists/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -528,7 +529,7 @@ class Trakt {
         this.recommendations = {
             movies: async (params) => {
                 const endpoint = "/recommendations/movies{?ignore_collected}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -536,7 +537,7 @@ class Trakt {
             },
             hideMovie: async (params) => {
                 const endpoint = "/recommendations/movies/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -544,7 +545,7 @@ class Trakt {
             },
             shows: async (params) => {
                 const endpoint = "/recommendations/shows{?ignore_collected}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -552,7 +553,7 @@ class Trakt {
             },
             hideShow: async (params) => {
                 const endpoint = "/recommendations/shows/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -562,7 +563,7 @@ class Trakt {
         this.scrobble = {
             start: async (params) => {
                 const endpoint = "/scrobble/start";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -581,7 +582,7 @@ class Trakt {
             },
             pause: async (params) => {
                 const endpoint = "/scrobble/pause";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -600,7 +601,7 @@ class Trakt {
             },
             stop: async (params) => {
                 const endpoint = "/scrobble/stop";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -621,7 +622,7 @@ class Trakt {
         this.search = {
             textQuery: async (params) => {
                 const endpoint = "/search/{type}{?query}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -629,7 +630,7 @@ class Trakt {
             },
             iDLookup: async (params) => {
                 const endpoint = "/search/{id_type}/{id}{?type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -639,7 +640,7 @@ class Trakt {
         this.shows = {
             trending: async () => {
                 const endpoint = "/shows/trending";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -647,7 +648,7 @@ class Trakt {
             },
             popular: async () => {
                 const endpoint = "/shows/popular";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -655,7 +656,7 @@ class Trakt {
             },
             recommended: async (params) => {
                 const endpoint = "/shows/recommended/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -663,7 +664,7 @@ class Trakt {
             },
             played: async (params) => {
                 const endpoint = "/shows/played/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -671,7 +672,7 @@ class Trakt {
             },
             watched: async (params) => {
                 const endpoint = "/shows/watched/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -679,7 +680,7 @@ class Trakt {
             },
             collected: async (params) => {
                 const endpoint = "/shows/collected/{period}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -687,7 +688,7 @@ class Trakt {
             },
             anticipated: async () => {
                 const endpoint = "/shows/anticipated";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -695,7 +696,7 @@ class Trakt {
             },
             updates: async (params) => {
                 const endpoint = "/shows/updates/{start_date}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -703,7 +704,7 @@ class Trakt {
             },
             updatedIDs: async (params) => {
                 const endpoint = "/shows/updates/id/{start_date}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -711,7 +712,7 @@ class Trakt {
             },
             summary: async (params) => {
                 const endpoint = "/shows/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -719,7 +720,7 @@ class Trakt {
             },
             aliases: async (params) => {
                 const endpoint = "/shows/{id}/aliases";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -727,7 +728,7 @@ class Trakt {
             },
             certifications: async (params) => {
                 const endpoint = "/shows/{id}/certifications";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -735,7 +736,7 @@ class Trakt {
             },
             translations: async (params) => {
                 const endpoint = "/shows/{id}/translations/{language}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -743,7 +744,7 @@ class Trakt {
             },
             comments: async (params) => {
                 const endpoint = "/shows/{id}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -751,7 +752,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/shows/{id}/lists/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -759,7 +760,7 @@ class Trakt {
             },
             collectionProgress: async (params) => {
                 const endpoint = "/shows/{id}/progress/collection{?hidden,specials,count_specials,last_activity}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -767,7 +768,7 @@ class Trakt {
             },
             watchedProgress: async (params) => {
                 const endpoint = "/shows/{id}/progress/watched{?hidden,specials,count_specials,last_activity}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -775,7 +776,7 @@ class Trakt {
             },
             resetWatchedProgress: async (params) => {
                 const endpoint = "/shows/{id}/progress/watched/reset";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -783,7 +784,7 @@ class Trakt {
             },
             people: async (params) => {
                 const endpoint = "/shows/{id}/people";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -791,7 +792,7 @@ class Trakt {
             },
             ratings: async (params) => {
                 const endpoint = "/shows/{id}/ratings";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -799,7 +800,7 @@ class Trakt {
             },
             related: async (params) => {
                 const endpoint = "/shows/{id}/related";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -807,7 +808,7 @@ class Trakt {
             },
             stats: async (params) => {
                 const endpoint = "/shows/{id}/stats";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -815,7 +816,7 @@ class Trakt {
             },
             watching: async (params) => {
                 const endpoint = "/shows/{id}/watching";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -823,7 +824,7 @@ class Trakt {
             },
             nextEpisode: async (params) => {
                 const endpoint = "/shows/{id}/next_episode";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -831,7 +832,7 @@ class Trakt {
             },
             lastEpisode: async (params) => {
                 const endpoint = "/shows/{id}/last_episode";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -841,7 +842,7 @@ class Trakt {
         this.seasons = {
             summary: async (params) => {
                 const endpoint = "/shows/{id}/seasons";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -849,7 +850,7 @@ class Trakt {
             },
             season: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}{?translations}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -857,7 +858,7 @@ class Trakt {
             },
             comments: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -865,7 +866,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/lists/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -873,7 +874,7 @@ class Trakt {
             },
             people: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/people";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -881,7 +882,7 @@ class Trakt {
             },
             ratings: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/ratings";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -889,7 +890,7 @@ class Trakt {
             },
             stats: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/stats";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -897,7 +898,7 @@ class Trakt {
             },
             watching: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/watching";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -907,7 +908,7 @@ class Trakt {
         this.episodes = {
             summary: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -915,7 +916,7 @@ class Trakt {
             },
             translations: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -923,7 +924,7 @@ class Trakt {
             },
             comments: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -931,7 +932,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -939,7 +940,7 @@ class Trakt {
             },
             people: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/people";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -947,7 +948,7 @@ class Trakt {
             },
             ratings: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/ratings";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -955,7 +956,7 @@ class Trakt {
             },
             stats: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/stats";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -963,7 +964,7 @@ class Trakt {
             },
             watching: async (params) => {
                 const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/watching";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -973,7 +974,7 @@ class Trakt {
         this.sync = {
             lastActivities: async () => {
                 const endpoint = "/sync/last_activities";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -981,7 +982,7 @@ class Trakt {
             },
             playback: async (params) => {
                 const endpoint = "/sync/playback/{type}{?start_at,end_at}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -989,7 +990,7 @@ class Trakt {
             },
             removePlayback: async (params) => {
                 const endpoint = "/sync/playback/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -997,7 +998,7 @@ class Trakt {
             },
             getCollection: async (params) => {
                 const endpoint = "/sync/collection/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1005,7 +1006,7 @@ class Trakt {
             },
             addToCollection: async (params) => {
                 const endpoint = "/sync/collection";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1024,7 +1025,7 @@ class Trakt {
             },
             removeFromCollection: async (params) => {
                 const endpoint = "/sync/collection/remove";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1043,7 +1044,7 @@ class Trakt {
             },
             getWatched: async (params) => {
                 const endpoint = "/sync/watched/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1051,7 +1052,7 @@ class Trakt {
             },
             getHistory: async (params) => {
                 const endpoint = "/sync/history/{type}/{id}{?start_at,end_at}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1059,7 +1060,7 @@ class Trakt {
             },
             addToHistory: async (params) => {
                 const endpoint = "/sync/history";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1078,7 +1079,7 @@ class Trakt {
             },
             removeFromHistory: async (params) => {
                 const endpoint = "/sync/history/remove";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1098,7 +1099,7 @@ class Trakt {
             },
             getRatings: async (params) => {
                 const endpoint = "/sync/ratings/{type}/{rating}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1106,7 +1107,7 @@ class Trakt {
             },
             addRatings: async (params) => {
                 const endpoint = "/sync/ratings";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1125,7 +1126,7 @@ class Trakt {
             },
             removeRatings: async (params) => {
                 const endpoint = "/sync/ratings/remove";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1144,7 +1145,7 @@ class Trakt {
             },
             getWatchlist: async (params) => {
                 const endpoint = "/sync/watchlist/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1152,7 +1153,7 @@ class Trakt {
             },
             addToWatchlist: async (params) => {
                 const endpoint = "/sync/watchlist";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1171,7 +1172,7 @@ class Trakt {
             },
             removeFromWatchlist: async (params) => {
                 const endpoint = "/sync/watchlist/remove";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1190,7 +1191,7 @@ class Trakt {
             },
             reorderWatchlist: async () => {
                 const endpoint = "/sync/watchlist/reorder";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1203,7 +1204,7 @@ class Trakt {
             },
             getPersonalRecommendations: async (params) => {
                 const endpoint = "/sync/recommendations/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1211,7 +1212,7 @@ class Trakt {
             },
             addToPersonalRecommendations: async (params) => {
                 const endpoint = "/sync/recommendations";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1228,7 +1229,7 @@ class Trakt {
             },
             removeFromPersonalRecommendations: async (params) => {
                 const endpoint = "/sync/recommendations/remove";
-                const route = endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1245,7 +1246,7 @@ class Trakt {
             },
             reorderPersonalRecommendations: async () => {
                 const endpoint = "/sync/recommendations/reorder";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1260,7 +1261,7 @@ class Trakt {
         this.users = {
             settings: async () => {
                 const endpoint = "/users/settings";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1268,7 +1269,7 @@ class Trakt {
             },
             followingRequests: async () => {
                 const endpoint = "/users/requests/following";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1276,7 +1277,7 @@ class Trakt {
             },
             followerRequests: async () => {
                 const endpoint = "/users/requests";
-                const route = endpoint;
+                const route = this.baseUrl + endpoint;
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1284,7 +1285,7 @@ class Trakt {
             },
             approveOrDenyFollowerRequests: async (params) => {
                 const endpoint = "/users/requests/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -1292,7 +1293,7 @@ class Trakt {
             },
             hiddenItems: async (params) => {
                 const endpoint = "/users/hidden/{section}{?type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1300,7 +1301,7 @@ class Trakt {
             },
             addHiddenItems: async (params) => {
                 const endpoint = "/users/hidden/{section}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1319,7 +1320,7 @@ class Trakt {
             },
             removeHiddenItems: async (params) => {
                 const endpoint = "/users/hidden/{section}/remove";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1338,7 +1339,7 @@ class Trakt {
             },
             profile: async (params) => {
                 const endpoint = "/users/{id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1346,7 +1347,7 @@ class Trakt {
             },
             likes: async (params) => {
                 const endpoint = "/users/{id}/likes/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1354,7 +1355,7 @@ class Trakt {
             },
             collection: async (params) => {
                 const endpoint = "/users/{id}/collection/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1362,7 +1363,7 @@ class Trakt {
             },
             comments: async (params) => {
                 const endpoint = "/users/{id}/comments/{comment_type}/{type}{?include_replies}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1370,7 +1371,7 @@ class Trakt {
             },
             lists: async (params) => {
                 const endpoint = "/users/{id}/lists";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1392,7 +1393,7 @@ class Trakt {
             },
             reorderLists: async (params) => {
                 const endpoint = "/users/{id}/lists/reorder";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1405,7 +1406,7 @@ class Trakt {
             },
             list: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -1413,7 +1414,7 @@ class Trakt {
             },
             listLikes: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/likes";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1421,7 +1422,7 @@ class Trakt {
             },
             listLike: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/like";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -1429,7 +1430,7 @@ class Trakt {
             },
             listItems: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/items/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1437,7 +1438,7 @@ class Trakt {
             },
             addListItems: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/items";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1457,7 +1458,7 @@ class Trakt {
             },
             removeListItems: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/items/remove";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1477,7 +1478,7 @@ class Trakt {
             },
             reorderListItems: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/items/reorder";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "POST",
                     headers: {
@@ -1490,7 +1491,7 @@ class Trakt {
             },
             listComments: async (params) => {
                 const endpoint = "/users/{id}/lists/{list_id}/comments/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1498,7 +1499,7 @@ class Trakt {
             },
             follow: async (params) => {
                 const endpoint = "/users/{id}/follow";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "DELETE",
                 });
@@ -1506,7 +1507,7 @@ class Trakt {
             },
             followers: async (params) => {
                 const endpoint = "/users/{id}/followers";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1514,7 +1515,7 @@ class Trakt {
             },
             following: async (params) => {
                 const endpoint = "/users/{id}/following";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1522,7 +1523,7 @@ class Trakt {
             },
             friends: async (params) => {
                 const endpoint = "/users/{id}/friends";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1530,7 +1531,7 @@ class Trakt {
             },
             history: async (params) => {
                 const endpoint = "/users/{id}/history/{type}/{item_id}{?start_at,end_at}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1538,7 +1539,7 @@ class Trakt {
             },
             ratings: async (params) => {
                 const endpoint = "/users/{id}/ratings/{type}/{rating}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1546,7 +1547,7 @@ class Trakt {
             },
             watchlist: async (params) => {
                 const endpoint = "/users/{id}/watchlist/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1554,7 +1555,7 @@ class Trakt {
             },
             personalRecommendations: async (params) => {
                 const endpoint = "/users/{id}/recommendations/{type}/{sort}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1562,7 +1563,7 @@ class Trakt {
             },
             watching: async (params) => {
                 const endpoint = "/users/{id}/watching";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1570,7 +1571,7 @@ class Trakt {
             },
             watched: async (params) => {
                 const endpoint = "/users/{id}/watched/{type}";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });
@@ -1578,7 +1579,7 @@ class Trakt {
             },
             stats: async (params) => {
                 const endpoint = "/users/{id}/stats";
-                const route = this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 const { headers, body } = await got(route, {
                     method: "GET",
                 });

@@ -6,6 +6,7 @@ declare class Trakt {
     private client_secret;
     private access_token;
     private redirect_uri;
+    private baseUrl;
     constructor(options: TraktOptions);
     private parseEndpoint;
     authentication: {

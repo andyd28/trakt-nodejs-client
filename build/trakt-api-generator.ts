@@ -5,7 +5,7 @@ const data = JSON.parse(output);
 const classRequiredOptions = ["client_id", "client_secret"];
 const classOptionalOptions = ["access_token", "redirect_uri"];
 const classOptionalValues = ["", "urn:ietf:wg:oauth:2.0:oob", "code", "", ""];
-const classStaticValues = ["grant_type"];
+const classStaticValues: string[] = [];
 const classAllValues = [...classRequiredOptions, ...classOptionalOptions];
 
 const toPascalCase = (...args: string[]) => args.map((s) => {
@@ -73,6 +73,7 @@ const addMethod = (groupName: string, methodName: string, method: any) => {
     const sourceBody = method["request"].hasOwnProperty("body") ? method["request"]["body"] : {};
     if (!!sourceBody && Object.keys(sourceBody).length > 0) {
         paramsDeclaration = "params: " + createInterfaceName(groupName, methodName, "Body");
+        routeMethod = "this.parseEndpoint(endpoint, params)";
         body = Object.keys(sourceBody)
             .map((key) => {
                 if (classAllValues.indexOf(key) >= 0) return `"${key}": this.${key}`;
@@ -88,8 +89,10 @@ const addMethod = (groupName: string, methodName: string, method: any) => {
     }
 
     // If all params are in the class props then do not use as params
-    if(sourceBody && Object.keys(sourceBody).filter(f => classAllValues.indexOf(f) < 0).length == 0)
+    if(!!sourceBody && Object.keys(sourceBody).length > 0 && Object.keys(sourceBody).filter(f => classAllValues.indexOf(f) < 0).length == 0) {    
         paramsDeclaration = "";
+        routeMethod = "endpoint";
+    }
 
     // Header Parameters
     let headers = "";
@@ -121,7 +124,7 @@ const addMethod = (groupName: string, methodName: string, method: any) => {
     return `
         ${methodName}: async (${paramsDeclaration}) => {
             const endpoint = "${method["endpoint"]}";
-            const route = ${routeMethod};
+            const route = this.baseUrl + ${routeMethod};
 
             const {headers, body} = await got(route, {
                 method: "${method["verb"]}",${headers}${body}                          
@@ -136,6 +139,7 @@ const openClass = () => `import got from "got";
 class Trakt {
 ${classRequiredOptions.map((opt) => `\tprivate ${opt}: string;`).join("\n")}
 ${classOptionalOptions.map((opt) => `\tprivate ${opt}: string;`).join("\n")}
+    private baseUrl = "https://api.trakt.tv";
     
     constructor(options: TraktOptions) {
 ${classRequiredOptions.map((opt) => `\t\tthis.${opt} = options.${opt};`).join("\n")}
