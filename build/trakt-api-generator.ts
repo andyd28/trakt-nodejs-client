@@ -87,6 +87,10 @@ const addMethod = (groupName: string, methodName: string, method: any) => {
                 },`;
     }
 
+    // If all params are in the class props then do not use as params
+    if(sourceBody && Object.keys(sourceBody).filter(f => classAllValues.indexOf(f) < 0).length == 0)
+        paramsDeclaration = "";
+
     // Header Parameters
     let headers = "";
     const sourceHeaders = method["request"].hasOwnProperty("body") ? method["request"]["headers"] : {};
