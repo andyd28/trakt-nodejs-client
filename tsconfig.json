@@ -1,0 +1,10 @@
+{
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "files": ["index.ts"],
+    "compilerOptions": {       
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "dist",
+        "esModuleInterop": true
+    }
+}
