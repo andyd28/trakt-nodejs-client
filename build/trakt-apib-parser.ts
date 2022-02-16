@@ -120,7 +120,7 @@ const parse = async () => {
         }
 
         const match12 = RX_REQUESTBODYVALUE.exec(line);
-        if (match12 && isRequestBody && match12.groups.name.trim() !== "---" && match12.groups.name.trim() !== "Key") {
+        if (match12 && match12.groups && isRequestBody && match12.groups.name.trim() !== "---" && match12.groups.name.trim() !== "Key") {
             currentRequestBody[match12.groups.name.trim().split(" ")[0].replace(/`/g, "")] = addRequestParameter(match12.groups);
         }
 
@@ -156,16 +156,16 @@ const assignProperty = (methodProp: KeyObjectPairs, name: string, value: any) =>
 };
 
 const addRequestParameter = (groups: Record<string, string>) => {
-    var param = { values: [], required: false, default: "", type: "" };
+    var param = { values: [] as Array<string>, required: false, default: "", type: "" };
 
     param.type = groups.type.trim();
 
     if (groups.name.indexOf(">*<") > -1) param.required = true;
 
-    if (groups.item2) {
+    if (groups && groups.item2) {
         param.default = groups.item1.trim().replace(/`/g, "");
 
-        if (groups.item2.indexOf("`, `") > -1) {
+        if (param && groups.item2.indexOf("`, `") > -1) {
             param.values = groups.item2
                 .replace(/`/g, "")
                 .split(",")

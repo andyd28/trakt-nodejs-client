@@ -1,3 +1,695 @@
+/// <reference types="node" />
+/// <reference types="node/http" />
+/// <reference types="got/dist/source/core/timed-out" />
+declare class Trakt {
+    private client_id;
+    private client_secret;
+    private access_token;
+    private redirect_uri;
+    constructor(options: TraktOptions);
+    private parseEndpoint;
+    authentication: {
+        authorize: (params: TraktAuthenticationAuthorizeParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getToken: (params: TraktAuthenticationGetTokenBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        refreshToken: (params: TraktAuthenticationRefreshTokenBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        revokeToken: (params: TraktAuthenticationRevokeTokenBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        deviceCode: (params: TraktAuthenticationDeviceCodeBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    calendars: {
+        myShows: (params: TraktCalendarsMyShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        myNewShows: (params: TraktCalendarsMyNewShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        mySeasonPremieres: (params: TraktCalendarsMySeasonPremieresParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        myMovies: (params: TraktCalendarsMyMoviesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        myDVD: (params: TraktCalendarsMyDVDParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        allShows: (params: TraktCalendarsAllShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        allNewShows: (params: TraktCalendarsAllNewShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        allSeasonPremieres: (params: TraktCalendarsAllSeasonPremieresParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        allMovies: (params: TraktCalendarsAllMoviesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        allDVD: (params: TraktCalendarsAllDVDParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    checkin: {
+        checkin: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    certifications: {
+        list: (params: TraktCertificationsListParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    comments: {
+        comments: (params: TraktCommentsCommentsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comment: (params: TraktCommentsCommentParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        replies: (params: TraktCommentsRepliesBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        item: (params: TraktCommentsItemParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        likes: (params: TraktCommentsLikesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        like: (params: TraktCommentsLikeParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        trending: (params: TraktCommentsTrendingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        recent: (params: TraktCommentsRecentParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        updates: (params: TraktCommentsUpdatesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    countries: {
+        list: (params: TraktCountriesListParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    genres: {
+        list: (params: TraktGenresListParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    languages: {
+        list: (params: TraktLanguagesListParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        trending: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        popular: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listLikes: (params: TraktLanguagesListLikesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listItems: (params: TraktLanguagesListItemsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listComments: (params: TraktLanguagesListCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        recommended: (params: TraktLanguagesRecommendedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        played: (params: TraktLanguagesPlayedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watched: (params: TraktLanguagesWatchedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        collected: (params: TraktLanguagesCollectedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        anticipated: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        boxOffice: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        updates: (params: TraktLanguagesUpdatesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        updatedIDs: (params: TraktLanguagesUpdatedIDsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        summary: (params: TraktLanguagesSummaryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        aliases: (params: TraktLanguagesAliasesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        releases: (params: TraktLanguagesReleasesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        translations: (params: TraktLanguagesTranslationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comments: (params: TraktLanguagesCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktLanguagesListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        people: (params: TraktLanguagesPeopleParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        ratings: (params: TraktLanguagesRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        related: (params: TraktLanguagesRelatedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stats: (params: TraktLanguagesStatsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watching: (params: TraktLanguagesWatchingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    networks: {
+        list: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    people: {
+        summary: (params: TraktPeopleSummaryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        movies: (params: TraktPeopleMoviesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        shows: (params: TraktPeopleShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktPeopleListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    recommendations: {
+        movies: (params: TraktRecommendationsMoviesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        hideMovie: (params: TraktRecommendationsHideMovieParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        shows: (params: TraktRecommendationsShowsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        hideShow: (params: TraktRecommendationsHideShowParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    scrobble: {
+        start: (params: TraktScrobbleStartBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        pause: (params: TraktScrobblePauseBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stop: (params: TraktScrobbleStopBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    search: {
+        textQuery: (params: TraktSearchTextQueryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        iDLookup: (params: TraktSearchIDLookupParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    shows: {
+        trending: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        popular: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        recommended: (params: TraktShowsRecommendedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        played: (params: TraktShowsPlayedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watched: (params: TraktShowsWatchedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        collected: (params: TraktShowsCollectedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        anticipated: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        updates: (params: TraktShowsUpdatesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        updatedIDs: (params: TraktShowsUpdatedIDsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        summary: (params: TraktShowsSummaryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        aliases: (params: TraktShowsAliasesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        certifications: (params: TraktShowsCertificationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        translations: (params: TraktShowsTranslationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comments: (params: TraktShowsCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktShowsListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        collectionProgress: (params: TraktShowsCollectionProgressParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watchedProgress: (params: TraktShowsWatchedProgressParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        resetWatchedProgress: (params: TraktShowsResetWatchedProgressParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        people: (params: TraktShowsPeopleParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        ratings: (params: TraktShowsRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        related: (params: TraktShowsRelatedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stats: (params: TraktShowsStatsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watching: (params: TraktShowsWatchingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        nextEpisode: (params: TraktShowsNextEpisodeParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lastEpisode: (params: TraktShowsLastEpisodeParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    seasons: {
+        summary: (params: TraktSeasonsSummaryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        season: (params: TraktSeasonsSeasonParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comments: (params: TraktSeasonsCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktSeasonsListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        people: (params: TraktSeasonsPeopleParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        ratings: (params: TraktSeasonsRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stats: (params: TraktSeasonsStatsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watching: (params: TraktSeasonsWatchingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    episodes: {
+        summary: (params: TraktEpisodesSummaryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        translations: (params: TraktEpisodesTranslationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comments: (params: TraktEpisodesCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktEpisodesListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        people: (params: TraktEpisodesPeopleParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        ratings: (params: TraktEpisodesRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stats: (params: TraktEpisodesStatsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watching: (params: TraktEpisodesWatchingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    sync: {
+        lastActivities: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        playback: (params: TraktSyncPlaybackParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removePlayback: (params: TraktSyncRemovePlaybackParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getCollection: (params: TraktSyncGetCollectionParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addToCollection: (params: TraktSyncAddToCollectionBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeFromCollection: (params: TraktSyncRemoveFromCollectionBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getWatched: (params: TraktSyncGetWatchedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getHistory: (params: TraktSyncGetHistoryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addToHistory: (params: TraktSyncAddToHistoryBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeFromHistory: (params: TraktSyncRemoveFromHistoryBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getRatings: (params: TraktSyncGetRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addRatings: (params: TraktSyncAddRatingsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeRatings: (params: TraktSyncRemoveRatingsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getWatchlist: (params: TraktSyncGetWatchlistParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addToWatchlist: (params: TraktSyncAddToWatchlistBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeFromWatchlist: (params: TraktSyncRemoveFromWatchlistBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        reorderWatchlist: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        getPersonalRecommendations: (params: TraktSyncGetPersonalRecommendationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addToPersonalRecommendations: (params: TraktSyncAddToPersonalRecommendationsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeFromPersonalRecommendations: (params: TraktSyncRemoveFromPersonalRecommendationsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        reorderPersonalRecommendations: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+    users: {
+        settings: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        followingRequests: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        followerRequests: () => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        hiddenItems: (params: TraktUsersHiddenItemsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addHiddenItems: (params: TraktUsersAddHiddenItemsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeHiddenItems: (params: TraktUsersRemoveHiddenItemsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        profile: (params: TraktUsersProfileParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        likes: (params: TraktUsersLikesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        collection: (params: TraktUsersCollectionParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        comments: (params: TraktUsersCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        lists: (params: TraktUsersListsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        reorderLists: (params: TraktUsersReorderListsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        list: (params: TraktUsersListParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listLikes: (params: TraktUsersListLikesParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listLike: (params: TraktUsersListLikeParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listItems: (params: TraktUsersListItemsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        addListItems: (params: TraktUsersAddListItemsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        removeListItems: (params: TraktUsersRemoveListItemsBody) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        reorderListItems: (params: TraktUsersReorderListItemsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        listComments: (params: TraktUsersListCommentsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        follow: (params: TraktUsersFollowParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        followers: (params: TraktUsersFollowersParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        following: (params: TraktUsersFollowingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        friends: (params: TraktUsersFriendsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        history: (params: TraktUsersHistoryParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        ratings: (params: TraktUsersRatingsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watchlist: (params: TraktUsersWatchlistParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        personalRecommendations: (params: TraktUsersPersonalRecommendationsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watching: (params: TraktUsersWatchingParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        watched: (params: TraktUsersWatchedParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+        stats: (params: TraktUsersStatsParams) => Promise<{
+            headers: import("http").IncomingHttpHeaders;
+            body: any;
+        }>;
+    };
+}
+export default Trakt;
 export interface TraktOptions {
     client_id: string;
     client_secret: string;
@@ -389,14 +1081,14 @@ export interface TraktUsersApproveOrDenyFollowerRequestsParams {
     id: number;
 }
 export interface TraktUsersHiddenItemsParams {
-    section: "calendar" | "recommendations";
+    section: "calendar" | "recommendations" | "comments";
     type?: string;
 }
 export interface TraktUsersAddHiddenItemsParams {
     section: "calendar" | "recommendations";
 }
 export interface TraktUsersRemoveHiddenItemsParams {
-    section: "calendar" | "recommendations";
+    section: "calendar" | "recommendations" | "comments";
 }
 export interface TraktUsersProfileParams {
     id: string;
@@ -608,11 +1300,13 @@ export interface TraktUsersAddHiddenItemsBody {
     movies?: Array<any>;
     shows?: Array<any>;
     seasons?: Array<any>;
+    users?: Array<any>;
 }
 export interface TraktUsersRemoveHiddenItemsBody {
     movies?: Array<any>;
     shows?: Array<any>;
     seasons?: Array<any>;
+    users?: Array<any>;
 }
 export interface TraktUsersListsBody {
     name: string;

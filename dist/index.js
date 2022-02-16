@@ -1316,7 +1316,8 @@ class Trakt {
                     json: {
                         "movies": params.movies,
                         "shows": params.shows,
-                        "seasons": params.seasons
+                        "seasons": params.seasons,
+                        "users": params.users
                     },
                 });
                 return { headers, body: JSON.parse(body) };
@@ -1334,7 +1335,8 @@ class Trakt {
                     json: {
                         "movies": params.movies,
                         "shows": params.shows,
-                        "seasons": params.seasons
+                        "seasons": params.seasons,
+                        "users": params.users
                     },
                 });
                 return { headers, body: JSON.parse(body) };
@@ -1597,7 +1599,7 @@ class Trakt {
         const matches = /{(.+)}/g.exec(endpoint);
         if (!matches)
             return endpoint;
-        for (var im = 0; im < matches?.length ?? 0; im++) {
+        for (var im = 0; im < matches.length; im++) {
             const repl = matches[im];
             // If querystring
             if (repl[0] === "?") {
@@ -1616,4 +1618,5 @@ class Trakt {
     }
     ;
 }
+exports.default = Trakt;
 //# sourceMappingURL=index.js.map

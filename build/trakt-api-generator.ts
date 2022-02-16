@@ -133,10 +133,13 @@ ${classRequiredOptions.map((opt) => `\t\tthis.${opt} = options.${opt};`).join("\
 ${classOptionalOptions.map((opt) => `\t\tthis.${opt} = options.${opt} ?? "${classOptionalValues[classOptionalOptions.indexOf(opt)]}";`).join("\n")}
     }
     
-    private parseEndpoint(endpoint: string, params: object): string {
-        const matches = /\{(.+)\}/g.exec(endpoint);
+    private parseEndpoint(endpoint: string, params: Record<string, any>): string {
+        const matches = /{(.+)}/g.exec(endpoint);
 
-        for (const im in matches) {
+        if(!matches)
+            return endpoint;
+
+        for (var im = 0; im < matches.length; im++) {
             const repl = matches[im];
             // If querystring
             if (repl[0] === "?") {
@@ -218,7 +221,8 @@ const generateMethods = () => {
 
     // Close Class
     writer.write(closeBrace());
-
+    writer.write("\nexport default Trakt;\n\n")
+    
     writer.write(interfaces);
 };
 
