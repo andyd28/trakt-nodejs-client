@@ -1,13 +1,13 @@
 {
     "name": "trakt-typed-api",
-    "version": "0.8.11",
+    "version": "0.8.8",
     "description": "Trakt.tv typed node api client",
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "generate": "(cd build && ts-node trakt-apib-parser.ts && ts-node trakt-api-generator.ts && cd ../) && tsc",
-        "patch": "(npm version patch && copy /y package.json && ./dist copy /y README.md ./dist && cd dist)"
+        "patch": "(npm version patch && copy /Y package.json && ./dist/package.json copy /Y README.md ./dist && cd dist)"
     },
     "author": "",
     "license": "ISC",
