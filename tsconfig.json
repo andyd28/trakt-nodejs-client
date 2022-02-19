@@ -1,6 +1,6 @@
 {
-    "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
-    "files": ["index.ts"],
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "files": ["index.ts", "methods.ts"],
     "compilerOptions": {
         "sourceMap": true,
         "declaration": true,

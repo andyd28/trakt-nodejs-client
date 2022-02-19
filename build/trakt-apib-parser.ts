@@ -1,13 +1,14 @@
-import { AnyCnameRecord } from "dns";
-import { captureRejectionSymbol } from "events";
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require("fs");
+const readline = require("readline");
+
+// TODO refactor using a call stack method, looking back for methods and groups rather than
+// variables i.e. push and pop
 
 type KeyObjectPairs = Record<string, any> | null;
 
 const fileStream = fs.createReadStream("trakt.apib");
 
-const RX_GROUP = /^# Group\s(?<name>[a-z]+)/i;
+const RX_GROUP = /^#{1,2} Group\s(?<name>[a-z]+)/i;
 const RX_METHOD = /^## (?<name>[a-z\s]+) \[(?<endpoint>.+)\]$/i;
 const RX_VERB = /^###.+\[(?<verb>.+)\]$/i;
 const RX_METHODPROP = /^\+\s(?<name>[a-z]+)/i;
@@ -65,7 +66,7 @@ const parse = async () => {
         const match3 = RX_METHODPROP.exec(line);
         if (match3?.groups && currentMethod) {
             currentMethodProp = addMethodProperty(currentMethod, match3.groups);
-            currentMethodPropName = match3.groups.name;
+            currentMethodPropName = match3.groups["name"] ?? "";
             currentParameter = null;
             currentParameterName = "";
             currentResponseBody = "";
@@ -75,11 +76,11 @@ const parse = async () => {
         const match5 = RX_PROPERTY.exec(line);
         if (match4?.groups && currentMethodProp) {
             currentParameter = addParameter(currentMethodProp, match4.groups);
-            currentParameterName = match4.groups.name;
+            currentParameterName = match4.groups["name"] ?? "";
             currentResponseBody = "";
         } else if (match5?.groups) {
             currentParameter = addProperty(currentMethodProp, match5.groups);
-            currentParameterName = match5.groups.name;
+            currentParameterName = match5.groups["name"] ?? "";
             currentResponseBody = "";
 
             if (currentParameterName == "Body" && currentMethodPropName == "Request") assignProperty(currentMethodProp, currentParameterName, currentRequestBody);
@@ -97,7 +98,7 @@ const parse = async () => {
 
         const match8 = RX_VERB.exec(line);
         if (match8?.groups && currentMethod) {
-            currentMethod["verb"] = match8.groups.verb;
+            currentMethod["verb"] = match8.groups["verb"] ?? "GET";
         }
 
         const match9 = RX_RESPONSEBODYSTART.test(line);
@@ -120,8 +121,11 @@ const parse = async () => {
         }
 
         const match12 = RX_REQUESTBODYVALUE.exec(line);
-        if (match12 && match12.groups && isRequestBody && match12.groups.name.trim() !== "---" && match12.groups.name.trim() !== "Key") {
-            currentRequestBody[match12.groups.name.trim().split(" ")[0].replace(/`/g, "")] = addRequestParameter(match12.groups);
+        if (match12 && match12.groups && match12.groups["name"] && isRequestBody) {
+            var name = match12.groups["name"].trim();
+            var nameArr = name.split(" ");
+
+            if (name !== "---" && name !== "Key" && nameArr[0]) currentRequestBody[nameArr[0].replace(/`/g, "")] = addRequestParameter(match12.groups);
         }
 
         if (line.length == 0 && isRequestBody) isRequestBody = false;
@@ -132,21 +136,22 @@ const parse = async () => {
         // characters Array<string>
         // person PersonResponse name: string, ids: IdsResponse
         // IdsResponse trakt? number
+        // Also pagination
     }
 
     fs.writeFileSync("./data.json", JSON.stringify(methodGroups, null, 2));
 };
 
 const addKeyValue = (parameter: any | null, groups: Record<string, string>) => {
-    if (!parameter) return;
+    if (!parameter || !groups["name"] || !groups["value"]) return;
 
-    parameter[groups.name] = groups.value;
+    parameter[groups["name"]] = groups["value"];
 };
 
 const addValue = (parameter: any | null, groups: Record<string, string>) => {
-    if (!parameter) return;
+    if (!parameter || !groups["value"]) return;
 
-    parameter.values.push(groups.value);
+    parameter.values.push(groups["value"]);
 };
 
 const assignProperty = (methodProp: KeyObjectPairs, name: string, value: any) => {
@@ -158,15 +163,15 @@ const assignProperty = (methodProp: KeyObjectPairs, name: string, value: any) =>
 const addRequestParameter = (groups: Record<string, string>) => {
     var param = { values: [] as Array<string>, required: false, default: "", type: "" };
 
-    param.type = groups.type.trim();
+    param.type = (groups["type"] ?? "").trim();
 
-    if (groups.name.indexOf(">*<") > -1) param.required = true;
+    if (groups["name"] && groups["name"].indexOf(">*<") > -1) param.required = true;
 
-    if (groups && groups.item2) {
-        param.default = groups.item1.trim().replace(/`/g, "");
+    if (groups && groups["item1"] && groups["item2"]) {
+        param.default = groups["item1"].trim().replace(/`/g, "");
 
-        if (param && groups.item2.indexOf("`, `") > -1) {
-            param.values = groups.item2
+        if (param && groups["item2"] && groups["item2"].indexOf("`, `") > -1) {
+            param.values = groups["item2"]
                 .replace(/`/g, "")
                 .split(",")
                 .map((v) => v.trim());
@@ -177,7 +182,9 @@ const addRequestParameter = (groups: Record<string, string>) => {
 };
 
 const addProperty = (methodProp: KeyObjectPairs, groups: Record<string, string>): any | null => {
-    var propertyName = groups.name.toLowerCase();
+    if (!groups["name"]) return null;
+
+    var propertyName = groups["name"].toLowerCase();
 
     if (!methodProp) return null;
 
@@ -187,14 +194,16 @@ const addProperty = (methodProp: KeyObjectPairs, groups: Record<string, string>)
 };
 
 const addParameter = (methodProp: KeyObjectPairs, groups: Record<string, string>): any | null => {
+    if (!groups["name"]) return null;
+
     var param = { values: [], required: false, type: "" };
-    var paramName = groups.name;
-    var props = groups?.props ? groups.props.split(", ") : [];
+    var paramName = groups["name"];
+    var props = groups["props"] ? groups["props"].split(", ") : [];
 
     if (!methodProp) return null;
 
     if (props.length > 0) param.required = props[0] === "required";
-    if (props.length > 1) param.type = props[1];
+    if (props.length > 1) param.type = props[1] ?? "";
 
     methodProp[paramName] = param;
 
@@ -202,7 +211,9 @@ const addParameter = (methodProp: KeyObjectPairs, groups: Record<string, string>
 };
 
 const addMethodProperty = (method: KeyObjectPairs, groups: Record<string, string>): KeyObjectPairs => {
-    var name = sanitiseName(groups.name);
+    if (!groups["name"]) return null;
+
+    var name = sanitiseName(groups["name"]);
 
     if (!method) return null;
 
@@ -212,19 +223,23 @@ const addMethodProperty = (method: KeyObjectPairs, groups: Record<string, string
 };
 
 const addMethod = (methodGroup: KeyObjectPairs, groups: Record<string, string>): KeyObjectPairs => {
-    var name = sanitiseName(groups.name);
+    if (!groups["name"] || !groups["endpoint"]) return null;
+
+    var name = sanitiseName(groups["name"]);
 
     if (!methodGroup) return null;
 
     methodGroup[name] = {
-        endpoint: groups.endpoint,
+        endpoint: groups["endpoint"],
     };
 
     return methodGroup[name];
 };
 
 const ensureMethodGroup = (methodGroups: KeyObjectPairs, groups: Record<string, string>): KeyObjectPairs => {
-    var name = sanitiseName(groups.name);
+    if (!groups["name"]) return null;
+
+    var name = sanitiseName(groups["name"]);
     if (!methodGroups) return null;
 
     if (Object.keys(methodGroups).indexOf(name) == -1) methodGroups[name] = {};
@@ -238,11 +253,16 @@ const sanitiseName = (name: string): string => {
     const nameArr = name.split(" ");
 
     for (var ix = 0; ix < nameArr.length; ix++) {
+        var cur = nameArr[ix];
+        if (!cur || !cur[0]) continue;
+
         if (ix === 0) {
-            nameArr[ix] = nameArr[ix][0].toLowerCase() + nameArr[ix].substring(1);
+            cur = cur[0].toLowerCase() + cur.substring(1);
         } else {
-            nameArr[ix] = nameArr[ix][0].toUpperCase() + nameArr[ix].substring(1);
+            cur = cur[0].toUpperCase() + cur.substring(1);
         }
+
+        nameArr[ix] = cur;
     }
 
     return nameArr.join("");
