@@ -7,7 +7,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "generate": "(cd build && ts-node trakt-apib-parser.ts && ts-node trakt-api-generator.ts && cd ../) && tsc",
-        "patch": "(npm version patch && copy package.json && ./dist copy README.md ./dist && cd dist)"
+        "patch": "(npm version patch && copy /y package.json && ./dist copy /y README.md ./dist && cd dist)"
     },
     "author": "",
     "license": "ISC",
