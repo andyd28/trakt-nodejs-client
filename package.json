@@ -1,6 +1,6 @@
 {
     "name": "trakt-typed-api",
-    "version": "0.8.9",
+    "version": "0.8.11",
     "description": "Trakt.tv typed node api client",
     "main": "index.js",
     "types": "index.d.ts",
