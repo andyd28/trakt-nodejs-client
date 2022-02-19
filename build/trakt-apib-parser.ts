@@ -1,5 +1,5 @@
-const fs = require("fs");
-const readline = require("readline");
+import fs from "fs";
+import readline from "readline";
 
 // TODO refactor using a call stack method, looking back for methods and groups rather than
 // variables i.e. push and pop
