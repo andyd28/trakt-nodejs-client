@@ -6,3 +6,5 @@ declare class Trakt extends TraktMethods {
     ensureToken(params: TraktAuthenticationGetTokenResponse): Promise<TraktAuthenticationGetTokenResponse>;
 }
 export default Trakt;
+export * from "./methods";
+export * from "./base";

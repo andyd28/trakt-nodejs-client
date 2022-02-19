@@ -1,4 +1,5 @@
 import fs from "fs";
+import { arrayBuffer } from "stream/consumers";
 import { isatty } from "tty";
 
 // TODO
@@ -134,7 +135,10 @@ const addApiMethod = (groupName: string, methodName: string, method: Method) => 
 
     // Check for response
     let responseDeclaration = "any";
-    if (method.response.body && Object.keys(method.response.body).length > 0) responseDeclaration = createInterfaceName(groupName, methodName, "Response");
+    if (method.response.body && Object.keys(method.response.body).length > 0) {
+        responseDeclaration = createInterfaceName(groupName, methodName, "Response");
+        if (Array.isArray(method.response.body)) responseDeclaration += "[]";
+    }
 
     // HACK refreshToken response type is for errors in apib
     if (methodName == "refreshToken") responseDeclaration = createInterfaceName(groupName, "getToken", "Response");

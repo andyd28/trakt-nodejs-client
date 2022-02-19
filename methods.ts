@@ -79,7 +79,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	calendars = {
-        myShows: async (params: TraktCalendarsMyShowsParams): Promise<Response<TraktCalendarsMyShowsResponse>> => {
+        myShows: async (params: TraktCalendarsMyShowsParams): Promise<Response<TraktCalendarsMyShowsResponse[]>> => {
             const endpoint = "/calendars/my/shows/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -94,7 +94,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myNewShows: async (params: TraktCalendarsMyNewShowsParams): Promise<Response<TraktCalendarsMyNewShowsResponse>> => {
+        myNewShows: async (params: TraktCalendarsMyNewShowsParams): Promise<Response<TraktCalendarsMyNewShowsResponse[]>> => {
             const endpoint = "/calendars/my/shows/new/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -109,7 +109,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        mySeasonPremieres: async (params: TraktCalendarsMySeasonPremieresParams): Promise<Response<TraktCalendarsMySeasonPremieresResponse>> => {
+        mySeasonPremieres: async (params: TraktCalendarsMySeasonPremieresParams): Promise<Response<TraktCalendarsMySeasonPremieresResponse[]>> => {
             const endpoint = "/calendars/my/shows/premieres/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -124,7 +124,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myMovies: async (params: TraktCalendarsMyMoviesParams): Promise<Response<TraktCalendarsMyMoviesResponse>> => {
+        myMovies: async (params: TraktCalendarsMyMoviesParams): Promise<Response<TraktCalendarsMyMoviesResponse[]>> => {
             const endpoint = "/calendars/my/movies/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -139,7 +139,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myDVD: async (params: TraktCalendarsMyDVDParams): Promise<Response<TraktCalendarsMyDVDResponse>> => {
+        myDVD: async (params: TraktCalendarsMyDVDParams): Promise<Response<TraktCalendarsMyDVDResponse[]>> => {
             const endpoint = "/calendars/my/dvd/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -154,7 +154,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allShows: async (params: TraktCalendarsAllShowsParams): Promise<Response<TraktCalendarsAllShowsResponse>> => {
+        allShows: async (params: TraktCalendarsAllShowsParams): Promise<Response<TraktCalendarsAllShowsResponse[]>> => {
             const endpoint = "/calendars/all/shows/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -168,7 +168,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allNewShows: async (params: TraktCalendarsAllNewShowsParams): Promise<Response<TraktCalendarsAllNewShowsResponse>> => {
+        allNewShows: async (params: TraktCalendarsAllNewShowsParams): Promise<Response<TraktCalendarsAllNewShowsResponse[]>> => {
             const endpoint = "/calendars/all/shows/new/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -182,7 +182,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allSeasonPremieres: async (params: TraktCalendarsAllSeasonPremieresParams): Promise<Response<TraktCalendarsAllSeasonPremieresResponse>> => {
+        allSeasonPremieres: async (params: TraktCalendarsAllSeasonPremieresParams): Promise<Response<TraktCalendarsAllSeasonPremieresResponse[]>> => {
             const endpoint = "/calendars/all/shows/premieres/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -196,7 +196,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allMovies: async (params: TraktCalendarsAllMoviesParams): Promise<Response<TraktCalendarsAllMoviesResponse>> => {
+        allMovies: async (params: TraktCalendarsAllMoviesParams): Promise<Response<TraktCalendarsAllMoviesResponse[]>> => {
             const endpoint = "/calendars/all/movies/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -210,7 +210,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allDVD: async (params: TraktCalendarsAllDVDParams): Promise<Response<TraktCalendarsAllDVDResponse>> => {
+        allDVD: async (params: TraktCalendarsAllDVDParams): Promise<Response<TraktCalendarsAllDVDResponse[]>> => {
             const endpoint = "/calendars/all/dvd/{start_date}/{days}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -331,7 +331,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        likes: async (params: TraktCommentsLikesParams): Promise<Response<TraktCommentsLikesResponse>> => {
+        likes: async (params: TraktCommentsLikesParams): Promise<Response<TraktCommentsLikesResponse[]>> => {
             const endpoint = "/comments/{id}/likes";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -360,7 +360,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        trending: async (params: TraktCommentsTrendingParams): Promise<Response<TraktCommentsTrendingResponse>> => {
+        trending: async (params: TraktCommentsTrendingParams): Promise<Response<TraktCommentsTrendingResponse[]>> => {
             const endpoint = "/comments/trending/{comment_type}/{type}{?include_replies}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -374,7 +374,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recent: async (params: TraktCommentsRecentParams): Promise<Response<TraktCommentsRecentResponse>> => {
+        recent: async (params: TraktCommentsRecentParams): Promise<Response<TraktCommentsRecentResponse[]>> => {
             const endpoint = "/comments/recent/{comment_type}/{type}{?include_replies}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -388,7 +388,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktCommentsUpdatesParams): Promise<Response<TraktCommentsUpdatesResponse>> => {
+        updates: async (params: TraktCommentsUpdatesParams): Promise<Response<TraktCommentsUpdatesResponse[]>> => {
             const endpoint = "/comments/updates/{comment_type}/{type}{?include_replies}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -405,7 +405,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	countries = {
-        list: async (params: TraktCountriesListParams): Promise<Response<TraktCountriesListResponse>> => {
+        list: async (params: TraktCountriesListParams): Promise<Response<TraktCountriesListResponse[]>> => {
             const endpoint = "/countries/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -422,7 +422,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	genres = {
-        list: async (params: TraktGenresListParams): Promise<Response<TraktGenresListResponse>> => {
+        list: async (params: TraktGenresListParams): Promise<Response<TraktGenresListResponse[]>> => {
             const endpoint = "/genres/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -439,7 +439,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	languages = {
-        list: async (params: TraktLanguagesListParams): Promise<Response<TraktLanguagesListResponse>> => {
+        list: async (params: TraktLanguagesListParams): Promise<Response<TraktLanguagesListResponse[]>> => {
             const endpoint = "/languages/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -456,7 +456,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	lists = {
-        trending: async (): Promise<Response<TraktListsTrendingResponse>> => {
+        trending: async (): Promise<Response<TraktListsTrendingResponse[]>> => {
             const endpoint = "/lists/trending";
             const route = this.baseUrl + endpoint;
             
@@ -470,7 +470,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktListsPopularResponse>> => {
+        popular: async (): Promise<Response<TraktListsPopularResponse[]>> => {
             const endpoint = "/lists/popular";
             const route = this.baseUrl + endpoint;
             
@@ -498,7 +498,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listLikes: async (params: TraktListsListLikesParams): Promise<Response<TraktListsListLikesResponse>> => {
+        listLikes: async (params: TraktListsListLikesParams): Promise<Response<TraktListsListLikesResponse[]>> => {
             const endpoint = "/lists/{id}/likes";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -512,7 +512,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listItems: async (params: TraktListsListItemsParams): Promise<Response<TraktListsListItemsResponse>> => {
+        listItems: async (params: TraktListsListItemsParams): Promise<Response<TraktListsListItemsResponse[]>> => {
             const endpoint = "/lists/{id}/items/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -526,7 +526,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listComments: async (params: TraktListsListCommentsParams): Promise<Response<TraktListsListCommentsResponse>> => {
+        listComments: async (params: TraktListsListCommentsParams): Promise<Response<TraktListsListCommentsResponse[]>> => {
             const endpoint = "/lists/{id}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -543,7 +543,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	movies = {
-        trending: async (): Promise<Response<TraktMoviesTrendingResponse>> => {
+        trending: async (): Promise<Response<TraktMoviesTrendingResponse[]>> => {
             const endpoint = "/movies/trending";
             const route = this.baseUrl + endpoint;
             
@@ -557,7 +557,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktMoviesPopularResponse>> => {
+        popular: async (): Promise<Response<TraktMoviesPopularResponse[]>> => {
             const endpoint = "/movies/popular";
             const route = this.baseUrl + endpoint;
             
@@ -571,7 +571,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recommended: async (params: TraktMoviesRecommendedParams): Promise<Response<TraktMoviesRecommendedResponse>> => {
+        recommended: async (params: TraktMoviesRecommendedParams): Promise<Response<TraktMoviesRecommendedResponse[]>> => {
             const endpoint = "/movies/recommended/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -585,7 +585,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        played: async (params: TraktMoviesPlayedParams): Promise<Response<TraktMoviesPlayedResponse>> => {
+        played: async (params: TraktMoviesPlayedParams): Promise<Response<TraktMoviesPlayedResponse[]>> => {
             const endpoint = "/movies/played/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -599,7 +599,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktMoviesWatchedParams): Promise<Response<TraktMoviesWatchedResponse>> => {
+        watched: async (params: TraktMoviesWatchedParams): Promise<Response<TraktMoviesWatchedResponse[]>> => {
             const endpoint = "/movies/watched/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -613,7 +613,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collected: async (params: TraktMoviesCollectedParams): Promise<Response<TraktMoviesCollectedResponse>> => {
+        collected: async (params: TraktMoviesCollectedParams): Promise<Response<TraktMoviesCollectedResponse[]>> => {
             const endpoint = "/movies/collected/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -627,7 +627,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (): Promise<Response<TraktMoviesAnticipatedResponse>> => {
+        anticipated: async (): Promise<Response<TraktMoviesAnticipatedResponse[]>> => {
             const endpoint = "/movies/anticipated";
             const route = this.baseUrl + endpoint;
             
@@ -641,7 +641,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        boxOffice: async (): Promise<Response<TraktMoviesBoxOfficeResponse>> => {
+        boxOffice: async (): Promise<Response<TraktMoviesBoxOfficeResponse[]>> => {
             const endpoint = "/movies/boxoffice";
             const route = this.baseUrl + endpoint;
             
@@ -655,7 +655,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktMoviesUpdatesParams): Promise<Response<TraktMoviesUpdatesResponse>> => {
+        updates: async (params: TraktMoviesUpdatesParams): Promise<Response<TraktMoviesUpdatesResponse[]>> => {
             const endpoint = "/movies/updates/{start_date}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -669,7 +669,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updatedIDs: async (params: TraktMoviesUpdatedIDsParams): Promise<Response<TraktMoviesUpdatedIDsResponse>> => {
+        updatedIDs: async (params: TraktMoviesUpdatedIDsParams): Promise<Response<TraktMoviesUpdatedIDsResponse[]>> => {
             const endpoint = "/movies/updates/id/{start_date}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -697,7 +697,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        aliases: async (params: TraktMoviesAliasesParams): Promise<Response<TraktMoviesAliasesResponse>> => {
+        aliases: async (params: TraktMoviesAliasesParams): Promise<Response<TraktMoviesAliasesResponse[]>> => {
             const endpoint = "/movies/{id}/aliases";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -711,7 +711,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        releases: async (params: TraktMoviesReleasesParams): Promise<Response<TraktMoviesReleasesResponse>> => {
+        releases: async (params: TraktMoviesReleasesParams): Promise<Response<TraktMoviesReleasesResponse[]>> => {
             const endpoint = "/movies/{id}/releases/{country}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -725,7 +725,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktMoviesTranslationsParams): Promise<Response<TraktMoviesTranslationsResponse>> => {
+        translations: async (params: TraktMoviesTranslationsParams): Promise<Response<TraktMoviesTranslationsResponse[]>> => {
             const endpoint = "/movies/{id}/translations/{language}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -739,7 +739,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktMoviesCommentsParams): Promise<Response<TraktMoviesCommentsResponse>> => {
+        comments: async (params: TraktMoviesCommentsParams): Promise<Response<TraktMoviesCommentsResponse[]>> => {
             const endpoint = "/movies/{id}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -753,7 +753,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktMoviesListsParams): Promise<Response<TraktMoviesListsResponse>> => {
+        lists: async (params: TraktMoviesListsParams): Promise<Response<TraktMoviesListsResponse[]>> => {
             const endpoint = "/movies/{id}/lists/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -795,7 +795,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        related: async (params: TraktMoviesRelatedParams): Promise<Response<TraktMoviesRelatedResponse>> => {
+        related: async (params: TraktMoviesRelatedParams): Promise<Response<TraktMoviesRelatedResponse[]>> => {
             const endpoint = "/movies/{id}/related";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -823,7 +823,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktMoviesWatchingParams): Promise<Response<TraktMoviesWatchingResponse>> => {
+        watching: async (params: TraktMoviesWatchingParams): Promise<Response<TraktMoviesWatchingResponse[]>> => {
             const endpoint = "/movies/{id}/watching";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -840,7 +840,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	networks = {
-        list: async (): Promise<Response<TraktNetworksListResponse>> => {
+        list: async (): Promise<Response<TraktNetworksListResponse[]>> => {
             const endpoint = "/networks";
             const route = this.baseUrl + endpoint;
             
@@ -899,7 +899,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktPeopleListsParams): Promise<Response<TraktPeopleListsResponse>> => {
+        lists: async (params: TraktPeopleListsParams): Promise<Response<TraktPeopleListsResponse[]>> => {
             const endpoint = "/people/{id}/lists/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -916,7 +916,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	recommendations = {
-        movies: async (params: TraktRecommendationsMoviesParams): Promise<Response<TraktRecommendationsMoviesResponse>> => {
+        movies: async (params: TraktRecommendationsMoviesParams): Promise<Response<TraktRecommendationsMoviesResponse[]>> => {
             const endpoint = "/recommendations/movies{?ignore_collected}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -946,7 +946,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        shows: async (params: TraktRecommendationsShowsParams): Promise<Response<TraktRecommendationsShowsResponse>> => {
+        shows: async (params: TraktRecommendationsShowsParams): Promise<Response<TraktRecommendationsShowsResponse[]>> => {
             const endpoint = "/recommendations/shows{?ignore_collected}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1045,7 +1045,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	search = {
-        textQuery: async (params: TraktSearchTextQueryParams): Promise<Response<TraktSearchTextQueryResponse>> => {
+        textQuery: async (params: TraktSearchTextQueryParams): Promise<Response<TraktSearchTextQueryResponse[]>> => {
             const endpoint = "/search/{type}{?query}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1059,7 +1059,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        iDLookup: async (params: TraktSearchIDLookupParams): Promise<Response<TraktSearchIDLookupResponse>> => {
+        iDLookup: async (params: TraktSearchIDLookupParams): Promise<Response<TraktSearchIDLookupResponse[]>> => {
             const endpoint = "/search/{id_type}/{id}{?type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1076,7 +1076,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	shows = {
-        trending: async (): Promise<Response<TraktShowsTrendingResponse>> => {
+        trending: async (): Promise<Response<TraktShowsTrendingResponse[]>> => {
             const endpoint = "/shows/trending";
             const route = this.baseUrl + endpoint;
             
@@ -1090,7 +1090,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktShowsPopularResponse>> => {
+        popular: async (): Promise<Response<TraktShowsPopularResponse[]>> => {
             const endpoint = "/shows/popular";
             const route = this.baseUrl + endpoint;
             
@@ -1104,7 +1104,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recommended: async (params: TraktShowsRecommendedParams): Promise<Response<TraktShowsRecommendedResponse>> => {
+        recommended: async (params: TraktShowsRecommendedParams): Promise<Response<TraktShowsRecommendedResponse[]>> => {
             const endpoint = "/shows/recommended/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1118,7 +1118,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        played: async (params: TraktShowsPlayedParams): Promise<Response<TraktShowsPlayedResponse>> => {
+        played: async (params: TraktShowsPlayedParams): Promise<Response<TraktShowsPlayedResponse[]>> => {
             const endpoint = "/shows/played/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1132,7 +1132,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktShowsWatchedParams): Promise<Response<TraktShowsWatchedResponse>> => {
+        watched: async (params: TraktShowsWatchedParams): Promise<Response<TraktShowsWatchedResponse[]>> => {
             const endpoint = "/shows/watched/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1146,7 +1146,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collected: async (params: TraktShowsCollectedParams): Promise<Response<TraktShowsCollectedResponse>> => {
+        collected: async (params: TraktShowsCollectedParams): Promise<Response<TraktShowsCollectedResponse[]>> => {
             const endpoint = "/shows/collected/{period}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1160,7 +1160,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (): Promise<Response<TraktShowsAnticipatedResponse>> => {
+        anticipated: async (): Promise<Response<TraktShowsAnticipatedResponse[]>> => {
             const endpoint = "/shows/anticipated";
             const route = this.baseUrl + endpoint;
             
@@ -1174,7 +1174,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktShowsUpdatesParams): Promise<Response<TraktShowsUpdatesResponse>> => {
+        updates: async (params: TraktShowsUpdatesParams): Promise<Response<TraktShowsUpdatesResponse[]>> => {
             const endpoint = "/shows/updates/{start_date}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1188,7 +1188,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updatedIDs: async (params: TraktShowsUpdatedIDsParams): Promise<Response<TraktShowsUpdatedIDsResponse>> => {
+        updatedIDs: async (params: TraktShowsUpdatedIDsParams): Promise<Response<TraktShowsUpdatedIDsResponse[]>> => {
             const endpoint = "/shows/updates/id/{start_date}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1216,7 +1216,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        aliases: async (params: TraktShowsAliasesParams): Promise<Response<TraktShowsAliasesResponse>> => {
+        aliases: async (params: TraktShowsAliasesParams): Promise<Response<TraktShowsAliasesResponse[]>> => {
             const endpoint = "/shows/{id}/aliases";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1230,7 +1230,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        certifications: async (params: TraktShowsCertificationsParams): Promise<Response<TraktShowsCertificationsResponse>> => {
+        certifications: async (params: TraktShowsCertificationsParams): Promise<Response<TraktShowsCertificationsResponse[]>> => {
             const endpoint = "/shows/{id}/certifications";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1244,7 +1244,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktShowsTranslationsParams): Promise<Response<TraktShowsTranslationsResponse>> => {
+        translations: async (params: TraktShowsTranslationsParams): Promise<Response<TraktShowsTranslationsResponse[]>> => {
             const endpoint = "/shows/{id}/translations/{language}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1258,7 +1258,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktShowsCommentsParams): Promise<Response<TraktShowsCommentsResponse>> => {
+        comments: async (params: TraktShowsCommentsParams): Promise<Response<TraktShowsCommentsResponse[]>> => {
             const endpoint = "/shows/{id}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1272,7 +1272,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktShowsListsParams): Promise<Response<TraktShowsListsResponse>> => {
+        lists: async (params: TraktShowsListsParams): Promise<Response<TraktShowsListsResponse[]>> => {
             const endpoint = "/shows/{id}/lists/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1359,7 +1359,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        related: async (params: TraktShowsRelatedParams): Promise<Response<TraktShowsRelatedResponse>> => {
+        related: async (params: TraktShowsRelatedParams): Promise<Response<TraktShowsRelatedResponse[]>> => {
             const endpoint = "/shows/{id}/related";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1387,7 +1387,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktShowsWatchingParams): Promise<Response<TraktShowsWatchingResponse>> => {
+        watching: async (params: TraktShowsWatchingParams): Promise<Response<TraktShowsWatchingResponse[]>> => {
             const endpoint = "/shows/{id}/watching";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1432,7 +1432,7 @@ class TraktMethods extends TraktBase {
 	};
 
 	seasons = {
-        summary: async (params: TraktSeasonsSummaryParams): Promise<Response<TraktSeasonsSummaryResponse>> => {
+        summary: async (params: TraktSeasonsSummaryParams): Promise<Response<TraktSeasonsSummaryResponse[]>> => {
             const endpoint = "/shows/{id}/seasons";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1446,7 +1446,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        season: async (params: TraktSeasonsSeasonParams): Promise<Response<TraktSeasonsSeasonResponse>> => {
+        season: async (params: TraktSeasonsSeasonParams): Promise<Response<TraktSeasonsSeasonResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}{?translations}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1460,7 +1460,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktSeasonsCommentsParams): Promise<Response<TraktSeasonsCommentsResponse>> => {
+        comments: async (params: TraktSeasonsCommentsParams): Promise<Response<TraktSeasonsCommentsResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1474,7 +1474,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktSeasonsListsParams): Promise<Response<TraktSeasonsListsResponse>> => {
+        lists: async (params: TraktSeasonsListsParams): Promise<Response<TraktSeasonsListsResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/lists/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1530,7 +1530,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktSeasonsWatchingParams): Promise<Response<TraktSeasonsWatchingResponse>> => {
+        watching: async (params: TraktSeasonsWatchingParams): Promise<Response<TraktSeasonsWatchingResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/watching";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1561,7 +1561,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktEpisodesTranslationsParams): Promise<Response<TraktEpisodesTranslationsResponse>> => {
+        translations: async (params: TraktEpisodesTranslationsParams): Promise<Response<TraktEpisodesTranslationsResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1575,7 +1575,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktEpisodesCommentsParams): Promise<Response<TraktEpisodesCommentsResponse>> => {
+        comments: async (params: TraktEpisodesCommentsParams): Promise<Response<TraktEpisodesCommentsResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1589,7 +1589,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktEpisodesListsParams): Promise<Response<TraktEpisodesListsResponse>> => {
+        lists: async (params: TraktEpisodesListsParams): Promise<Response<TraktEpisodesListsResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1645,7 +1645,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktEpisodesWatchingParams): Promise<Response<TraktEpisodesWatchingResponse>> => {
+        watching: async (params: TraktEpisodesWatchingParams): Promise<Response<TraktEpisodesWatchingResponse[]>> => {
             const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/watching";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1677,7 +1677,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        playback: async (params: TraktSyncPlaybackParams): Promise<Response<TraktSyncPlaybackResponse>> => {
+        playback: async (params: TraktSyncPlaybackParams): Promise<Response<TraktSyncPlaybackResponse[]>> => {
             const endpoint = "/sync/playback/{type}{?start_at,end_at}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1707,7 +1707,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getCollection: async (params: TraktSyncGetCollectionParams): Promise<Response<TraktSyncGetCollectionResponse>> => {
+        getCollection: async (params: TraktSyncGetCollectionParams): Promise<Response<TraktSyncGetCollectionResponse[]>> => {
             const endpoint = "/sync/collection/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1764,7 +1764,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getWatched: async (params: TraktSyncGetWatchedParams): Promise<Response<TraktSyncGetWatchedResponse>> => {
+        getWatched: async (params: TraktSyncGetWatchedParams): Promise<Response<TraktSyncGetWatchedResponse[]>> => {
             const endpoint = "/sync/watched/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1779,7 +1779,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getHistory: async (params: TraktSyncGetHistoryParams): Promise<Response<TraktSyncGetHistoryResponse>> => {
+        getHistory: async (params: TraktSyncGetHistoryParams): Promise<Response<TraktSyncGetHistoryResponse[]>> => {
             const endpoint = "/sync/history/{type}/{id}{?start_at,end_at}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1837,7 +1837,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getRatings: async (params: TraktSyncGetRatingsParams): Promise<Response<TraktSyncGetRatingsResponse>> => {
+        getRatings: async (params: TraktSyncGetRatingsParams): Promise<Response<TraktSyncGetRatingsResponse[]>> => {
             const endpoint = "/sync/ratings/{type}/{rating}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1894,7 +1894,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getWatchlist: async (params: TraktSyncGetWatchlistParams): Promise<Response<TraktSyncGetWatchlistResponse>> => {
+        getWatchlist: async (params: TraktSyncGetWatchlistParams): Promise<Response<TraktSyncGetWatchlistResponse[]>> => {
             const endpoint = "/sync/watchlist/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -1966,7 +1966,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getPersonalRecommendations: async (params: TraktSyncGetPersonalRecommendationsParams): Promise<Response<TraktSyncGetPersonalRecommendationsResponse>> => {
+        getPersonalRecommendations: async (params: TraktSyncGetPersonalRecommendationsParams): Promise<Response<TraktSyncGetPersonalRecommendationsResponse[]>> => {
             const endpoint = "/sync/recommendations/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2052,7 +2052,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followingRequests: async (): Promise<Response<TraktUsersFollowingRequestsResponse>> => {
+        followingRequests: async (): Promise<Response<TraktUsersFollowingRequestsResponse[]>> => {
             const endpoint = "/users/requests/following";
             const route = this.baseUrl + endpoint;
             
@@ -2067,7 +2067,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followerRequests: async (): Promise<Response<TraktUsersFollowerRequestsResponse>> => {
+        followerRequests: async (): Promise<Response<TraktUsersFollowerRequestsResponse[]>> => {
             const endpoint = "/users/requests";
             const route = this.baseUrl + endpoint;
             
@@ -2097,7 +2097,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        hiddenItems: async (params: TraktUsersHiddenItemsParams): Promise<Response<TraktUsersHiddenItemsResponse>> => {
+        hiddenItems: async (params: TraktUsersHiddenItemsParams): Promise<Response<TraktUsersHiddenItemsResponse[]>> => {
             const endpoint = "/users/hidden/{section}{?type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2168,7 +2168,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        likes: async (params: TraktUsersLikesParams): Promise<Response<TraktUsersLikesResponse>> => {
+        likes: async (params: TraktUsersLikesParams): Promise<Response<TraktUsersLikesResponse[]>> => {
             const endpoint = "/users/{id}/likes/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2183,7 +2183,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collection: async (params: TraktUsersCollectionParams): Promise<Response<TraktUsersCollectionResponse>> => {
+        collection: async (params: TraktUsersCollectionParams): Promise<Response<TraktUsersCollectionResponse[]>> => {
             const endpoint = "/users/{id}/collection/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2197,7 +2197,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktUsersCommentsParams): Promise<Response<TraktUsersCommentsResponse>> => {
+        comments: async (params: TraktUsersCommentsParams): Promise<Response<TraktUsersCommentsResponse[]>> => {
             const endpoint = "/users/{id}/comments/{comment_type}/{type}{?include_replies}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2265,7 +2265,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listLikes: async (params: TraktUsersListLikesParams): Promise<Response<TraktUsersListLikesResponse>> => {
+        listLikes: async (params: TraktUsersListLikesParams): Promise<Response<TraktUsersListLikesResponse[]>> => {
             const endpoint = "/users/{id}/lists/{list_id}/likes";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2294,7 +2294,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listItems: async (params: TraktUsersListItemsParams): Promise<Response<TraktUsersListItemsResponse>> => {
+        listItems: async (params: TraktUsersListItemsParams): Promise<Response<TraktUsersListItemsResponse[]>> => {
             const endpoint = "/users/{id}/lists/{list_id}/items/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2367,7 +2367,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listComments: async (params: TraktUsersListCommentsParams): Promise<Response<TraktUsersListCommentsResponse>> => {
+        listComments: async (params: TraktUsersListCommentsParams): Promise<Response<TraktUsersListCommentsResponse[]>> => {
             const endpoint = "/users/{id}/lists/{list_id}/comments/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2396,7 +2396,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followers: async (params: TraktUsersFollowersParams): Promise<Response<TraktUsersFollowersResponse>> => {
+        followers: async (params: TraktUsersFollowersParams): Promise<Response<TraktUsersFollowersResponse[]>> => {
             const endpoint = "/users/{id}/followers";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2410,7 +2410,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        following: async (params: TraktUsersFollowingParams): Promise<Response<TraktUsersFollowingResponse>> => {
+        following: async (params: TraktUsersFollowingParams): Promise<Response<TraktUsersFollowingResponse[]>> => {
             const endpoint = "/users/{id}/following";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2424,7 +2424,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        friends: async (params: TraktUsersFriendsParams): Promise<Response<TraktUsersFriendsResponse>> => {
+        friends: async (params: TraktUsersFriendsParams): Promise<Response<TraktUsersFriendsResponse[]>> => {
             const endpoint = "/users/{id}/friends";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2438,7 +2438,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        history: async (params: TraktUsersHistoryParams): Promise<Response<TraktUsersHistoryResponse>> => {
+        history: async (params: TraktUsersHistoryParams): Promise<Response<TraktUsersHistoryResponse[]>> => {
             const endpoint = "/users/{id}/history/{type}/{item_id}{?start_at,end_at}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2452,7 +2452,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktUsersRatingsParams): Promise<Response<TraktUsersRatingsResponse>> => {
+        ratings: async (params: TraktUsersRatingsParams): Promise<Response<TraktUsersRatingsResponse[]>> => {
             const endpoint = "/users/{id}/ratings/{type}/{rating}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2466,7 +2466,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watchlist: async (params: TraktUsersWatchlistParams): Promise<Response<TraktUsersWatchlistResponse>> => {
+        watchlist: async (params: TraktUsersWatchlistParams): Promise<Response<TraktUsersWatchlistResponse[]>> => {
             const endpoint = "/users/{id}/watchlist/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2480,7 +2480,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        personalRecommendations: async (params: TraktUsersPersonalRecommendationsParams): Promise<Response<TraktUsersPersonalRecommendationsResponse>> => {
+        personalRecommendations: async (params: TraktUsersPersonalRecommendationsParams): Promise<Response<TraktUsersPersonalRecommendationsResponse[]>> => {
             const endpoint = "/users/{id}/recommendations/{type}/{sort}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
@@ -2509,7 +2509,7 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktUsersWatchedParams): Promise<Response<TraktUsersWatchedResponse>> => {
+        watched: async (params: TraktUsersWatchedParams): Promise<Response<TraktUsersWatchedResponse[]>> => {
             const endpoint = "/users/{id}/watched/{type}";
             const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
