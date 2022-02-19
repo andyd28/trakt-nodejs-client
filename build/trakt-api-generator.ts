@@ -254,6 +254,9 @@ export interface Trakt${toPascalCase(name)} { ${propsToString(obj, 1)}
                 arr = "[]";
             }
 
+            // TODO if array, loop through and compare the properties for differences,
+            // then add both as optional
+
             if (typeof value == "object" && Object.keys(common).indexOf(prop) >= 0) {
                 if (!common[prop]) {
                     commonInterfaces += addCommonInterface(prop, value);
@@ -286,9 +289,6 @@ export interface Trakt${toPascalCase(name)} { ${propsToString(obj, 1)}
                 console.log(methodName);
                 continue;
             }
-
-            // REMEMBER - on main type addition, check if array<t>
-            // TODO - not all responses are objects see updatedIds
 
             let body = method.response.body ?? {};
             const isArray = Array.isArray(body);

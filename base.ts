@@ -23,15 +23,18 @@ class TraktBase {
             if (repl && repl[0] === "?") {
                 const sourceArray = repl.substring(1).split(",");
                 const destArray = [];
-                for (const s in sourceArray) {
-                    destArray.push(encodeURIComponent(sourceArray[s]) + "=" + encodeURIComponent(params[sourceArray[s]]));
+                for (const s of sourceArray) {
+                    if (!params[s]) continue;
+                    destArray.push(encodeURIComponent(s) + "=" + encodeURIComponent(params[s]));
                 }
 
                 endpoint = endpoint.replace("{" + repl + "}", "?" + destArray.join("&"));
             } else if (repl) {
-                endpoint = endpoint.replace("{" + repl + "}", params[repl]);
+                endpoint = endpoint.replace("{" + repl + "}", params[repl] ?? "");
             }
         }
+
+        endpoint = endpoint.replace(/\/+/g, "/");
 
         return endpoint;
     }

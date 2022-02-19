@@ -19,14 +19,17 @@ class TraktBase {
                 const sourceArray = repl.substring(1).split(",");
                 const destArray = [];
                 for (const s in sourceArray) {
+                    if (!params[sourceArray[s]])
+                        continue;
                     destArray.push(encodeURIComponent(sourceArray[s]) + "=" + encodeURIComponent(params[sourceArray[s]]));
                 }
                 endpoint = endpoint.replace("{" + repl + "}", "?" + destArray.join("&"));
             }
             else if (repl) {
-                endpoint = endpoint.replace("{" + repl + "}", params[repl]);
+                endpoint = endpoint.replace("{" + repl + "}", params[repl] ?? "");
             }
         }
+        endpoint = endpoint.replace(/\/+/g, "/");
         return endpoint;
     }
 }
