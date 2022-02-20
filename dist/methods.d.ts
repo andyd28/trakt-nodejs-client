@@ -48,22 +48,22 @@ declare class TraktMethods extends TraktBase {
         list: (params: TraktLanguagesListParams) => Promise<Response<TraktLanguagesListResponse[]>>;
     };
     lists: {
-        trending: () => Promise<Response<TraktListsTrendingResponse[]>>;
-        popular: () => Promise<Response<TraktListsPopularResponse[]>>;
+        trending: (params: TraktListsTrendingParams) => Promise<Response<TraktListsTrendingResponse[]>>;
+        popular: (params: TraktListsPopularParams) => Promise<Response<TraktListsPopularResponse[]>>;
         list: (params: TraktListsListParams) => Promise<Response<TraktListsListResponse>>;
         listLikes: (params: TraktListsListLikesParams) => Promise<Response<TraktListsListLikesResponse[]>>;
         listItems: (params: TraktListsListItemsParams) => Promise<Response<TraktListsListItemsResponse[]>>;
         listComments: (params: TraktListsListCommentsParams) => Promise<Response<TraktListsListCommentsResponse[]>>;
     };
     movies: {
-        trending: () => Promise<Response<TraktMoviesTrendingResponse[]>>;
-        popular: () => Promise<Response<TraktMoviesPopularResponse[]>>;
+        trending: (params: TraktMoviesTrendingParams) => Promise<Response<TraktMoviesTrendingResponse[]>>;
+        popular: (params: TraktMoviesPopularParams) => Promise<Response<TraktMoviesPopularResponse[]>>;
         recommended: (params: TraktMoviesRecommendedParams) => Promise<Response<TraktMoviesRecommendedResponse[]>>;
         played: (params: TraktMoviesPlayedParams) => Promise<Response<TraktMoviesPlayedResponse[]>>;
         watched: (params: TraktMoviesWatchedParams) => Promise<Response<TraktMoviesWatchedResponse[]>>;
         collected: (params: TraktMoviesCollectedParams) => Promise<Response<TraktMoviesCollectedResponse[]>>;
-        anticipated: () => Promise<Response<TraktMoviesAnticipatedResponse[]>>;
-        boxOffice: () => Promise<Response<TraktMoviesBoxOfficeResponse[]>>;
+        anticipated: (params: TraktMoviesAnticipatedParams) => Promise<Response<TraktMoviesAnticipatedResponse[]>>;
+        boxOffice: (params: TraktMoviesBoxOfficeParams) => Promise<Response<TraktMoviesBoxOfficeResponse[]>>;
         updates: (params: TraktMoviesUpdatesParams) => Promise<Response<TraktMoviesUpdatesResponse[]>>;
         updatedIDs: (params: TraktMoviesUpdatedIDsParams) => Promise<Response<TraktMoviesUpdatedIDsResponse[]>>;
         summary: (params: TraktMoviesSummaryParams) => Promise<Response<TraktMoviesSummaryResponse>>;
@@ -103,13 +103,13 @@ declare class TraktMethods extends TraktBase {
         iDLookup: (params: TraktSearchIDLookupParams) => Promise<Response<TraktSearchIDLookupResponse[]>>;
     };
     shows: {
-        trending: () => Promise<Response<TraktShowsTrendingResponse[]>>;
-        popular: () => Promise<Response<TraktShowsPopularResponse[]>>;
+        trending: (params: TraktShowsTrendingParams) => Promise<Response<TraktShowsTrendingResponse[]>>;
+        popular: (params: TraktShowsPopularParams) => Promise<Response<TraktShowsPopularResponse[]>>;
         recommended: (params: TraktShowsRecommendedParams) => Promise<Response<TraktShowsRecommendedResponse[]>>;
         played: (params: TraktShowsPlayedParams) => Promise<Response<TraktShowsPlayedResponse[]>>;
         watched: (params: TraktShowsWatchedParams) => Promise<Response<TraktShowsWatchedResponse[]>>;
         collected: (params: TraktShowsCollectedParams) => Promise<Response<TraktShowsCollectedResponse[]>>;
-        anticipated: () => Promise<Response<TraktShowsAnticipatedResponse[]>>;
+        anticipated: (params: TraktShowsAnticipatedParams) => Promise<Response<TraktShowsAnticipatedResponse[]>>;
         updates: (params: TraktShowsUpdatesParams) => Promise<Response<TraktShowsUpdatesResponse[]>>;
         updatedIDs: (params: TraktShowsUpdatedIDsParams) => Promise<Response<TraktShowsUpdatedIDsResponse[]>>;
         summary: (params: TraktShowsSummaryParams) => Promise<Response<TraktShowsSummaryResponse>>;
@@ -174,8 +174,8 @@ declare class TraktMethods extends TraktBase {
     };
     users: {
         settings: () => Promise<Response<TraktUsersSettingsResponse>>;
-        followingRequests: () => Promise<Response<TraktUsersFollowingRequestsResponse[]>>;
-        followerRequests: () => Promise<Response<TraktUsersFollowerRequestsResponse[]>>;
+        followingRequests: (params: TraktUsersFollowingRequestsParams) => Promise<Response<TraktUsersFollowingRequestsResponse[]>>;
+        followerRequests: (params: TraktUsersFollowerRequestsParams) => Promise<Response<TraktUsersFollowerRequestsResponse[]>>;
         approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsParams) => Promise<Response<any>>;
         hiddenItems: (params: TraktUsersHiddenItemsParams) => Promise<Response<TraktUsersHiddenItemsResponse[]>>;
         addHiddenItems: (params: TraktUsersAddHiddenItemsBody) => Promise<Response<TraktUsersAddHiddenItemsResponse>>;
@@ -304,61 +304,81 @@ export interface TraktCalendarsMyShowsParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsMyNewShowsParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsMySeasonPremieresParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsMyMoviesParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsMyDVDParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllShowsParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllNewShowsParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllSeasonPremieresParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllMoviesParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllDVDParams {
     start_date?: string;
     days?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCertificationsListParams {
     type: "movies" | "shows";
@@ -449,47 +469,61 @@ export interface TraktMoviesTrendingParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesPopularParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesRecommendedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesPlayedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesWatchedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesCollectedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesAnticipatedParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesBoxOfficeParams {
     extended?: "full" | "metadata";
@@ -593,7 +627,9 @@ export interface TraktSearchTextQueryParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktSearchIDLookupParams {
     id_type: string;
@@ -607,47 +643,61 @@ export interface TraktShowsTrendingParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsPopularParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsRecommendedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsPlayedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsWatchedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsCollectedParams {
     period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsAnticipatedParams {
     page?: number;
     limit?: number;
     extended?: "full" | "metadata";
-    filters?: Record<TraktFilter, string>;
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsUpdatesParams {
     start_date?: string;

@@ -422,9 +422,9 @@ class TraktMethods extends base_1.default {
             },
         };
         this.lists = {
-            trending: async () => {
+            trending: async (params) => {
                 const endpoint = "/lists/trending";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -435,9 +435,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            popular: async () => {
+            popular: async (params) => {
                 const endpoint = "/lists/popular";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -502,9 +502,9 @@ class TraktMethods extends base_1.default {
             },
         };
         this.movies = {
-            trending: async () => {
+            trending: async (params) => {
                 const endpoint = "/movies/trending";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -515,9 +515,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            popular: async () => {
+            popular: async (params) => {
                 const endpoint = "/movies/popular";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -580,9 +580,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            anticipated: async () => {
+            anticipated: async (params) => {
                 const endpoint = "/movies/anticipated";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -593,9 +593,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            boxOffice: async () => {
+            boxOffice: async (params) => {
                 const endpoint = "/movies/boxoffice";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -994,9 +994,9 @@ class TraktMethods extends base_1.default {
             },
         };
         this.shows = {
-            trending: async () => {
+            trending: async (params) => {
                 const endpoint = "/shows/trending";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1007,9 +1007,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            popular: async () => {
+            popular: async (params) => {
                 const endpoint = "/shows/popular";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1072,9 +1072,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            anticipated: async () => {
+            anticipated: async (params) => {
                 const endpoint = "/shows/anticipated";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1903,9 +1903,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            followingRequests: async () => {
+            followingRequests: async (params) => {
                 const endpoint = "/users/requests/following";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1917,9 +1917,9 @@ class TraktMethods extends base_1.default {
                     },
                 });
             },
-            followerRequests: async () => {
+            followerRequests: async (params) => {
                 const endpoint = "/users/requests";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",

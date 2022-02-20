@@ -4,6 +4,7 @@ declare class TraktBase {
     protected access_token: string;
     protected redirect_uri: string;
     protected baseUrl: string;
+    private commonParameters;
     constructor(options: TraktOptions);
     protected parseEndpoint(endpoint: string, params: Record<string, any>): string;
 }

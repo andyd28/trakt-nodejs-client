@@ -1,9 +1,13 @@
+import { getEventListeners } from "events";
+
 class TraktBase {
     protected client_id: string;
     protected client_secret: string;
     protected access_token: string;
     protected redirect_uri: string;
     protected baseUrl = "https://api.trakt.tv";
+
+    private commonParameters = ["extended", "filters", "page", "limit"];
 
     constructor(options: TraktOptions) {
         this.client_id = options.client_id;
@@ -15,7 +19,10 @@ class TraktBase {
     protected parseEndpoint(endpoint: string, params: Record<string, any>): string {
         const matches = endpoint.matchAll(/{([^}]+)}/g);
 
-        if (!matches) return endpoint;
+        if (Object.keys(params).findIndex((p) => this.commonParameters.indexOf(p) >= 0) >= 0) {
+        } else if (!matches) {
+            return endpoint;
+        }
 
         for (const match of matches) {
             const repl = match[1];
@@ -34,8 +41,20 @@ class TraktBase {
             }
         }
 
-        endpoint = endpoint.replace(/\/+/g, "/");
+        for (const common of this.commonParameters) {
+            if (!params[common]) continue;
 
+            endpoint += endpoint.indexOf("?") < 0 ? "?" : "&";
+
+            if (common == "filters")
+                endpoint += Object.keys(params[common])
+                    .map((p) => p + "=" + params[common][p])
+                    .join("&");
+            else endpoint += common + "=" + params[common];
+        }
+
+        endpoint = endpoint.replace(/\/+/g, "/");
+        console.log(endpoint);
         return endpoint;
     }
 }

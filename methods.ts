@@ -456,9 +456,9 @@ class TraktMethods extends TraktBase {
 	};
 
 	lists = {
-        trending: async (): Promise<Response<TraktListsTrendingResponse[]>> => {
+        trending: async (params: TraktListsTrendingParams): Promise<Response<TraktListsTrendingResponse[]>> => {
             const endpoint = "/lists/trending";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -470,9 +470,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktListsPopularResponse[]>> => {
+        popular: async (params: TraktListsPopularParams): Promise<Response<TraktListsPopularResponse[]>> => {
             const endpoint = "/lists/popular";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -543,9 +543,9 @@ class TraktMethods extends TraktBase {
 	};
 
 	movies = {
-        trending: async (): Promise<Response<TraktMoviesTrendingResponse[]>> => {
+        trending: async (params: TraktMoviesTrendingParams): Promise<Response<TraktMoviesTrendingResponse[]>> => {
             const endpoint = "/movies/trending";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -557,9 +557,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktMoviesPopularResponse[]>> => {
+        popular: async (params: TraktMoviesPopularParams): Promise<Response<TraktMoviesPopularResponse[]>> => {
             const endpoint = "/movies/popular";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -627,9 +627,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (): Promise<Response<TraktMoviesAnticipatedResponse[]>> => {
+        anticipated: async (params: TraktMoviesAnticipatedParams): Promise<Response<TraktMoviesAnticipatedResponse[]>> => {
             const endpoint = "/movies/anticipated";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -641,9 +641,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        boxOffice: async (): Promise<Response<TraktMoviesBoxOfficeResponse[]>> => {
+        boxOffice: async (params: TraktMoviesBoxOfficeParams): Promise<Response<TraktMoviesBoxOfficeResponse[]>> => {
             const endpoint = "/movies/boxoffice";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1076,9 +1076,9 @@ class TraktMethods extends TraktBase {
 	};
 
 	shows = {
-        trending: async (): Promise<Response<TraktShowsTrendingResponse[]>> => {
+        trending: async (params: TraktShowsTrendingParams): Promise<Response<TraktShowsTrendingResponse[]>> => {
             const endpoint = "/shows/trending";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1090,9 +1090,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (): Promise<Response<TraktShowsPopularResponse[]>> => {
+        popular: async (params: TraktShowsPopularParams): Promise<Response<TraktShowsPopularResponse[]>> => {
             const endpoint = "/shows/popular";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1160,9 +1160,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (): Promise<Response<TraktShowsAnticipatedResponse[]>> => {
+        anticipated: async (params: TraktShowsAnticipatedParams): Promise<Response<TraktShowsAnticipatedResponse[]>> => {
             const endpoint = "/shows/anticipated";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2052,9 +2052,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followingRequests: async (): Promise<Response<TraktUsersFollowingRequestsResponse[]>> => {
+        followingRequests: async (params: TraktUsersFollowingRequestsParams): Promise<Response<TraktUsersFollowingRequestsResponse[]>> => {
             const endpoint = "/users/requests/following";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2067,9 +2067,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followerRequests: async (): Promise<Response<TraktUsersFollowerRequestsResponse[]>> => {
+        followerRequests: async (params: TraktUsersFollowerRequestsParams): Promise<Response<TraktUsersFollowerRequestsResponse[]>> => {
             const endpoint = "/users/requests";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2649,70 +2649,70 @@ export interface TraktCalendarsMyShowsParams {
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMyNewShowsParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMySeasonPremieresParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMyMoviesParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMyDVDParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllShowsParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllNewShowsParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllSeasonPremieresParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllMoviesParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllDVDParams { 
 	start_date?: string;
 	days?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCertificationsListParams { 
@@ -2822,14 +2822,14 @@ export interface TraktMoviesTrendingParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesPopularParams { 
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesRecommendedParams { 
@@ -2837,7 +2837,7 @@ export interface TraktMoviesRecommendedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesPlayedParams { 
@@ -2845,7 +2845,7 @@ export interface TraktMoviesPlayedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesWatchedParams { 
@@ -2853,7 +2853,7 @@ export interface TraktMoviesWatchedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesCollectedParams { 
@@ -2861,14 +2861,14 @@ export interface TraktMoviesCollectedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesAnticipatedParams { 
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesBoxOfficeParams { 
@@ -2995,7 +2995,7 @@ export interface TraktSearchTextQueryParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktSearchIDLookupParams { 
@@ -3011,14 +3011,14 @@ export interface TraktShowsTrendingParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsPopularParams { 
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsRecommendedParams { 
@@ -3026,7 +3026,7 @@ export interface TraktShowsRecommendedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsPlayedParams { 
@@ -3034,7 +3034,7 @@ export interface TraktShowsPlayedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsWatchedParams { 
@@ -3042,7 +3042,7 @@ export interface TraktShowsWatchedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsCollectedParams { 
@@ -3050,14 +3050,14 @@ export interface TraktShowsCollectedParams {
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsAnticipatedParams { 
 	page?: number;
 	limit?: number;
 	extended?: "full"|"metadata";
-	filters?: Record<TraktFilter, string>;
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsUpdatesParams { 

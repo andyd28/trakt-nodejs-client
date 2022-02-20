@@ -75,7 +75,7 @@ const addApiMethod = (groupName: string, methodName: string, method: Method) => 
     // parameters: if class property then update
 
     // Querystring Parameters
-    if (!!method.parameters) {
+    if (!!method.parameters || method.extended || method.pagination || method.filters) {
         routeMethod = "this.parseEndpoint(endpoint, params)";
         paramsDeclaration = "params: " + createInterfaceName(groupName, methodName, "Params");
     }
@@ -187,7 +187,7 @@ const generateParameterInterfaces = () => {
             }
 
             if (method.filters) {
-                params["filters"] = { required: false, type: "Record<TraktFilter, string>", values: [] };
+                params["filters"] = { required: false, type: "{ [key in TraktFilter]?: string }", values: [] };
             }
 
             // TODO add to querystring part of endpoint
