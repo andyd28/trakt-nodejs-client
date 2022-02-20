@@ -48,3 +48,5 @@ export interface TraktOptions {
     access_token?: string;
     redirect_uri?: string;
 }
+
+export type TraktFilter = "query" | "years" | "genres" | "languages" | "countries" | "runtimes" | "ratings" | "certifications" | "networks" | "status";

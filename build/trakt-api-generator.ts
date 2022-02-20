@@ -156,7 +156,7 @@ const addApiMethod = (groupName: string, methodName: string, method: Method) => 
         },`;
 };
 
-const openClass = () => `import TraktBase, { TraktOptions } from "./base";
+const openClass = () => `import TraktBase, { TraktOptions, TraktFilter } from "./base";
 import got, { Response } from "got";
 
 class TraktMethods extends TraktBase {    
@@ -175,8 +175,24 @@ const generateParameterInterfaces = () => {
         for (const methodName in group) {
             const method = group[methodName];
             const paramsInterface = createInterfaceName(groupName, methodName, "Params");
+            const params = method.parameters ?? {};
 
-            if (!!method.parameters) interfaces += addParametersInterface(paramsInterface, method.parameters);
+            if (method.pagination) {
+                params["page"] = { required: false, type: "number", values: [] };
+                params["limit"] = { required: false, type: "number", values: [] };
+            }
+
+            if (method.extended) {
+                params["extended"] = { required: false, type: "string", values: ["full", "metadata"] };
+            }
+
+            if (method.filters) {
+                params["filters"] = { required: false, type: "Record<TraktFilter, string>", values: [] };
+            }
+
+            // TODO add to querystring part of endpoint
+
+            if (Object.keys(params).length > 0) interfaces += addParametersInterface(paramsInterface, params);
         }
     }
 };
@@ -302,7 +318,7 @@ export interface ${interfaceName} extends ${ext} { }
 `;
             } else if (Object.keys(body).length > 0)
                 interfaces += `    
-export interface ${interfaceName} { ${propsToString(body, 1)}
+export interface ${interfaceName} { ${propsToString(body, 1)} ${method.extended ? "\n\t[key: string]: any;" : ""}
 }
 `;
         }
@@ -347,6 +363,11 @@ interface MethodGroup extends Record<string, Method> {}
 
 interface Method {
     endpoint: string;
+    pagination: boolean;
+    extended: boolean;
+    filters: boolean;
+    oauth: boolean;
+    emojis: boolean;
     parameters?: Record<string, MethodParameter>;
     verb: "GET" | "POST" | "PUT" | "DELETE";
     request: {

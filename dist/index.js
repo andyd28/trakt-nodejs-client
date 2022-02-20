@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const methods_1 = __importDefault(require("./methods"));
-// TODO export all interfaces from this class
 class Trakt extends methods_1.default {
     constructor(options) {
         super(options);

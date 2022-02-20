@@ -17,6 +17,7 @@ const fileStream = fs.createReadStream("trakt.apib");
 
 const RX_GROUP = /^#{1,2} Group\s(?<name>[a-z]+)/i;
 const RX_METHOD = /^## (?<name>[a-z\s]+) \[(?<endpoint>.+)\]$/i;
+const RX_OPTIONALS = /^\#{4}\s\&\#[0-9]+/i;
 const RX_VERB = /^###.+\[(?<verb>.+)\]$/i;
 const RX_METHODPROP = /^\+\s(?<name>[a-z]+)/i;
 const RX_PARAMETER = /^\s{4}\+ (?<name>[a-z_]+) \((?<props>.+)\) /i;
@@ -68,6 +69,16 @@ const parse = async () => {
             currentParameter = null;
             currentParameterName = "";
             currentRequestBody = {};
+        }
+
+        if (RX_OPTIONALS.test(line) && currentMethod) {
+            var lineArr = line.split(/\&\#[0-9]+\;/);
+            lineArr.shift();
+            lineArr
+                .map((s) => s.split(" ")[1].trim())
+                .forEach((s) => {
+                    if (currentMethod) currentMethod[s.toLowerCase()] = true;
+                });
         }
 
         const match3 = RX_METHODPROP.exec(line);
@@ -136,8 +147,6 @@ const parse = async () => {
         }
 
         if (line.length == 0 && isRequestBody) isRequestBody = false;
-
-        // TODO pagination
     }
 
     fs.writeFileSync("./data.json", JSON.stringify(methodGroups, null, 2));
@@ -232,6 +241,11 @@ const addMethod = (methodGroup: KeyObjectPairs, groups: Record<string, string>):
 
     methodGroup[name] = {
         endpoint: groups["endpoint"],
+        extended: false,
+        pagination: false,
+        filters: false,
+        emojis: false,
+        oauth: false,
     };
 
     return methodGroup[name];

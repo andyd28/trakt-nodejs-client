@@ -18,10 +18,10 @@ class TraktBase {
             if (repl && repl[0] === "?") {
                 const sourceArray = repl.substring(1).split(",");
                 const destArray = [];
-                for (const s in sourceArray) {
-                    if (!params[sourceArray[s]])
+                for (const s of sourceArray) {
+                    if (!params[s])
                         continue;
-                    destArray.push(encodeURIComponent(sourceArray[s]) + "=" + encodeURIComponent(params[sourceArray[s]]));
+                    destArray.push(encodeURIComponent(s) + "=" + encodeURIComponent(params[s]));
                 }
                 endpoint = endpoint.replace("{" + repl + "}", "?" + destArray.join("&"));
             }
