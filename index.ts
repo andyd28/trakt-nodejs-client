@@ -1,8 +1,6 @@
 import TraktMethods, { TraktAuthenticationGetTokenResponse, TraktAuthenticationDeviceCodeResponse } from "./methods";
 import { TraktOptions } from "./base";
 
-// TODO export all interfaces from this class
-
 class Trakt extends TraktMethods {
     constructor(options: TraktOptions) {
         super(options);

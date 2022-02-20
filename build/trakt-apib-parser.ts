@@ -4,6 +4,13 @@ import readline from "readline";
 // TODO refactor using a call stack method, looking back for methods and groups rather than
 // variables i.e. push and pop
 
+// TODO look for extended and filter properties
+// How does this affect the body return object
+
+// TODO as previous, check if OAuth required, then reject if access_token not set.
+
+// TODO finally add paging
+
 type KeyObjectPairs = Record<string, any> | null;
 
 const fileStream = fs.createReadStream("trakt.apib");
@@ -130,13 +137,7 @@ const parse = async () => {
 
         if (line.length == 0 && isRequestBody) isRequestBody = false;
 
-        // TODO for body, create a dictionary that adds to, use once complete to create interfaces
-        // PeopleResponse
-        //  cast: Array<CastResponse>
-        // characters Array<string>
-        // person PersonResponse name: string, ids: IdsResponse
-        // IdsResponse trakt? number
-        // Also pagination
+        // TODO pagination
     }
 
     fs.writeFileSync("./data.json", JSON.stringify(methodGroups, null, 2));
