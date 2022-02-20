@@ -14,8 +14,11 @@ https://trakt.docs.apiary.io/
 
 -   [x] Types for common objects such as 'movie', 'show' etc.
 -   [x] Interfaces for the return objects of each method.
--   [ ] Optional pagination parameters.
--   [ ] Optional extended info parameter.
--   [ ] Optional filters.
+-   [x] Optional pagination parameters.
+-   [x] Optional extended info parameter.
+-   [x] Optional filters.
 -   [ ] Examples of use, notably how to create and authorise the API.
 -   [ ] Addition of error trapping with exception message.
+-   [ ] Create response types for extended information.
+-   [ ] Create a fluent interface for common optional parameters.
+-   [ ] Refactor the build scripts and base classes.
