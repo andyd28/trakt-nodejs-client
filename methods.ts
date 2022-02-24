@@ -6,9 +6,8 @@ class TraktMethods extends TraktBase {
         super(options);
     }
 	authentication = {
-        authorize: async (params: TraktAuthenticationAuthorizeParams): Promise<Response<any>> => {
-            const endpoint = "/oauth/authorize{?response_type,client_id,redirect_uri,state}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        authorize: async (params: TraktAuthenticationAuthorizeRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/oauth/authorize{?response_type,client_id,redirect_uri,state}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -16,9 +15,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",                          
             });   
         },
-        getToken: async (params: TraktAuthenticationGetTokenBody): Promise<Response<TraktAuthenticationGetTokenResponse>> => {
-            const endpoint = "/oauth/device/token";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getToken: async (params: TraktAuthenticationGetTokenRequest): Promise<Response<TraktAuthenticationGetTokenResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/oauth/device/token", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -31,9 +29,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        refreshToken: async (params: TraktAuthenticationRefreshTokenBody): Promise<Response<TraktAuthenticationGetTokenResponse>> => {
-            const endpoint = "/oauth/token";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        refreshToken: async (params: TraktAuthenticationRefreshTokenRequest): Promise<Response<TraktAuthenticationGetTokenResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/oauth/token", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -48,9 +45,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        revokeToken: async (params: TraktAuthenticationRevokeTokenBody): Promise<Response<any>> => {
-            const endpoint = "/oauth/revoke";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        revokeToken: async (params: TraktAuthenticationRevokeTokenRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/oauth/revoke", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -64,8 +60,7 @@ class TraktMethods extends TraktBase {
             });   
         },
         deviceCode: async (): Promise<Response<TraktAuthenticationDeviceCodeResponse>> => {
-            const endpoint = "/oauth/device/code";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/oauth/device/code";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -76,12 +71,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	calendars = {
-        myShows: async (params: TraktCalendarsMyShowsParams): Promise<Response<TraktCalendarsMyShowsResponse[]>> => {
-            const endpoint = "/calendars/my/shows/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	calendars = {
+        myShows: async (params: TraktCalendarsMyShowsRequest): Promise<Response<TraktCalendarsMyShowsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -94,9 +86,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myNewShows: async (params: TraktCalendarsMyNewShowsParams): Promise<Response<TraktCalendarsMyNewShowsResponse[]>> => {
-            const endpoint = "/calendars/my/shows/new/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        myNewShows: async (params: TraktCalendarsMyNewShowsRequest): Promise<Response<TraktCalendarsMyNewShowsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/new/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -109,9 +100,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        mySeasonPremieres: async (params: TraktCalendarsMySeasonPremieresParams): Promise<Response<TraktCalendarsMySeasonPremieresResponse[]>> => {
-            const endpoint = "/calendars/my/shows/premieres/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        mySeasonPremieres: async (params: TraktCalendarsMySeasonPremieresRequest): Promise<Response<TraktCalendarsMySeasonPremieresResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/premieres/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -124,9 +114,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myMovies: async (params: TraktCalendarsMyMoviesParams): Promise<Response<TraktCalendarsMyMoviesResponse[]>> => {
-            const endpoint = "/calendars/my/movies/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        myMovies: async (params: TraktCalendarsMyMoviesRequest): Promise<Response<TraktCalendarsMyMoviesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/my/movies/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -139,9 +128,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        myDVD: async (params: TraktCalendarsMyDVDParams): Promise<Response<TraktCalendarsMyDVDResponse[]>> => {
-            const endpoint = "/calendars/my/dvd/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        myDVD: async (params: TraktCalendarsMyDVDRequest): Promise<Response<TraktCalendarsMyDVDResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/my/dvd/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -154,9 +142,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allShows: async (params: TraktCalendarsAllShowsParams): Promise<Response<TraktCalendarsAllShowsResponse[]>> => {
-            const endpoint = "/calendars/all/shows/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        allShows: async (params: TraktCalendarsAllShowsRequest): Promise<Response<TraktCalendarsAllShowsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -168,9 +155,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allNewShows: async (params: TraktCalendarsAllNewShowsParams): Promise<Response<TraktCalendarsAllNewShowsResponse[]>> => {
-            const endpoint = "/calendars/all/shows/new/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        allNewShows: async (params: TraktCalendarsAllNewShowsRequest): Promise<Response<TraktCalendarsAllNewShowsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/new/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -182,9 +168,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allSeasonPremieres: async (params: TraktCalendarsAllSeasonPremieresParams): Promise<Response<TraktCalendarsAllSeasonPremieresResponse[]>> => {
-            const endpoint = "/calendars/all/shows/premieres/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        allSeasonPremieres: async (params: TraktCalendarsAllSeasonPremieresRequest): Promise<Response<TraktCalendarsAllSeasonPremieresResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/premieres/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -196,9 +181,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allMovies: async (params: TraktCalendarsAllMoviesParams): Promise<Response<TraktCalendarsAllMoviesResponse[]>> => {
-            const endpoint = "/calendars/all/movies/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        allMovies: async (params: TraktCalendarsAllMoviesRequest): Promise<Response<TraktCalendarsAllMoviesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/all/movies/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -210,9 +194,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        allDVD: async (params: TraktCalendarsAllDVDParams): Promise<Response<TraktCalendarsAllDVDResponse[]>> => {
-            const endpoint = "/calendars/all/dvd/{start_date}/{days}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        allDVD: async (params: TraktCalendarsAllDVDRequest): Promise<Response<TraktCalendarsAllDVDResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/calendars/all/dvd/{start_date}/{days}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -224,12 +207,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	checkin = {
+	};	checkin = {
         checkin: async (): Promise<Response<any>> => {
-            const endpoint = "/checkin";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/checkin";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -242,12 +222,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	certifications = {
-        list: async (params: TraktCertificationsListParams): Promise<Response<TraktCertificationsListResponse>> => {
-            const endpoint = "/certifications/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	certifications = {
+        list: async (params: TraktCertificationsListRequest): Promise<Response<TraktCertificationsListResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/certifications/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -259,12 +236,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	comments = {
-        comments: async (params: TraktCommentsCommentsBody): Promise<Response<TraktCommentsCommentsResponse>> => {
-            const endpoint = "/comments";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	comments = {
+        comments: async (params: TraktCommentsCommentsRequest): Promise<Response<TraktCommentsCommentsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -283,9 +257,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comment: async (params: TraktCommentsCommentParams): Promise<Response<any>> => {
-            const endpoint = "/comments/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comment: async (params: TraktCommentsCommentRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -298,9 +271,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        replies: async (params: TraktCommentsRepliesBody): Promise<Response<TraktCommentsRepliesResponse>> => {
-            const endpoint = "/comments/{id}/replies";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        replies: async (params: TraktCommentsRepliesRequest): Promise<Response<TraktCommentsRepliesResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -317,9 +289,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        item: async (params: TraktCommentsItemParams): Promise<Response<TraktCommentsItemResponse>> => {
-            const endpoint = "/comments/{id}/item";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        item: async (params: TraktCommentsItemRequest): Promise<Response<TraktCommentsItemResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/item", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -331,9 +302,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        likes: async (params: TraktCommentsLikesParams): Promise<Response<TraktCommentsLikesResponse[]>> => {
-            const endpoint = "/comments/{id}/likes";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        likes: async (params: TraktCommentsLikesRequest): Promise<Response<TraktCommentsLikesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/likes", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -345,9 +315,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        like: async (params: TraktCommentsLikeParams): Promise<Response<any>> => {
-            const endpoint = "/comments/{id}/like";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        like: async (params: TraktCommentsLikeRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -360,9 +329,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        trending: async (params: TraktCommentsTrendingParams): Promise<Response<TraktCommentsTrendingResponse[]>> => {
-            const endpoint = "/comments/trending/{comment_type}/{type}{?include_replies}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        trending: async (params: TraktCommentsTrendingRequest): Promise<Response<TraktCommentsTrendingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/trending/{comment_type}/{type}{?include_replies}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -374,9 +342,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recent: async (params: TraktCommentsRecentParams): Promise<Response<TraktCommentsRecentResponse[]>> => {
-            const endpoint = "/comments/recent/{comment_type}/{type}{?include_replies}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        recent: async (params: TraktCommentsRecentRequest): Promise<Response<TraktCommentsRecentResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/recent/{comment_type}/{type}{?include_replies}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -388,9 +355,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktCommentsUpdatesParams): Promise<Response<TraktCommentsUpdatesResponse[]>> => {
-            const endpoint = "/comments/updates/{comment_type}/{type}{?include_replies}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        updates: async (params: TraktCommentsUpdatesRequest): Promise<Response<TraktCommentsUpdatesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/updates/{comment_type}/{type}{?include_replies}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -402,12 +368,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	countries = {
-        list: async (params: TraktCountriesListParams): Promise<Response<TraktCountriesListResponse[]>> => {
-            const endpoint = "/countries/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	countries = {
+        list: async (params: TraktCountriesListRequest): Promise<Response<TraktCountriesListResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/countries/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -419,12 +382,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	genres = {
-        list: async (params: TraktGenresListParams): Promise<Response<TraktGenresListResponse[]>> => {
-            const endpoint = "/genres/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	genres = {
+        list: async (params: TraktGenresListRequest): Promise<Response<TraktGenresListResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/genres/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -436,12 +396,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	languages = {
-        list: async (params: TraktLanguagesListParams): Promise<Response<TraktLanguagesListResponse[]>> => {
-            const endpoint = "/languages/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	languages = {
+        list: async (params: TraktLanguagesListRequest): Promise<Response<TraktLanguagesListResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/languages/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -453,12 +410,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	lists = {
-        trending: async (params: TraktListsTrendingParams): Promise<Response<TraktListsTrendingResponse[]>> => {
-            const endpoint = "/lists/trending";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	lists = {
+        trending: async (params: TraktListsTrendingRequest): Promise<Response<TraktListsTrendingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/trending", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -470,9 +424,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (params: TraktListsPopularParams): Promise<Response<TraktListsPopularResponse[]>> => {
-            const endpoint = "/lists/popular";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        popular: async (params: TraktListsPopularRequest): Promise<Response<TraktListsPopularResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/popular", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -484,9 +437,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        list: async (params: TraktListsListParams): Promise<Response<TraktListsListResponse>> => {
-            const endpoint = "/lists/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        list: async (params: TraktListsListRequest): Promise<Response<TraktListsListResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -498,9 +450,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listLikes: async (params: TraktListsListLikesParams): Promise<Response<TraktListsListLikesResponse[]>> => {
-            const endpoint = "/lists/{id}/likes";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listLikes: async (params: TraktListsListLikesRequest): Promise<Response<TraktListsListLikesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/{id}/likes", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -512,9 +463,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listItems: async (params: TraktListsListItemsParams): Promise<Response<TraktListsListItemsResponse[]>> => {
-            const endpoint = "/lists/{id}/items/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listItems: async (params: TraktListsListItemsRequest): Promise<Response<TraktListsListItemsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/{id}/items/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -526,9 +476,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listComments: async (params: TraktListsListCommentsParams): Promise<Response<TraktListsListCommentsResponse[]>> => {
-            const endpoint = "/lists/{id}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listComments: async (params: TraktListsListCommentsRequest): Promise<Response<TraktListsListCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/lists/{id}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -540,12 +489,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	movies = {
-        trending: async (params: TraktMoviesTrendingParams): Promise<Response<TraktMoviesTrendingResponse[]>> => {
-            const endpoint = "/movies/trending";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	movies = {
+        trending: async (params: TraktMoviesTrendingRequest): Promise<Response<TraktMoviesTrendingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/trending", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -557,9 +503,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (params: TraktMoviesPopularParams): Promise<Response<TraktMoviesPopularResponse[]>> => {
-            const endpoint = "/movies/popular";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        popular: async (params: TraktMoviesPopularRequest): Promise<Response<TraktMoviesPopularResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/popular", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -571,9 +516,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recommended: async (params: TraktMoviesRecommendedParams): Promise<Response<TraktMoviesRecommendedResponse[]>> => {
-            const endpoint = "/movies/recommended/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        recommended: async (params: TraktMoviesRecommendedRequest): Promise<Response<TraktMoviesRecommendedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/recommended/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -585,9 +529,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        played: async (params: TraktMoviesPlayedParams): Promise<Response<TraktMoviesPlayedResponse[]>> => {
-            const endpoint = "/movies/played/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        played: async (params: TraktMoviesPlayedRequest): Promise<Response<TraktMoviesPlayedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/played/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -599,9 +542,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktMoviesWatchedParams): Promise<Response<TraktMoviesWatchedResponse[]>> => {
-            const endpoint = "/movies/watched/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watched: async (params: TraktMoviesWatchedRequest): Promise<Response<TraktMoviesWatchedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/watched/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -613,9 +555,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collected: async (params: TraktMoviesCollectedParams): Promise<Response<TraktMoviesCollectedResponse[]>> => {
-            const endpoint = "/movies/collected/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        collected: async (params: TraktMoviesCollectedRequest): Promise<Response<TraktMoviesCollectedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/collected/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -627,9 +568,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (params: TraktMoviesAnticipatedParams): Promise<Response<TraktMoviesAnticipatedResponse[]>> => {
-            const endpoint = "/movies/anticipated";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        anticipated: async (params: TraktMoviesAnticipatedRequest): Promise<Response<TraktMoviesAnticipatedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/anticipated", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -641,9 +581,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        boxOffice: async (params: TraktMoviesBoxOfficeParams): Promise<Response<TraktMoviesBoxOfficeResponse[]>> => {
-            const endpoint = "/movies/boxoffice";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        boxOffice: async (params: TraktMoviesBoxOfficeRequest): Promise<Response<TraktMoviesBoxOfficeResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/boxoffice", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -655,9 +594,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktMoviesUpdatesParams): Promise<Response<TraktMoviesUpdatesResponse[]>> => {
-            const endpoint = "/movies/updates/{start_date}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        updates: async (params: TraktMoviesUpdatesRequest): Promise<Response<TraktMoviesUpdatesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/updates/{start_date}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -669,9 +607,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updatedIDs: async (params: TraktMoviesUpdatedIDsParams): Promise<Response<TraktMoviesUpdatedIDsResponse[]>> => {
-            const endpoint = "/movies/updates/id/{start_date}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        updatedIDs: async (params: TraktMoviesUpdatedIDsRequest): Promise<Response<number[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/updates/id/{start_date}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -683,9 +620,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        summary: async (params: TraktMoviesSummaryParams): Promise<Response<TraktMoviesSummaryResponse>> => {
-            const endpoint = "/movies/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        summary: async (params: TraktMoviesSummaryRequest): Promise<Response<TraktMoviesSummaryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -697,9 +633,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        aliases: async (params: TraktMoviesAliasesParams): Promise<Response<TraktMoviesAliasesResponse[]>> => {
-            const endpoint = "/movies/{id}/aliases";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        aliases: async (params: TraktMoviesAliasesRequest): Promise<Response<TraktMoviesAliasesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/aliases", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -711,9 +646,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        releases: async (params: TraktMoviesReleasesParams): Promise<Response<TraktMoviesReleasesResponse[]>> => {
-            const endpoint = "/movies/{id}/releases/{country}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        releases: async (params: TraktMoviesReleasesRequest): Promise<Response<TraktMoviesReleasesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/releases/{country}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -725,9 +659,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktMoviesTranslationsParams): Promise<Response<TraktMoviesTranslationsResponse[]>> => {
-            const endpoint = "/movies/{id}/translations/{language}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        translations: async (params: TraktMoviesTranslationsRequest): Promise<Response<TraktMoviesTranslationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/translations/{language}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -739,9 +672,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktMoviesCommentsParams): Promise<Response<TraktMoviesCommentsResponse[]>> => {
-            const endpoint = "/movies/{id}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comments: async (params: TraktMoviesCommentsRequest): Promise<Response<TraktMoviesCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -753,9 +685,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktMoviesListsParams): Promise<Response<TraktMoviesListsResponse[]>> => {
-            const endpoint = "/movies/{id}/lists/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktMoviesListsRequest): Promise<Response<TraktMoviesListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/lists/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -767,9 +698,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        people: async (params: TraktMoviesPeopleParams): Promise<Response<TraktMoviesPeopleResponse>> => {
-            const endpoint = "/movies/{id}/people";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        people: async (params: TraktMoviesPeopleRequest): Promise<Response<TraktMoviesPeopleResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/people", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -781,9 +711,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktMoviesRatingsParams): Promise<Response<TraktMoviesRatingsResponse>> => {
-            const endpoint = "/movies/{id}/ratings";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        ratings: async (params: TraktMoviesRatingsRequest): Promise<Response<TraktMoviesRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/ratings", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -795,9 +724,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        related: async (params: TraktMoviesRelatedParams): Promise<Response<TraktMoviesRelatedResponse[]>> => {
-            const endpoint = "/movies/{id}/related";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        related: async (params: TraktMoviesRelatedRequest): Promise<Response<TraktMoviesRelatedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/related", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -809,9 +737,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stats: async (params: TraktMoviesStatsParams): Promise<Response<TraktMoviesStatsResponse>> => {
-            const endpoint = "/movies/{id}/stats";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stats: async (params: TraktMoviesStatsRequest): Promise<Response<TraktMoviesStatsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/stats", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -823,9 +750,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktMoviesWatchingParams): Promise<Response<TraktMoviesWatchingResponse[]>> => {
-            const endpoint = "/movies/{id}/watching";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watching: async (params: TraktMoviesWatchingRequest): Promise<Response<TraktMoviesWatchingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/movies/{id}/watching", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -837,12 +763,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	networks = {
+	};	networks = {
         list: async (): Promise<Response<TraktNetworksListResponse[]>> => {
-            const endpoint = "/networks";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/networks";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -854,12 +777,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	people = {
-        summary: async (params: TraktPeopleSummaryParams): Promise<Response<TraktPeopleSummaryResponse>> => {
-            const endpoint = "/people/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	people = {
+        summary: async (params: TraktPeopleSummaryRequest): Promise<Response<TraktPeopleSummaryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/people/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -871,9 +791,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        movies: async (params: TraktPeopleMoviesParams): Promise<Response<TraktPeopleMoviesResponse>> => {
-            const endpoint = "/people/{id}/movies";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        movies: async (params: TraktPeopleMoviesRequest): Promise<Response<TraktPeopleMoviesResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/people/{id}/movies", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -885,9 +804,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        shows: async (params: TraktPeopleShowsParams): Promise<Response<TraktPeopleShowsResponse>> => {
-            const endpoint = "/people/{id}/shows";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        shows: async (params: TraktPeopleShowsRequest): Promise<Response<TraktPeopleShowsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/people/{id}/shows", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -899,9 +817,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktPeopleListsParams): Promise<Response<TraktPeopleListsResponse[]>> => {
-            const endpoint = "/people/{id}/lists/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktPeopleListsRequest): Promise<Response<TraktPeopleListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/people/{id}/lists/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -913,12 +830,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	recommendations = {
-        movies: async (params: TraktRecommendationsMoviesParams): Promise<Response<TraktRecommendationsMoviesResponse[]>> => {
-            const endpoint = "/recommendations/movies{?ignore_collected}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	recommendations = {
+        movies: async (params: TraktRecommendationsMoviesRequest): Promise<Response<TraktRecommendationsMoviesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/recommendations/movies{?ignore_collected}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -931,9 +845,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        hideMovie: async (params: TraktRecommendationsHideMovieParams): Promise<Response<any>> => {
-            const endpoint = "/recommendations/movies/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        hideMovie: async (params: TraktRecommendationsHideMovieRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/recommendations/movies/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -946,9 +859,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        shows: async (params: TraktRecommendationsShowsParams): Promise<Response<TraktRecommendationsShowsResponse[]>> => {
-            const endpoint = "/recommendations/shows{?ignore_collected}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        shows: async (params: TraktRecommendationsShowsRequest): Promise<Response<TraktRecommendationsShowsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/recommendations/shows{?ignore_collected}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -961,9 +873,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        hideShow: async (params: TraktRecommendationsHideShowParams): Promise<Response<any>> => {
-            const endpoint = "/recommendations/shows/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        hideShow: async (params: TraktRecommendationsHideShowRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/recommendations/shows/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -976,12 +887,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	scrobble = {
-        start: async (params: TraktScrobbleStartBody): Promise<Response<TraktScrobbleStartResponse>> => {
-            const endpoint = "/scrobble/start";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	scrobble = {
+        start: async (params: TraktScrobbleStartRequest): Promise<Response<TraktScrobbleStartResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/scrobble/start", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1000,9 +908,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        pause: async (params: TraktScrobblePauseBody): Promise<Response<TraktScrobblePauseResponse>> => {
-            const endpoint = "/scrobble/pause";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        pause: async (params: TraktScrobblePauseRequest): Promise<Response<TraktScrobblePauseResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/scrobble/pause", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1021,9 +928,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stop: async (params: TraktScrobbleStopBody): Promise<Response<TraktScrobbleStopResponse>> => {
-            const endpoint = "/scrobble/stop";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stop: async (params: TraktScrobbleStopRequest): Promise<Response<TraktScrobbleStopResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/scrobble/stop", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1042,12 +948,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	search = {
-        textQuery: async (params: TraktSearchTextQueryParams): Promise<Response<TraktSearchTextQueryResponse[]>> => {
-            const endpoint = "/search/{type}{?query}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	search = {
+        textQuery: async (params: TraktSearchTextQueryRequest): Promise<Response<TraktSearchTextQueryResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/search/{type}{?query}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1059,9 +962,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        iDLookup: async (params: TraktSearchIDLookupParams): Promise<Response<TraktSearchIDLookupResponse[]>> => {
-            const endpoint = "/search/{id_type}/{id}{?type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        iDLookup: async (params: TraktSearchIDLookupRequest): Promise<Response<TraktSearchIDLookupResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/search/{id_type}/{id}{?type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1073,12 +975,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	shows = {
-        trending: async (params: TraktShowsTrendingParams): Promise<Response<TraktShowsTrendingResponse[]>> => {
-            const endpoint = "/shows/trending";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	shows = {
+        trending: async (params: TraktShowsTrendingRequest): Promise<Response<TraktShowsTrendingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/trending", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1090,9 +989,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        popular: async (params: TraktShowsPopularParams): Promise<Response<TraktShowsPopularResponse[]>> => {
-            const endpoint = "/shows/popular";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        popular: async (params: TraktShowsPopularRequest): Promise<Response<TraktShowsPopularResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/popular", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1104,9 +1002,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        recommended: async (params: TraktShowsRecommendedParams): Promise<Response<TraktShowsRecommendedResponse[]>> => {
-            const endpoint = "/shows/recommended/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        recommended: async (params: TraktShowsRecommendedRequest): Promise<Response<TraktShowsRecommendedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/recommended/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1118,9 +1015,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        played: async (params: TraktShowsPlayedParams): Promise<Response<TraktShowsPlayedResponse[]>> => {
-            const endpoint = "/shows/played/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        played: async (params: TraktShowsPlayedRequest): Promise<Response<TraktShowsPlayedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/played/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1132,9 +1028,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktShowsWatchedParams): Promise<Response<TraktShowsWatchedResponse[]>> => {
-            const endpoint = "/shows/watched/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watched: async (params: TraktShowsWatchedRequest): Promise<Response<TraktShowsWatchedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/watched/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1146,9 +1041,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collected: async (params: TraktShowsCollectedParams): Promise<Response<TraktShowsCollectedResponse[]>> => {
-            const endpoint = "/shows/collected/{period}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        collected: async (params: TraktShowsCollectedRequest): Promise<Response<TraktShowsCollectedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/collected/{period}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1160,9 +1054,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        anticipated: async (params: TraktShowsAnticipatedParams): Promise<Response<TraktShowsAnticipatedResponse[]>> => {
-            const endpoint = "/shows/anticipated";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        anticipated: async (params: TraktShowsAnticipatedRequest): Promise<Response<TraktShowsAnticipatedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/anticipated", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1174,9 +1067,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updates: async (params: TraktShowsUpdatesParams): Promise<Response<TraktShowsUpdatesResponse[]>> => {
-            const endpoint = "/shows/updates/{start_date}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        updates: async (params: TraktShowsUpdatesRequest): Promise<Response<TraktShowsUpdatesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/updates/{start_date}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1188,9 +1080,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        updatedIDs: async (params: TraktShowsUpdatedIDsParams): Promise<Response<TraktShowsUpdatedIDsResponse[]>> => {
-            const endpoint = "/shows/updates/id/{start_date}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        updatedIDs: async (params: TraktShowsUpdatedIDsRequest): Promise<Response<number[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/updates/id/{start_date}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1202,9 +1093,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        summary: async (params: TraktShowsSummaryParams): Promise<Response<TraktShowsSummaryResponse>> => {
-            const endpoint = "/shows/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        summary: async (params: TraktShowsSummaryRequest): Promise<Response<TraktShowsSummaryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1216,9 +1106,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        aliases: async (params: TraktShowsAliasesParams): Promise<Response<TraktShowsAliasesResponse[]>> => {
-            const endpoint = "/shows/{id}/aliases";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        aliases: async (params: TraktShowsAliasesRequest): Promise<Response<TraktShowsAliasesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/aliases", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1230,9 +1119,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        certifications: async (params: TraktShowsCertificationsParams): Promise<Response<TraktShowsCertificationsResponse[]>> => {
-            const endpoint = "/shows/{id}/certifications";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        certifications: async (params: TraktShowsCertificationsRequest): Promise<Response<TraktShowsCertificationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/certifications", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1244,9 +1132,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktShowsTranslationsParams): Promise<Response<TraktShowsTranslationsResponse[]>> => {
-            const endpoint = "/shows/{id}/translations/{language}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        translations: async (params: TraktShowsTranslationsRequest): Promise<Response<TraktShowsTranslationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/translations/{language}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1258,9 +1145,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktShowsCommentsParams): Promise<Response<TraktShowsCommentsResponse[]>> => {
-            const endpoint = "/shows/{id}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comments: async (params: TraktShowsCommentsRequest): Promise<Response<TraktShowsCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1272,9 +1158,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktShowsListsParams): Promise<Response<TraktShowsListsResponse[]>> => {
-            const endpoint = "/shows/{id}/lists/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktShowsListsRequest): Promise<Response<TraktShowsListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/lists/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1286,9 +1171,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collectionProgress: async (params: TraktShowsCollectionProgressParams): Promise<Response<TraktShowsCollectionProgressResponse>> => {
-            const endpoint = "/shows/{id}/progress/collection{?hidden,specials,count_specials,last_activity}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        collectionProgress: async (params: TraktShowsCollectionProgressRequest): Promise<Response<TraktShowsCollectionProgressResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/collection{?hidden,specials,count_specials,last_activity}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1301,9 +1185,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watchedProgress: async (params: TraktShowsWatchedProgressParams): Promise<Response<TraktShowsWatchedProgressResponse>> => {
-            const endpoint = "/shows/{id}/progress/watched{?hidden,specials,count_specials,last_activity}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watchedProgress: async (params: TraktShowsWatchedProgressRequest): Promise<Response<TraktShowsWatchedProgressResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched{?hidden,specials,count_specials,last_activity}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1316,9 +1199,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        resetWatchedProgress: async (params: TraktShowsResetWatchedProgressParams): Promise<Response<any>> => {
-            const endpoint = "/shows/{id}/progress/watched/reset";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        resetWatchedProgress: async (params: TraktShowsResetWatchedProgressRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched/reset", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1331,9 +1213,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        people: async (params: TraktShowsPeopleParams): Promise<Response<TraktShowsPeopleResponse>> => {
-            const endpoint = "/shows/{id}/people";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        people: async (params: TraktShowsPeopleRequest): Promise<Response<TraktShowsPeopleResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/people", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1345,9 +1226,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktShowsRatingsParams): Promise<Response<TraktShowsRatingsResponse>> => {
-            const endpoint = "/shows/{id}/ratings";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        ratings: async (params: TraktShowsRatingsRequest): Promise<Response<TraktShowsRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/ratings", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1359,9 +1239,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        related: async (params: TraktShowsRelatedParams): Promise<Response<TraktShowsRelatedResponse[]>> => {
-            const endpoint = "/shows/{id}/related";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        related: async (params: TraktShowsRelatedRequest): Promise<Response<TraktShowsRelatedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/related", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1373,9 +1252,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stats: async (params: TraktShowsStatsParams): Promise<Response<TraktShowsStatsResponse>> => {
-            const endpoint = "/shows/{id}/stats";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stats: async (params: TraktShowsStatsRequest): Promise<Response<TraktShowsStatsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/stats", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1387,9 +1265,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktShowsWatchingParams): Promise<Response<TraktShowsWatchingResponse[]>> => {
-            const endpoint = "/shows/{id}/watching";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watching: async (params: TraktShowsWatchingRequest): Promise<Response<TraktShowsWatchingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/watching", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1401,9 +1278,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        nextEpisode: async (params: TraktShowsNextEpisodeParams): Promise<Response<TraktShowsNextEpisodeResponse>> => {
-            const endpoint = "/shows/{id}/next_episode";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        nextEpisode: async (params: TraktShowsNextEpisodeRequest): Promise<Response<TraktShowsNextEpisodeResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/next_episode", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1415,9 +1291,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lastEpisode: async (params: TraktShowsLastEpisodeParams): Promise<Response<TraktShowsLastEpisodeResponse>> => {
-            const endpoint = "/shows/{id}/last_episode";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lastEpisode: async (params: TraktShowsLastEpisodeRequest): Promise<Response<TraktShowsLastEpisodeResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/last_episode", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1429,12 +1304,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	seasons = {
-        summary: async (params: TraktSeasonsSummaryParams): Promise<Response<TraktSeasonsSummaryResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	seasons = {
+        summary: async (params: TraktSeasonsSummaryRequest): Promise<Response<TraktSeasonsSummaryResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1446,9 +1318,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        season: async (params: TraktSeasonsSeasonParams): Promise<Response<TraktSeasonsSeasonResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}{?translations}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        season: async (params: TraktSeasonsSeasonRequest): Promise<Response<TraktSeasonsSeasonResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}{?translations}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1460,9 +1331,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktSeasonsCommentsParams): Promise<Response<TraktSeasonsCommentsResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comments: async (params: TraktSeasonsCommentsRequest): Promise<Response<TraktSeasonsCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1474,9 +1344,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktSeasonsListsParams): Promise<Response<TraktSeasonsListsResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/lists/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktSeasonsListsRequest): Promise<Response<TraktSeasonsListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/lists/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1488,9 +1357,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        people: async (params: TraktSeasonsPeopleParams): Promise<Response<TraktSeasonsPeopleResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/people";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        people: async (params: TraktSeasonsPeopleRequest): Promise<Response<TraktSeasonsPeopleResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/people", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1502,9 +1370,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktSeasonsRatingsParams): Promise<Response<TraktSeasonsRatingsResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/ratings";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        ratings: async (params: TraktSeasonsRatingsRequest): Promise<Response<TraktSeasonsRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/ratings", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1516,9 +1383,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stats: async (params: TraktSeasonsStatsParams): Promise<Response<TraktSeasonsStatsResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/stats";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stats: async (params: TraktSeasonsStatsRequest): Promise<Response<TraktSeasonsStatsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/stats", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1530,9 +1396,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktSeasonsWatchingParams): Promise<Response<TraktSeasonsWatchingResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/watching";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watching: async (params: TraktSeasonsWatchingRequest): Promise<Response<TraktSeasonsWatchingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/watching", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1544,12 +1409,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	episodes = {
-        summary: async (params: TraktEpisodesSummaryParams): Promise<Response<TraktEpisodesSummaryResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+	};	episodes = {
+        summary: async (params: TraktEpisodesSummaryRequest): Promise<Response<TraktEpisodesSummaryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1561,9 +1423,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        translations: async (params: TraktEpisodesTranslationsParams): Promise<Response<TraktEpisodesTranslationsResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        translations: async (params: TraktEpisodesTranslationsRequest): Promise<Response<TraktEpisodesTranslationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1575,9 +1436,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktEpisodesCommentsParams): Promise<Response<TraktEpisodesCommentsResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comments: async (params: TraktEpisodesCommentsRequest): Promise<Response<TraktEpisodesCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1589,9 +1449,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktEpisodesListsParams): Promise<Response<TraktEpisodesListsResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktEpisodesListsRequest): Promise<Response<TraktEpisodesListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1603,9 +1462,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        people: async (params: TraktEpisodesPeopleParams): Promise<Response<TraktEpisodesPeopleResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/people";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        people: async (params: TraktEpisodesPeopleRequest): Promise<Response<TraktEpisodesPeopleResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/people", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1617,9 +1475,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktEpisodesRatingsParams): Promise<Response<TraktEpisodesRatingsResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/ratings";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        ratings: async (params: TraktEpisodesRatingsRequest): Promise<Response<TraktEpisodesRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/ratings", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1631,9 +1488,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stats: async (params: TraktEpisodesStatsParams): Promise<Response<TraktEpisodesStatsResponse>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/stats";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stats: async (params: TraktEpisodesStatsRequest): Promise<Response<TraktEpisodesStatsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/stats", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1645,9 +1501,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktEpisodesWatchingParams): Promise<Response<TraktEpisodesWatchingResponse[]>> => {
-            const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/watching";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watching: async (params: TraktEpisodesWatchingRequest): Promise<Response<TraktEpisodesWatchingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/watching", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1659,12 +1514,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	sync = {
+	};	sync = {
         lastActivities: async (): Promise<Response<TraktSyncLastActivitiesResponse>> => {
-            const endpoint = "/sync/last_activities";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/sync/last_activities";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1677,9 +1529,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        playback: async (params: TraktSyncPlaybackParams): Promise<Response<TraktSyncPlaybackResponse[]>> => {
-            const endpoint = "/sync/playback/{type}{?start_at,end_at}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        playback: async (params: TraktSyncPlaybackRequest): Promise<Response<TraktSyncPlaybackResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/playback/{type}{?start_at,end_at}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1692,9 +1543,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removePlayback: async (params: TraktSyncRemovePlaybackParams): Promise<Response<any>> => {
-            const endpoint = "/sync/playback/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removePlayback: async (params: TraktSyncRemovePlaybackRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/playback/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1707,9 +1557,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getCollection: async (params: TraktSyncGetCollectionParams): Promise<Response<TraktSyncGetCollectionResponse[]>> => {
-            const endpoint = "/sync/collection/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getCollection: async (params: TraktSyncGetCollectionRequest): Promise<Response<TraktSyncGetCollectionResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/collection/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1722,9 +1571,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addToCollection: async (params: TraktSyncAddToCollectionBody): Promise<Response<TraktSyncAddToCollectionResponse>> => {
-            const endpoint = "/sync/collection";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addToCollection: async (params: TraktSyncAddToCollectionRequest): Promise<Response<TraktSyncAddToCollectionResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/collection", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1743,9 +1591,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeFromCollection: async (params: TraktSyncRemoveFromCollectionBody): Promise<Response<TraktSyncRemoveFromCollectionResponse>> => {
-            const endpoint = "/sync/collection/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeFromCollection: async (params: TraktSyncRemoveFromCollectionRequest): Promise<Response<TraktSyncRemoveFromCollectionResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/collection/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1764,9 +1611,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getWatched: async (params: TraktSyncGetWatchedParams): Promise<Response<TraktSyncGetWatchedResponse[]>> => {
-            const endpoint = "/sync/watched/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getWatched: async (params: TraktSyncGetWatchedRequest): Promise<Response<TraktSyncGetWatchedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/watched/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1779,9 +1625,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getHistory: async (params: TraktSyncGetHistoryParams): Promise<Response<TraktSyncGetHistoryResponse[]>> => {
-            const endpoint = "/sync/history/{type}/{id}{?start_at,end_at}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getHistory: async (params: TraktSyncGetHistoryRequest): Promise<Response<TraktSyncGetHistoryResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/history/{type}/{id}{?start_at,end_at}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1794,9 +1639,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addToHistory: async (params: TraktSyncAddToHistoryBody): Promise<Response<TraktSyncAddToHistoryResponse>> => {
-            const endpoint = "/sync/history";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addToHistory: async (params: TraktSyncAddToHistoryRequest): Promise<Response<TraktSyncAddToHistoryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/history", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1815,9 +1659,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeFromHistory: async (params: TraktSyncRemoveFromHistoryBody): Promise<Response<TraktSyncRemoveFromHistoryResponse>> => {
-            const endpoint = "/sync/history/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeFromHistory: async (params: TraktSyncRemoveFromHistoryRequest): Promise<Response<TraktSyncRemoveFromHistoryResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/history/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1837,9 +1680,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getRatings: async (params: TraktSyncGetRatingsParams): Promise<Response<TraktSyncGetRatingsResponse[]>> => {
-            const endpoint = "/sync/ratings/{type}/{rating}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getRatings: async (params: TraktSyncGetRatingsRequest): Promise<Response<TraktSyncGetRatingsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/ratings/{type}/{rating}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1852,9 +1694,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addRatings: async (params: TraktSyncAddRatingsBody): Promise<Response<TraktSyncAddRatingsResponse>> => {
-            const endpoint = "/sync/ratings";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addRatings: async (params: TraktSyncAddRatingsRequest): Promise<Response<TraktSyncAddRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/ratings", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1873,9 +1714,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeRatings: async (params: TraktSyncRemoveRatingsBody): Promise<Response<TraktSyncRemoveRatingsResponse>> => {
-            const endpoint = "/sync/ratings/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeRatings: async (params: TraktSyncRemoveRatingsRequest): Promise<Response<TraktSyncRemoveRatingsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/ratings/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1894,9 +1734,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getWatchlist: async (params: TraktSyncGetWatchlistParams): Promise<Response<TraktSyncGetWatchlistResponse[]>> => {
-            const endpoint = "/sync/watchlist/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getWatchlist: async (params: TraktSyncGetWatchlistRequest): Promise<Response<TraktSyncGetWatchlistResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/watchlist/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1909,9 +1748,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addToWatchlist: async (params: TraktSyncAddToWatchlistBody): Promise<Response<TraktSyncAddToWatchlistResponse>> => {
-            const endpoint = "/sync/watchlist";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addToWatchlist: async (params: TraktSyncAddToWatchlistRequest): Promise<Response<TraktSyncAddToWatchlistResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/watchlist", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1930,9 +1768,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeFromWatchlist: async (params: TraktSyncRemoveFromWatchlistBody): Promise<Response<TraktSyncRemoveFromWatchlistResponse>> => {
-            const endpoint = "/sync/watchlist/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeFromWatchlist: async (params: TraktSyncRemoveFromWatchlistRequest): Promise<Response<TraktSyncRemoveFromWatchlistResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/watchlist/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1952,8 +1789,7 @@ class TraktMethods extends TraktBase {
             });   
         },
         reorderWatchlist: async (): Promise<Response<TraktSyncReorderWatchlistResponse>> => {
-            const endpoint = "/sync/watchlist/reorder";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/sync/watchlist/reorder";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1966,9 +1802,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        getPersonalRecommendations: async (params: TraktSyncGetPersonalRecommendationsParams): Promise<Response<TraktSyncGetPersonalRecommendationsResponse[]>> => {
-            const endpoint = "/sync/recommendations/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        getPersonalRecommendations: async (params: TraktSyncGetPersonalRecommendationsRequest): Promise<Response<TraktSyncGetPersonalRecommendationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/recommendations/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -1981,9 +1816,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addToPersonalRecommendations: async (params: TraktSyncAddToPersonalRecommendationsBody): Promise<Response<TraktSyncAddToPersonalRecommendationsResponse>> => {
-            const endpoint = "/sync/recommendations";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addToPersonalRecommendations: async (params: TraktSyncAddToPersonalRecommendationsRequest): Promise<Response<TraktSyncAddToPersonalRecommendationsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/recommendations", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2000,9 +1834,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeFromPersonalRecommendations: async (params: TraktSyncRemoveFromPersonalRecommendationsBody): Promise<Response<TraktSyncRemoveFromPersonalRecommendationsResponse>> => {
-            const endpoint = "/sync/recommendations/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeFromPersonalRecommendations: async (params: TraktSyncRemoveFromPersonalRecommendationsRequest): Promise<Response<TraktSyncRemoveFromPersonalRecommendationsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/sync/recommendations/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2020,8 +1853,7 @@ class TraktMethods extends TraktBase {
             });   
         },
         reorderPersonalRecommendations: async (): Promise<Response<TraktSyncReorderPersonalRecommendationsResponse>> => {
-            const endpoint = "/sync/recommendations/reorder";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/sync/recommendations/reorder";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2034,12 +1866,9 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-	users = {
+	};	users = {
         settings: async (): Promise<Response<TraktUsersSettingsResponse>> => {
-            const endpoint = "/users/settings";
-            const route = this.baseUrl + endpoint;
+            const route = this.baseUrl + "/users/settings";
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2052,9 +1881,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followingRequests: async (params: TraktUsersFollowingRequestsParams): Promise<Response<TraktUsersFollowingRequestsResponse[]>> => {
-            const endpoint = "/users/requests/following";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        followingRequests: async (params: TraktUsersFollowingRequestsRequest): Promise<Response<TraktUsersFollowingRequestsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/requests/following", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2067,9 +1895,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followerRequests: async (params: TraktUsersFollowerRequestsParams): Promise<Response<TraktUsersFollowerRequestsResponse[]>> => {
-            const endpoint = "/users/requests";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        followerRequests: async (params: TraktUsersFollowerRequestsRequest): Promise<Response<TraktUsersFollowerRequestsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/requests", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2082,9 +1909,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        approveOrDenyFollowerRequests: async (params: TraktUsersApproveOrDenyFollowerRequestsParams): Promise<Response<any>> => {
-            const endpoint = "/users/requests/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        approveOrDenyFollowerRequests: async (params: TraktUsersApproveOrDenyFollowerRequestsRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/requests/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2097,9 +1923,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        hiddenItems: async (params: TraktUsersHiddenItemsParams): Promise<Response<TraktUsersHiddenItemsResponse[]>> => {
-            const endpoint = "/users/hidden/{section}{?type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        hiddenItems: async (params: TraktUsersHiddenItemsRequest): Promise<Response<TraktUsersHiddenItemsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}{?type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2112,9 +1937,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addHiddenItems: async (params: TraktUsersAddHiddenItemsBody): Promise<Response<TraktUsersAddHiddenItemsResponse>> => {
-            const endpoint = "/users/hidden/{section}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addHiddenItems: async (params: TraktUsersAddHiddenItemsRequest): Promise<Response<TraktUsersAddHiddenItemsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2133,9 +1957,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeHiddenItems: async (params: TraktUsersRemoveHiddenItemsBody): Promise<Response<TraktUsersRemoveHiddenItemsResponse>> => {
-            const endpoint = "/users/hidden/{section}/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeHiddenItems: async (params: TraktUsersRemoveHiddenItemsRequest): Promise<Response<TraktUsersRemoveHiddenItemsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2154,9 +1977,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        profile: async (params: TraktUsersProfileParams): Promise<Response<TraktUsersProfileResponse>> => {
-            const endpoint = "/users/{id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        profile: async (params: TraktUsersProfileRequest): Promise<Response<TraktUsersProfileResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2168,9 +1990,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        likes: async (params: TraktUsersLikesParams): Promise<Response<TraktUsersLikesResponse[]>> => {
-            const endpoint = "/users/{id}/likes/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        likes: async (params: TraktUsersLikesRequest): Promise<Response<TraktUsersLikesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/likes/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2183,9 +2004,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        collection: async (params: TraktUsersCollectionParams): Promise<Response<TraktUsersCollectionResponse[]>> => {
-            const endpoint = "/users/{id}/collection/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        collection: async (params: TraktUsersCollectionRequest): Promise<Response<TraktUsersCollectionResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/collection/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2197,9 +2017,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comments: async (params: TraktUsersCommentsParams): Promise<Response<TraktUsersCommentsResponse[]>> => {
-            const endpoint = "/users/{id}/comments/{comment_type}/{type}{?include_replies}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        comments: async (params: TraktUsersCommentsRequest): Promise<Response<TraktUsersCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/comments/{comment_type}/{type}{?include_replies}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2211,9 +2030,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktUsersListsBody): Promise<Response<TraktUsersListsResponse>> => {
-            const endpoint = "/users/{id}/lists";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        lists: async (params: TraktUsersListsRequest): Promise<Response<TraktUsersListsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2235,9 +2053,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        reorderLists: async (params: TraktUsersReorderListsParams): Promise<Response<TraktUsersReorderListsResponse>> => {
-            const endpoint = "/users/{id}/lists/reorder";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        reorderLists: async (params: TraktUsersReorderListsRequest): Promise<Response<TraktUsersReorderListsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/reorder", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2250,9 +2067,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        list: async (params: TraktUsersListParams): Promise<Response<any>> => {
-            const endpoint = "/users/{id}/lists/{list_id}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        list: async (params: TraktUsersListRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2265,9 +2081,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listLikes: async (params: TraktUsersListLikesParams): Promise<Response<TraktUsersListLikesResponse[]>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/likes";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listLikes: async (params: TraktUsersListLikesRequest): Promise<Response<TraktUsersListLikesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/likes", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2279,9 +2094,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listLike: async (params: TraktUsersListLikeParams): Promise<Response<any>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/like";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listLike: async (params: TraktUsersListLikeRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2294,9 +2108,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listItems: async (params: TraktUsersListItemsParams): Promise<Response<TraktUsersListItemsResponse[]>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/items/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listItems: async (params: TraktUsersListItemsRequest): Promise<Response<TraktUsersListItemsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2308,9 +2121,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        addListItems: async (params: TraktUsersAddListItemsBody): Promise<Response<TraktUsersAddListItemsResponse>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/items";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        addListItems: async (params: TraktUsersAddListItemsRequest): Promise<Response<TraktUsersAddListItemsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2330,9 +2142,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        removeListItems: async (params: TraktUsersRemoveListItemsBody): Promise<Response<TraktUsersRemoveListItemsResponse>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/items/remove";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        removeListItems: async (params: TraktUsersRemoveListItemsRequest): Promise<Response<TraktUsersRemoveListItemsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/remove", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2352,9 +2163,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        reorderListItems: async (params: TraktUsersReorderListItemsParams): Promise<Response<TraktUsersReorderListItemsResponse>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/items/reorder";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        reorderListItems: async (params: TraktUsersReorderListItemsRequest): Promise<Response<TraktUsersReorderListItemsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/reorder", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2367,9 +2177,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        listComments: async (params: TraktUsersListCommentsParams): Promise<Response<TraktUsersListCommentsResponse[]>> => {
-            const endpoint = "/users/{id}/lists/{list_id}/comments/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        listComments: async (params: TraktUsersListCommentsRequest): Promise<Response<TraktUsersListCommentsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/comments/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2381,9 +2190,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        follow: async (params: TraktUsersFollowParams): Promise<Response<any>> => {
-            const endpoint = "/users/{id}/follow";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        follow: async (params: TraktUsersFollowRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2396,9 +2204,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        followers: async (params: TraktUsersFollowersParams): Promise<Response<TraktUsersFollowersResponse[]>> => {
-            const endpoint = "/users/{id}/followers";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        followers: async (params: TraktUsersFollowersRequest): Promise<Response<TraktUsersFollowersResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/followers", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2410,9 +2217,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        following: async (params: TraktUsersFollowingParams): Promise<Response<TraktUsersFollowingResponse[]>> => {
-            const endpoint = "/users/{id}/following";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        following: async (params: TraktUsersFollowingRequest): Promise<Response<TraktUsersFollowingResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/following", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2424,9 +2230,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        friends: async (params: TraktUsersFriendsParams): Promise<Response<TraktUsersFriendsResponse[]>> => {
-            const endpoint = "/users/{id}/friends";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        friends: async (params: TraktUsersFriendsRequest): Promise<Response<TraktUsersFriendsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/friends", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2438,9 +2243,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        history: async (params: TraktUsersHistoryParams): Promise<Response<TraktUsersHistoryResponse[]>> => {
-            const endpoint = "/users/{id}/history/{type}/{item_id}{?start_at,end_at}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        history: async (params: TraktUsersHistoryRequest): Promise<Response<TraktUsersHistoryResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/history/{type}/{item_id}{?start_at,end_at}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2452,9 +2256,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        ratings: async (params: TraktUsersRatingsParams): Promise<Response<TraktUsersRatingsResponse[]>> => {
-            const endpoint = "/users/{id}/ratings/{type}/{rating}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        ratings: async (params: TraktUsersRatingsRequest): Promise<Response<TraktUsersRatingsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/ratings/{type}/{rating}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2466,9 +2269,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watchlist: async (params: TraktUsersWatchlistParams): Promise<Response<TraktUsersWatchlistResponse[]>> => {
-            const endpoint = "/users/{id}/watchlist/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watchlist: async (params: TraktUsersWatchlistRequest): Promise<Response<TraktUsersWatchlistResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/watchlist/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2480,9 +2282,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        personalRecommendations: async (params: TraktUsersPersonalRecommendationsParams): Promise<Response<TraktUsersPersonalRecommendationsResponse[]>> => {
-            const endpoint = "/users/{id}/recommendations/{type}/{sort}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        personalRecommendations: async (params: TraktUsersPersonalRecommendationsRequest): Promise<Response<TraktUsersPersonalRecommendationsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/recommendations/{type}/{sort}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2495,9 +2296,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watching: async (params: TraktUsersWatchingParams): Promise<Response<any>> => {
-            const endpoint = "/users/{id}/watching";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watching: async (params: TraktUsersWatchingRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/watching", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2509,9 +2309,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        watched: async (params: TraktUsersWatchedParams): Promise<Response<TraktUsersWatchedResponse[]>> => {
-            const endpoint = "/users/{id}/watched/{type}";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        watched: async (params: TraktUsersWatchedRequest): Promise<Response<TraktUsersWatchedResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/watched/{type}", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2523,9 +2322,8 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        stats: async (params: TraktUsersStatsParams): Promise<Response<TraktUsersStatsResponse>> => {
-            const endpoint = "/users/{id}/stats";
-            const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+        stats: async (params: TraktUsersStatsRequest): Promise<Response<TraktUsersStatsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/stats", params);
             
             return await got(route, {
                 throwHttpErrors: false,
@@ -2537,24 +2335,32 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-	};
-
-}
-
-
+	};}
 export default TraktMethods;
 
     
-export interface TraktEpisode { 
-	season: number;
-	number: number;
-	title: string;
+export interface TraktUser { 
+	username: string;
+	private: boolean;
+	name: string;
+	vip: boolean;
+	vip_ep: boolean;
 	ids: {
-		trakt: number;
-		tvdb: number;
-		imdb: string;
-		tmdb: number;
+		slug: string;
 	};
+	joined_at: string;
+	location: string;
+	about: string;
+	gender: string;
+	age: number;
+	images: {
+		avatar: {
+			full: string;
+		};
+	};
+	vip_og: boolean;
+	vip_years: number; 
+    [key: string]: any;
 }
     
 export interface TraktShow { 
@@ -2566,7 +2372,8 @@ export interface TraktShow {
 		tvdb: number;
 		imdb: string;
 		tmdb: number;
-	};
+	}; 
+    [key: string]: any;
 }
     
 export interface TraktMovie { 
@@ -2577,18 +2384,30 @@ export interface TraktMovie {
 		slug: string;
 		imdb: string;
 		tmdb: number;
-	};
+	}; 
+    [key: string]: any;
 }
     
-export interface TraktUser { 
-	username: string;
-	private: boolean;
-	name: string;
-	vip: boolean;
-	vip_ep: boolean;
+export interface TraktSeason { 
+	number: number;
 	ids: {
-		slug: string;
-	};
+		tvdb: number;
+		tmdb: number;
+	}; 
+    [key: string]: any;
+}
+    
+export interface TraktEpisode { 
+	season: number;
+	number: number;
+	title: string;
+	ids: {
+		trakt: number;
+		tvdb: number;
+		imdb: string;
+		tmdb: number;
+	}; 
+    [key: string]: any;
 }
     
 export interface TraktComment { 
@@ -2602,11 +2421,13 @@ export interface TraktComment {
 	replies: number;
 	likes: number;
 	user_stats: {
-		rating: number;
+		rating: {
+		};
 		play_count: number;
 		completed_count: number;
 	};
-	user: TraktUser;
+	user: TraktUser; 
+    [key: string]: any;
 }
     
 export interface TraktList { 
@@ -2615,9 +2436,6 @@ export interface TraktList {
 	privacy: string;
 	display_numbers: boolean;
 	allow_comments: boolean;
-	sort_by: string;
-	sort_how: string;
-	created_at: string;
 	updated_at: string;
 	item_count: number;
 	comment_count: number;
@@ -2626,7 +2444,11 @@ export interface TraktList {
 		trakt: number;
 		slug: string;
 	};
-	user: TraktUser;
+	sort_by: string;
+	sort_how: string;
+	created_at: string;
+	user: TraktUser; 
+    [key: string]: any;
 }
     
 export interface TraktPerson { 
@@ -2636,1046 +2458,18 @@ export interface TraktPerson {
 		slug: string;
 		imdb: string;
 		tmdb: number;
-	};
+	}; 
+    [key: string]: any;
 }
     
-export interface TraktAuthenticationAuthorizeParams { 
+export interface TraktAuthenticationAuthorizeRequest { 
 	response_type: string;
 	state?: string;
 	signup?: string;
 }
     
-export interface TraktCalendarsMyShowsParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsMyNewShowsParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsMySeasonPremieresParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsMyMoviesParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsMyDVDParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsAllShowsParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsAllNewShowsParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsAllSeasonPremieresParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsAllMoviesParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCalendarsAllDVDParams { 
-	start_date?: string;
-	days?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktCertificationsListParams { 
-	type: "movies"|"shows";
-}
-    
-export interface TraktCommentsCommentParams { 
-	id: number;
-}
-    
-export interface TraktCommentsRepliesParams { 
-	id: number;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktCommentsItemParams { 
-	id: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktCommentsLikesParams { 
-	id: number;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktCommentsLikeParams { 
-	id: number;
-}
-    
-export interface TraktCommentsTrendingParams { 
-	comment_type?: "all"|"reviews"|"shouts";
-	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
-	include_replies?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktCommentsRecentParams { 
-	comment_type?: "all"|"reviews"|"shouts";
-	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
-	include_replies?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktCommentsUpdatesParams { 
-	comment_type?: "all"|"reviews"|"shouts";
-	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
-	include_replies?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktCountriesListParams { 
-	type: "movies"|"shows";
-}
-    
-export interface TraktGenresListParams { 
-	type: "movies"|"shows";
-}
-    
-export interface TraktLanguagesListParams { 
-	type: "movies"|"shows";
-}
-    
-export interface TraktListsTrendingParams { 
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktListsPopularParams { 
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktListsListParams { 
-	id: number;
-}
-    
-export interface TraktListsListLikesParams { 
-	id: string;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktListsListItemsParams { 
-	id: string;
-	type?: "movie"|"show"|"season"|"episode"|"person";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktListsListCommentsParams { 
-	id: number;
-	sort?: "newest"|"oldest"|"likes"|"replies";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktMoviesTrendingParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesPopularParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesRecommendedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesPlayedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesWatchedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesCollectedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesAnticipatedParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktMoviesBoxOfficeParams { 
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktMoviesUpdatesParams { 
-	start_date?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktMoviesUpdatedIDsParams { 
-	start_date?: string;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktMoviesSummaryParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktMoviesAliasesParams { 
-	id: string;
-}
-    
-export interface TraktMoviesReleasesParams { 
-	id: string;
-	country?: string;
-}
-    
-export interface TraktMoviesTranslationsParams { 
-	id: string;
-	language?: string;
-}
-    
-export interface TraktMoviesCommentsParams { 
-	id: string;
-	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktMoviesListsParams { 
-	id: string;
-	type?: "all"|"personal"|"official"|"watchlists"|"recommendations";
-	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktMoviesPeopleParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktMoviesRatingsParams { 
-	id: string;
-}
-    
-export interface TraktMoviesRelatedParams { 
-	id: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktMoviesStatsParams { 
-	id: string;
-}
-    
-export interface TraktMoviesWatchingParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktPeopleSummaryParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktPeopleMoviesParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktPeopleShowsParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktPeopleListsParams { 
-	id: string;
-	type?: "all"|"personal"|"official";
-	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktRecommendationsMoviesParams { 
-	ignore_collected?: "true"|"false";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktRecommendationsHideMovieParams { 
-	id: string;
-}
-    
-export interface TraktRecommendationsShowsParams { 
-	ignore_collected?: "true"|"false";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktRecommendationsHideShowParams { 
-	id: string;
-}
-    
-export interface TraktSearchTextQueryParams { 
-	type: string;
-	query: string;
-	fields?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktSearchIDLookupParams { 
-	id_type: string;
-	id: string;
-	type?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsTrendingParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsPopularParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsRecommendedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsPlayedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsWatchedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsCollectedParams { 
-	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsAnticipatedParams { 
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-	filters?: { [key in TraktFilter]?: string };
-}
-    
-export interface TraktShowsUpdatesParams { 
-	start_date?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsUpdatedIDsParams { 
-	start_date?: string;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktShowsSummaryParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsAliasesParams { 
-	id: string;
-}
-    
-export interface TraktShowsCertificationsParams { 
-	id: string;
-}
-    
-export interface TraktShowsTranslationsParams { 
-	id: string;
-	language?: string;
-}
-    
-export interface TraktShowsCommentsParams { 
-	id: string;
-	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays"|"watched";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktShowsListsParams { 
-	id: string;
-	type?: "all"|"personal"|"official"|"watchlists"|"recommendations";
-	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktShowsCollectionProgressParams { 
-	id: string;
-	hidden?: string;
-	specials?: string;
-	count_specials?: string;
-	last_activity?: "aired"|"collected";
-}
-    
-export interface TraktShowsWatchedProgressParams { 
-	id: string;
-	hidden?: string;
-	specials?: string;
-	count_specials?: string;
-	last_activity?: "aired"|"watched";
-}
-    
-export interface TraktShowsResetWatchedProgressParams { 
-	id: string;
-}
-    
-export interface TraktShowsPeopleParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsRatingsParams { 
-	id: string;
-}
-    
-export interface TraktShowsRelatedParams { 
-	id: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsStatsParams { 
-	id: string;
-}
-    
-export interface TraktShowsWatchingParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsNextEpisodeParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktShowsLastEpisodeParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSeasonsSummaryParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSeasonsSeasonParams { 
-	id: string;
-	season: number;
-	translations?: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSeasonsCommentsParams { 
-	id: string;
-	season: number;
-	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays"|"watched";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktSeasonsListsParams { 
-	id: string;
-	season: number;
-	type?: "all"|"personal"|"official"|"watchlists";
-	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktSeasonsPeopleParams { 
-	id: string;
-	season: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSeasonsRatingsParams { 
-	id: string;
-	season: number;
-}
-    
-export interface TraktSeasonsStatsParams { 
-	id: string;
-	season: number;
-}
-    
-export interface TraktSeasonsWatchingParams { 
-	id: string;
-	season: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktEpisodesSummaryParams { 
-	id: string;
-	season: number;
-	episode: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktEpisodesTranslationsParams { 
-	id: string;
-	season: number;
-	episode: number;
-	language?: string;
-}
-    
-export interface TraktEpisodesCommentsParams { 
-	id: string;
-	season: number;
-	episode: number;
-	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktEpisodesListsParams { 
-	id: string;
-	season: number;
-	episode: number;
-	type?: "all"|"personal"|"official"|"watchlists";
-	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktEpisodesPeopleParams { 
-	id: string;
-	season: number;
-	episode: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktEpisodesRatingsParams { 
-	id: string;
-	season: number;
-	episode: number;
-}
-    
-export interface TraktEpisodesStatsParams { 
-	id: string;
-	season: number;
-	episode: number;
-}
-    
-export interface TraktEpisodesWatchingParams { 
-	id: string;
-	season: number;
-	episode: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncPlaybackParams { 
-	type?: "movies"|"episodes";
-	start_at?: string;
-	end_at?: string;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktSyncRemovePlaybackParams { 
-	id: number;
-}
-    
-export interface TraktSyncGetCollectionParams { 
-	type: "movies"|"shows";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncGetWatchedParams { 
-	type: "movies"|"shows";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncGetHistoryParams { 
-	type?: "movies"|"shows"|"seasons"|"episodes";
-	id?: number;
-	start_at?: string;
-	end_at?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncGetRatingsParams { 
-	type?: "movies"|"shows"|"seasons"|"episodes"|"all";
-	rating?: number;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncGetWatchlistParams { 
-	type?: "movies"|"shows"|"seasons"|"episodes";
-	sort?: "rank"|"added"|"released"|"title";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktSyncGetPersonalRecommendationsParams { 
-	type?: "movies"|"shows";
-	sort?: "rank"|"added"|"released"|"title";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersFollowingRequestsParams { 
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersFollowerRequestsParams { 
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersApproveOrDenyFollowerRequestsParams { 
-	id: number;
-}
-    
-export interface TraktUsersHiddenItemsParams { 
-	section: "calendar"|"recommendations"|"comments";
-	type?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersAddHiddenItemsParams { 
-	section: "calendar"|"recommendations";
-}
-    
-export interface TraktUsersRemoveHiddenItemsParams { 
-	section: "calendar"|"recommendations"|"comments";
-}
-    
-export interface TraktUsersProfileParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersLikesParams { 
-	id: string;
-	type?: "comments"|"lists";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktUsersCollectionParams { 
-	id: string;
-	type: "movies"|"shows";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersCommentsParams { 
-	id: string;
-	comment_type?: "all"|"reviews"|"shouts";
-	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
-	include_replies?: "true"|"false"|"only";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersListsParams { 
-	id: string;
-}
-    
-export interface TraktUsersReorderListsParams { 
-	id: string;
-}
-    
-export interface TraktUsersListParams { 
-	id: string;
-	list_id: string;
-}
-    
-export interface TraktUsersListLikesParams { 
-	id: string;
-	list_id: string;
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktUsersListLikeParams { 
-	id: string;
-	list_id: string;
-}
-    
-export interface TraktUsersListItemsParams { 
-	id: string;
-	list_id: string;
-	type?: "movie"|"show"|"season"|"episode"|"person";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersAddListItemsParams { 
-	id: string;
-	list_id: string;
-}
-    
-export interface TraktUsersRemoveListItemsParams { 
-	id: string;
-	list_id: string;
-}
-    
-export interface TraktUsersReorderListItemsParams { 
-	id: string;
-	list_id: string;
-}
-    
-export interface TraktUsersListCommentsParams { 
-	id: string;
-	list_id: string;
-	sort?: "newest"|"oldest"|"likes"|"replies";
-	page?: number;
-	limit?: number;
-}
-    
-export interface TraktUsersFollowParams { 
-	id: string;
-}
-    
-export interface TraktUsersFollowersParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersFollowingParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersFriendsParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersHistoryParams { 
-	id: string;
-	type?: "movies"|"shows"|"seasons"|"episodes";
-	item_id?: number;
-	start_at?: string;
-	end_at?: string;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersRatingsParams { 
-	id: string;
-	type?: "movies"|"shows"|"seasons"|"episodes"|"all";
-	rating?: number;
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersWatchlistParams { 
-	id: string;
-	type?: "movies"|"shows"|"seasons"|"episodes";
-	sort?: "rank"|"added"|"released"|"title";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersPersonalRecommendationsParams { 
-	id: string;
-	type?: "movies"|"shows";
-	sort?: "rank"|"added"|"released"|"title";
-	page?: number;
-	limit?: number;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersWatchingParams { 
-	id: string;
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersWatchedParams { 
-	id: string;
-	type: "movies"|"shows";
-	extended?: "full"|"metadata";
-}
-    
-export interface TraktUsersStatsParams { 
-	id: string;
-}
-    
-export interface TraktAuthenticationGetTokenBody { 
+export interface TraktAuthenticationGetTokenRequest { 
 	code: string;
-}
-    
-export interface TraktAuthenticationRefreshTokenBody { 
-	refresh_token: string;
-	grant_type?: string;
-}
-    
-export interface TraktAuthenticationRevokeTokenBody { 
-	token: string;
-}
-    
-export interface TraktAuthenticationDeviceCodeBody { 
-}
-    
-export interface TraktCommentsCommentsBody { 
-	item: "movie"|"show"|"season"|"episode"|"or list object. (see examples &#8594;)";
-	comment: string;
-	spoiler?: boolean;
-	sharing?: object;
-}
-    
-export interface TraktCommentsRepliesBody { 
-	comment: string;
-	spoiler?: boolean;
-}
-    
-export interface TraktScrobbleStartBody { 
-	item: object;
-	progress: number;
-	app_version?: string;
-	app_date?: string;
-}
-    
-export interface TraktScrobblePauseBody { 
-	item: object;
-	progress: number;
-	app_version?: string;
-	app_date?: string;
-}
-    
-export interface TraktScrobbleStopBody { 
-	item: object;
-	progress: number;
-	app_version?: string;
-	app_date?: string;
-}
-    
-export interface TraktSyncAddToCollectionBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncRemoveFromCollectionBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncAddToHistoryBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncRemoveFromHistoryBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-	ids?: Array<any>;
-}
-    
-export interface TraktSyncAddRatingsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncRemoveRatingsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncAddToWatchlistBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncRemoveFromWatchlistBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-}
-    
-export interface TraktSyncAddToPersonalRecommendationsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-}
-    
-export interface TraktSyncRemoveFromPersonalRecommendationsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-}
-    
-export interface TraktUsersAddHiddenItemsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	users?: Array<any>;
-}
-    
-export interface TraktUsersRemoveHiddenItemsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	users?: Array<any>;
-}
-    
-export interface TraktUsersListsBody { 
-	name: string;
-	description?: string;
-	privacy?: "private"|"friends"|"public";
-	display_numbers?: boolean;
-	allow_comments?: boolean;
-	sort_by?: "rank"|"added"|"title"|"released"|"runtime"|"popularity"|"percentage"|"votes"|"my_rating"|"random"|"watched"|"collected";
-	sort_how?: "asc"|"desc";
-}
-    
-export interface TraktUsersAddListItemsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-	people?: Array<any>;
-}
-    
-export interface TraktUsersRemoveListItemsBody { 
-	movies?: Array<any>;
-	shows?: Array<any>;
-	seasons?: Array<any>;
-	episodes?: Array<any>;
-	people?: Array<any>;
-}
-
-export interface TraktCrew extends Record<string, TraktDepartment> { }
-    
-export interface TraktDepartment extends Array<TraktStaff> { }
-
-export interface TraktStaff {
-    jobs: Array<string>;
-    episode_count: number;
-    person: TraktPerson;
 }
     
 export interface TraktAuthenticationGetTokenResponse { 
@@ -3687,9 +2481,18 @@ export interface TraktAuthenticationGetTokenResponse {
 	created_at: number; 
 }
     
+export interface TraktAuthenticationRefreshTokenRequest { 
+	refresh_token: string;
+	grant_type?: string;
+}
+    
 export interface TraktAuthenticationRefreshTokenResponse { 
 	error: string;
 	error_description: string; 
+}
+    
+export interface TraktAuthenticationRevokeTokenRequest { 
+	token: string;
 }
     
 export interface TraktAuthenticationDeviceCodeResponse { 
@@ -3700,11 +2503,25 @@ export interface TraktAuthenticationDeviceCodeResponse {
 	interval: number; 
 }
     
+export interface TraktCalendarsMyShowsRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktCalendarsMyShowsResponse { 
 	first_aired: string;
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktCalendarsMyNewShowsRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMyNewShowsResponse { 
@@ -3714,11 +2531,25 @@ export interface TraktCalendarsMyNewShowsResponse {
 	[key: string]: any;
 }
     
+export interface TraktCalendarsMySeasonPremieresRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktCalendarsMySeasonPremieresResponse { 
 	first_aired: string;
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktCalendarsMyMoviesRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsMyMoviesResponse { 
@@ -3727,10 +2558,24 @@ export interface TraktCalendarsMyMoviesResponse {
 	[key: string]: any;
 }
     
+export interface TraktCalendarsMyDVDRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktCalendarsMyDVDResponse { 
 	released: string;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktCalendarsAllShowsRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllShowsResponse { 
@@ -3740,11 +2585,25 @@ export interface TraktCalendarsAllShowsResponse {
 	[key: string]: any;
 }
     
+export interface TraktCalendarsAllNewShowsRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktCalendarsAllNewShowsResponse { 
 	first_aired: string;
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktCalendarsAllSeasonPremieresRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllSeasonPremieresResponse { 
@@ -3754,10 +2613,24 @@ export interface TraktCalendarsAllSeasonPremieresResponse {
 	[key: string]: any;
 }
     
+export interface TraktCalendarsAllMoviesRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktCalendarsAllMoviesResponse { 
 	released: string;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktCalendarsAllDVDRequest { 
+	start_date?: string;
+	days?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktCalendarsAllDVDResponse { 
@@ -3766,12 +2639,23 @@ export interface TraktCalendarsAllDVDResponse {
 	[key: string]: any;
 }
     
+export interface TraktCertificationsListRequest { 
+	type: "movies"|"shows";
+}
+    
 export interface TraktCertificationsListResponse { 
 	us: {
 		name: string;
 		slug: string;
 		description: string;
 	}[]; 
+}
+    
+export interface TraktCommentsCommentsRequest { 
+	item: "movie"|"show"|"season"|"episode"|"or list object. (see examples &#8594;)";
+	comment: string;
+	spoiler?: boolean;
+	sharing?: object;
 }
     
 export interface TraktCommentsCommentsResponse { 
@@ -3793,6 +2677,18 @@ export interface TraktCommentsCommentsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktCommentsCommentRequest { 
+	id: number;
+}
+    
+export interface TraktCommentsRepliesRequest { 
+	id: number;
+	comment: string;
+	spoiler?: boolean;
+	page?: number;
+	limit?: number;
+}
+    
 export interface TraktCommentsRepliesResponse { 
 	id: number;
 	parent_id: number;
@@ -3812,10 +2708,21 @@ export interface TraktCommentsRepliesResponse {
 	user: TraktUser; 
 }
     
+export interface TraktCommentsItemRequest { 
+	id: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktCommentsItemResponse { 
 	type: string;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktCommentsLikesRequest { 
+	id: number;
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktCommentsLikesResponse { 
@@ -3823,25 +2730,72 @@ export interface TraktCommentsLikesResponse {
 	user: TraktUser; 
 }
     
+export interface TraktCommentsLikeRequest { 
+	id: number;
+}
+    
+export interface TraktCommentsTrendingRequest { 
+	comment_type?: "all"|"reviews"|"shouts";
+	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
+	include_replies?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktCommentsTrendingResponse { 
 	type: string;
-	movie: TraktMovie;
-	comment: TraktComment; 
+	movie?: TraktMovie;
+	comment: TraktComment;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	list?: TraktList; 
 	[key: string]: any;
+}
+    
+export interface TraktCommentsRecentRequest { 
+	comment_type?: "all"|"reviews"|"shouts";
+	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
+	include_replies?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktCommentsRecentResponse { 
 	type: string;
-	movie: TraktMovie;
-	comment: TraktComment; 
+	movie?: TraktMovie;
+	comment: TraktComment;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	list?: TraktList; 
 	[key: string]: any;
+}
+    
+export interface TraktCommentsUpdatesRequest { 
+	comment_type?: "all"|"reviews"|"shouts";
+	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
+	include_replies?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktCommentsUpdatesResponse { 
 	type: string;
-	movie: TraktMovie;
-	comment: TraktComment; 
+	movie?: TraktMovie;
+	comment: TraktComment;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	list?: TraktList; 
 	[key: string]: any;
+}
+    
+export interface TraktCountriesListRequest { 
+	type: "movies"|"shows";
 }
     
 export interface TraktCountriesListResponse { 
@@ -3849,14 +2803,27 @@ export interface TraktCountriesListResponse {
 	code: string; 
 }
     
+export interface TraktGenresListRequest { 
+	type: "movies"|"shows";
+}
+    
 export interface TraktGenresListResponse { 
 	name: string;
 	slug: string; 
 }
     
+export interface TraktLanguagesListRequest { 
+	type: "movies"|"shows";
+}
+    
 export interface TraktLanguagesListResponse { 
 	name: string;
 	code: string; 
+}
+    
+export interface TraktListsTrendingRequest { 
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktListsTrendingResponse { 
@@ -3865,10 +2832,19 @@ export interface TraktListsTrendingResponse {
 	list: TraktList; 
 }
     
+export interface TraktListsPopularRequest { 
+	page?: number;
+	limit?: number;
+}
+    
 export interface TraktListsPopularResponse { 
 	like_count: number;
 	comment_count: number;
 	list: TraktList; 
+}
+    
+export interface TraktListsListRequest { 
+	id: number;
 }
     
 export interface TraktListsListResponse { 
@@ -3891,17 +2867,42 @@ export interface TraktListsListResponse {
 	user: TraktUser; 
 }
     
+export interface TraktListsListLikesRequest { 
+	id: string;
+	page?: number;
+	limit?: number;
+}
+    
 export interface TraktListsListLikesResponse { 
 	liked_at: string;
 	user: TraktUser; 
+}
+    
+export interface TraktListsListItemsRequest { 
+	id: string;
+	type?: "movie"|"show"|"season"|"episode"|"person";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktListsListItemsResponse { 
 	rank: number;
 	listed_at: string;
 	type: string;
-	movie: TraktMovie; 
+	movie?: TraktMovie;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	person?: TraktPerson; 
 	[key: string]: any;
+}
+    
+export interface TraktListsListCommentsRequest { 
+	id: number;
+	sort?: "newest"|"oldest"|"likes"|"replies";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktListsListCommentsResponse { 
@@ -3923,10 +2924,24 @@ export interface TraktListsListCommentsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktMoviesTrendingRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktMoviesTrendingResponse { 
 	watchers: number;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktMoviesPopularRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesPopularResponse { 
@@ -3941,10 +2956,26 @@ export interface TraktMoviesPopularResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesRecommendedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktMoviesRecommendedResponse { 
 	user_count: number;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktMoviesPlayedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesPlayedResponse { 
@@ -3955,12 +2986,28 @@ export interface TraktMoviesPlayedResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesWatchedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktMoviesWatchedResponse { 
 	watcher_count: number;
 	play_count: number;
 	collected_count: number;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktMoviesCollectedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktMoviesCollectedResponse { 
@@ -3971,10 +3018,21 @@ export interface TraktMoviesCollectedResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesAnticipatedRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktMoviesAnticipatedResponse { 
 	list_count: number;
 	movie: TraktMovie; 
 	[key: string]: any;
+}
+    
+export interface TraktMoviesBoxOfficeRequest { 
+	extended?: "full"|"metadata";
 }
     
 export interface TraktMoviesBoxOfficeResponse { 
@@ -3983,13 +3041,32 @@ export interface TraktMoviesBoxOfficeResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesUpdatesRequest { 
+	start_date?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktMoviesUpdatesResponse { 
 	updated_at: string;
 	movie: TraktMovie; 
 	[key: string]: any;
 }
     
-export interface TraktMoviesUpdatedIDsResponse extends Array<number> { }
+export interface TraktMoviesUpdatedIDsRequest { 
+	start_date?: string;
+	page?: number;
+	limit?: number;
+}
+    
+export interface TraktMoviesUpdatedIDsResponse {  
+}
+    
+export interface TraktMoviesSummaryRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
     
 export interface TraktMoviesSummaryResponse { 
 	title: string;
@@ -4020,9 +3097,18 @@ export interface TraktMoviesSummaryResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesAliasesRequest { 
+	id: string;
+}
+    
 export interface TraktMoviesAliasesResponse { 
 	title: string;
 	country: string; 
+}
+    
+export interface TraktMoviesReleasesRequest { 
+	id: string;
+	country?: string;
 }
     
 export interface TraktMoviesReleasesResponse { 
@@ -4034,11 +3120,23 @@ export interface TraktMoviesReleasesResponse {
 	}; 
 }
     
+export interface TraktMoviesTranslationsRequest { 
+	id: string;
+	language?: string;
+}
+    
 export interface TraktMoviesTranslationsResponse { 
 	title: string;
 	overview: string;
 	tagline: string;
 	language: string; 
+}
+    
+export interface TraktMoviesCommentsRequest { 
+	id: string;
+	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktMoviesCommentsResponse { 
@@ -4057,6 +3155,14 @@ export interface TraktMoviesCommentsResponse {
 		completed_count: number;
 	};
 	user: TraktUser; 
+}
+    
+export interface TraktMoviesListsRequest { 
+	id: string;
+	type?: "all"|"personal"|"official"|"watchlists"|"recommendations";
+	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktMoviesListsResponse { 
@@ -4079,6 +3185,11 @@ export interface TraktMoviesListsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktMoviesPeopleRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktMoviesPeopleResponse { 
 	cast: {
 		characters: string[];
@@ -4086,6 +3197,10 @@ export interface TraktMoviesPeopleResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktMoviesRatingsRequest { 
+	id: string;
 }
     
 export interface TraktMoviesRatingsResponse { 
@@ -4105,6 +3220,13 @@ export interface TraktMoviesRatingsResponse {
 	}; 
 }
     
+export interface TraktMoviesRelatedRequest { 
+	id: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktMoviesRelatedResponse { 
 	title: string;
 	year: number;
@@ -4117,6 +3239,10 @@ export interface TraktMoviesRelatedResponse {
 	[key: string]: any;
 }
     
+export interface TraktMoviesStatsRequest { 
+	id: string;
+}
+    
 export interface TraktMoviesStatsResponse { 
 	watchers: number;
 	plays: number;
@@ -4125,6 +3251,11 @@ export interface TraktMoviesStatsResponse {
 	lists: number;
 	votes: number;
 	recommended: number; 
+}
+    
+export interface TraktMoviesWatchingRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktMoviesWatchingResponse { 
@@ -4141,6 +3272,11 @@ export interface TraktMoviesWatchingResponse {
     
 export interface TraktNetworksListResponse { 
 	name: string; 
+}
+    
+export interface TraktPeopleSummaryRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktPeopleSummaryResponse { 
@@ -4167,6 +3303,11 @@ export interface TraktPeopleSummaryResponse {
 	[key: string]: any;
 }
     
+export interface TraktPeopleMoviesRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktPeopleMoviesResponse { 
 	cast: {
 		characters: string[];
@@ -4174,6 +3315,11 @@ export interface TraktPeopleMoviesResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktPeopleShowsRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktPeopleShowsResponse { 
@@ -4185,6 +3331,14 @@ export interface TraktPeopleShowsResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktPeopleListsRequest { 
+	id: string;
+	type?: "all"|"personal"|"official";
+	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktPeopleListsResponse { 
@@ -4207,6 +3361,11 @@ export interface TraktPeopleListsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktRecommendationsMoviesRequest { 
+	ignore_collected?: "true"|"false";
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktRecommendationsMoviesResponse { 
 	title: string;
 	year: number;
@@ -4217,6 +3376,15 @@ export interface TraktRecommendationsMoviesResponse {
 		tmdb: number;
 	}; 
 	[key: string]: any;
+}
+    
+export interface TraktRecommendationsHideMovieRequest { 
+	id: string;
+}
+    
+export interface TraktRecommendationsShowsRequest { 
+	ignore_collected?: "true"|"false";
+	extended?: "full"|"metadata";
 }
     
 export interface TraktRecommendationsShowsResponse { 
@@ -4232,6 +3400,17 @@ export interface TraktRecommendationsShowsResponse {
 	[key: string]: any;
 }
     
+export interface TraktRecommendationsHideShowRequest { 
+	id: string;
+}
+    
+export interface TraktScrobbleStartRequest { 
+	item: object;
+	progress: number;
+	app_version?: string;
+	app_date?: string;
+}
+    
 export interface TraktScrobbleStartResponse { 
 	id: number;
 	action: string;
@@ -4242,6 +3421,13 @@ export interface TraktScrobbleStartResponse {
 	};
 	episode: TraktEpisode;
 	show: TraktShow; 
+}
+    
+export interface TraktScrobblePauseRequest { 
+	item: object;
+	progress: number;
+	app_version?: string;
+	app_date?: string;
 }
     
 export interface TraktScrobblePauseResponse { 
@@ -4255,16 +3441,46 @@ export interface TraktScrobblePauseResponse {
 	movie: TraktMovie; 
 }
     
+export interface TraktScrobbleStopRequest { 
+	item: object;
+	progress: number;
+	app_version?: string;
+	app_date?: string;
+}
+    
 export interface TraktScrobbleStopResponse { 
 	watched_at: string;
 	expires_at: string; 
 }
     
+export interface TraktSearchTextQueryRequest { 
+	type: string;
+	query: string;
+	fields?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktSearchTextQueryResponse { 
 	type: string;
 	score: number;
-	movie: TraktMovie; 
+	movie?: TraktMovie;
+	show?: TraktShow;
+	episode?: TraktEpisode;
+	person?: TraktPerson;
+	list?: TraktList; 
 	[key: string]: any;
+}
+    
+export interface TraktSearchIDLookupRequest { 
+	id_type: string;
+	id: string;
+	type?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSearchIDLookupResponse { 
@@ -4275,10 +3491,24 @@ export interface TraktSearchIDLookupResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsTrendingRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktShowsTrendingResponse { 
 	watchers: number;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsPopularRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsPopularResponse { 
@@ -4294,10 +3524,26 @@ export interface TraktShowsPopularResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsRecommendedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktShowsRecommendedResponse { 
 	user_count: number;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsPlayedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsPlayedResponse { 
@@ -4309,6 +3555,14 @@ export interface TraktShowsPlayedResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsWatchedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktShowsWatchedResponse { 
 	watcher_count: number;
 	play_count: number;
@@ -4316,6 +3570,14 @@ export interface TraktShowsWatchedResponse {
 	collector_count: number;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsCollectedRequest { 
+	period?: "daily"|"weekly"|"monthly"|"yearly"|"all";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
 }
     
 export interface TraktShowsCollectedResponse { 
@@ -4327,10 +3589,24 @@ export interface TraktShowsCollectedResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsAnticipatedRequest { 
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+	filters?: { [key in TraktFilter]?: string };
+}
+    
 export interface TraktShowsAnticipatedResponse { 
 	list_count: number;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsUpdatesRequest { 
+	start_date?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktShowsUpdatesResponse { 
@@ -4339,7 +3615,19 @@ export interface TraktShowsUpdatesResponse {
 	[key: string]: any;
 }
     
-export interface TraktShowsUpdatedIDsResponse extends Array<number> { }
+export interface TraktShowsUpdatedIDsRequest { 
+	start_date?: string;
+	page?: number;
+	limit?: number;
+}
+    
+export interface TraktShowsUpdatedIDsResponse {  
+}
+    
+export interface TraktShowsSummaryRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
     
 export interface TraktShowsSummaryResponse { 
 	title: string;
@@ -4377,9 +3665,17 @@ export interface TraktShowsSummaryResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsAliasesRequest { 
+	id: string;
+}
+    
 export interface TraktShowsAliasesResponse { 
 	title: string;
 	country: string; 
+}
+    
+export interface TraktShowsCertificationsRequest { 
+	id: string;
 }
     
 export interface TraktShowsCertificationsResponse { 
@@ -4387,10 +3683,22 @@ export interface TraktShowsCertificationsResponse {
 	country: string; 
 }
     
+export interface TraktShowsTranslationsRequest { 
+	id: string;
+	language?: string;
+}
+    
 export interface TraktShowsTranslationsResponse { 
 	title: string;
 	overview: string;
 	language: string; 
+}
+    
+export interface TraktShowsCommentsRequest { 
+	id: string;
+	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays"|"watched";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktShowsCommentsResponse { 
@@ -4409,6 +3717,14 @@ export interface TraktShowsCommentsResponse {
 		completed_count: number;
 	};
 	user: TraktUser; 
+}
+    
+export interface TraktShowsListsRequest { 
+	id: string;
+	type?: "all"|"personal"|"official"|"watchlists"|"recommendations";
+	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktShowsListsResponse { 
@@ -4431,6 +3747,14 @@ export interface TraktShowsListsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktShowsCollectionProgressRequest { 
+	id: string;
+	hidden?: string;
+	specials?: string;
+	count_specials?: string;
+	last_activity?: "aired"|"collected";
+}
+    
 export interface TraktShowsCollectionProgressResponse { 
 	aired: number;
 	completed: number;
@@ -4443,7 +3767,8 @@ export interface TraktShowsCollectionProgressResponse {
 		episodes: {
 			number: number;
 			completed: boolean;
-			collected_at: string;
+			collected_at: {
+			};
 		}[];
 	}[];
 	hidden_seasons: {
@@ -4480,6 +3805,14 @@ export interface TraktShowsCollectionProgressResponse {
 			};
 		};
 	}; 
+}
+    
+export interface TraktShowsWatchedProgressRequest { 
+	id: string;
+	hidden?: string;
+	specials?: string;
+	count_specials?: string;
+	last_activity?: "aired"|"watched";
 }
     
 export interface TraktShowsWatchedProgressResponse { 
@@ -4496,7 +3829,8 @@ export interface TraktShowsWatchedProgressResponse {
 		episodes: {
 			number: number;
 			completed: boolean;
-			last_watched_at: string;
+			last_watched_at: {
+			};
 		}[];
 	}[];
 	hidden_seasons: {
@@ -4535,6 +3869,15 @@ export interface TraktShowsWatchedProgressResponse {
 	}; 
 }
     
+export interface TraktShowsResetWatchedProgressRequest { 
+	id: string;
+}
+    
+export interface TraktShowsPeopleRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktShowsPeopleResponse { 
 	cast: {
 		characters: string[];
@@ -4548,6 +3891,10 @@ export interface TraktShowsPeopleResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsRatingsRequest { 
+	id: string;
 }
     
 export interface TraktShowsRatingsResponse { 
@@ -4567,6 +3914,13 @@ export interface TraktShowsRatingsResponse {
 	}; 
 }
     
+export interface TraktShowsRelatedRequest { 
+	id: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktShowsRelatedResponse { 
 	title: string;
 	year: number;
@@ -4580,6 +3934,10 @@ export interface TraktShowsRelatedResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsStatsRequest { 
+	id: string;
+}
+    
 export interface TraktShowsStatsResponse { 
 	watchers: number;
 	plays: number;
@@ -4589,6 +3947,11 @@ export interface TraktShowsStatsResponse {
 	lists: number;
 	votes: number;
 	recommended: number; 
+}
+    
+export interface TraktShowsWatchingRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktShowsWatchingResponse { 
@@ -4601,6 +3964,11 @@ export interface TraktShowsWatchingResponse {
 		slug: string;
 	}; 
 	[key: string]: any;
+}
+    
+export interface TraktShowsNextEpisodeRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktShowsNextEpisodeResponse { 
@@ -4618,6 +3986,11 @@ export interface TraktShowsNextEpisodeResponse {
 	[key: string]: any;
 }
     
+export interface TraktShowsLastEpisodeRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktShowsLastEpisodeResponse { 
 	season: number;
 	number: number;
@@ -4631,11 +4004,17 @@ export interface TraktShowsLastEpisodeResponse {
 	[key: string]: any;
 }
     
+export interface TraktSeasonsSummaryRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktSeasonsSummaryResponse { 
 	number: number;
 	ids: {
 		trakt: number;
-		tvdb: number;
+		tvdb: {
+		};
 		tmdb: number;
 	};
 	episodes: {
@@ -4644,12 +4023,20 @@ export interface TraktSeasonsSummaryResponse {
 		title: string;
 		ids: {
 			trakt: number;
-			tvdb: number;
+			tvdb: {
+			};
 			imdb: string;
 			tmdb: number;
 		};
 	}[]; 
 	[key: string]: any;
+}
+    
+export interface TraktSeasonsSeasonRequest { 
+	id: string;
+	season: number;
+	translations?: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSeasonsSeasonResponse { 
@@ -4663,6 +4050,14 @@ export interface TraktSeasonsSeasonResponse {
 		tmdb: number;
 	}; 
 	[key: string]: any;
+}
+    
+export interface TraktSeasonsCommentsRequest { 
+	id: string;
+	season: number;
+	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays"|"watched";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktSeasonsCommentsResponse { 
@@ -4681,6 +4076,15 @@ export interface TraktSeasonsCommentsResponse {
 		completed_count: number;
 	};
 	user: TraktUser; 
+}
+    
+export interface TraktSeasonsListsRequest { 
+	id: string;
+	season: number;
+	type?: "all"|"personal"|"official"|"watchlists";
+	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktSeasonsListsResponse { 
@@ -4703,6 +4107,12 @@ export interface TraktSeasonsListsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktSeasonsPeopleRequest { 
+	id: string;
+	season: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktSeasonsPeopleResponse { 
 	cast: {
 		characters: string[];
@@ -4716,6 +4126,11 @@ export interface TraktSeasonsPeopleResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktSeasonsRatingsRequest { 
+	id: string;
+	season: number;
 }
     
 export interface TraktSeasonsRatingsResponse { 
@@ -4735,6 +4150,11 @@ export interface TraktSeasonsRatingsResponse {
 	}; 
 }
     
+export interface TraktSeasonsStatsRequest { 
+	id: string;
+	season: number;
+}
+    
 export interface TraktSeasonsStatsResponse { 
 	watchers: number;
 	plays: number;
@@ -4743,6 +4163,12 @@ export interface TraktSeasonsStatsResponse {
 	comments: number;
 	lists: number;
 	votes: number; 
+}
+    
+export interface TraktSeasonsWatchingRequest { 
+	id: string;
+	season: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSeasonsWatchingResponse { 
@@ -4755,6 +4181,13 @@ export interface TraktSeasonsWatchingResponse {
 		slug: string;
 	}; 
 	[key: string]: any;
+}
+    
+export interface TraktEpisodesSummaryRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktEpisodesSummaryResponse { 
@@ -4780,10 +4213,26 @@ export interface TraktEpisodesSummaryResponse {
 	[key: string]: any;
 }
     
+export interface TraktEpisodesTranslationsRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	language?: string;
+}
+    
 export interface TraktEpisodesTranslationsResponse { 
 	title: string;
 	overview: string;
 	language: string; 
+}
+    
+export interface TraktEpisodesCommentsRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	sort?: "newest"|"oldest"|"likes"|"replies"|"highest"|"lowest"|"plays";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktEpisodesCommentsResponse { 
@@ -4802,6 +4251,16 @@ export interface TraktEpisodesCommentsResponse {
 		completed_count: number;
 	};
 	user: TraktUser; 
+}
+    
+export interface TraktEpisodesListsRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	type?: "all"|"personal"|"official"|"watchlists";
+	sort?: "popular"|"likes"|"comments"|"items"|"added"|"updated";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktEpisodesListsResponse { 
@@ -4824,6 +4283,13 @@ export interface TraktEpisodesListsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktEpisodesPeopleRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktEpisodesPeopleResponse { 
 	cast: {
 		characters: string[];
@@ -4835,6 +4301,12 @@ export interface TraktEpisodesPeopleResponse {
 	}[];
 	crew: TraktCrew; 
 	[key: string]: any;
+}
+    
+export interface TraktEpisodesRatingsRequest { 
+	id: string;
+	season: number;
+	episode: number;
 }
     
 export interface TraktEpisodesRatingsResponse { 
@@ -4854,6 +4326,12 @@ export interface TraktEpisodesRatingsResponse {
 	}; 
 }
     
+export interface TraktEpisodesStatsRequest { 
+	id: string;
+	season: number;
+	episode: number;
+}
+    
 export interface TraktEpisodesStatsResponse { 
 	watchers: number;
 	plays: number;
@@ -4862,6 +4340,13 @@ export interface TraktEpisodesStatsResponse {
 	comments: number;
 	lists: number;
 	votes: number; 
+}
+    
+export interface TraktEpisodesWatchingRequest { 
+	id: string;
+	season: number;
+	episode: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktEpisodesWatchingResponse { 
@@ -4931,12 +4416,31 @@ export interface TraktSyncLastActivitiesResponse {
 	}; 
 }
     
+export interface TraktSyncPlaybackRequest { 
+	type?: "movies"|"episodes";
+	start_at?: string;
+	end_at?: string;
+	page?: number;
+	limit?: number;
+}
+    
 export interface TraktSyncPlaybackResponse { 
 	progress: number;
 	paused_at: string;
 	id: number;
 	type: string;
-	movie: TraktMovie; 
+	movie?: TraktMovie;
+	episode?: TraktEpisode;
+	show?: TraktShow; 
+}
+    
+export interface TraktSyncRemovePlaybackRequest { 
+	id: number;
+}
+    
+export interface TraktSyncGetCollectionRequest { 
+	type: "movies"|"shows";
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetCollectionResponse { 
@@ -4961,6 +4465,13 @@ export interface TraktSyncGetCollectionResponse {
 	[key: string]: any;
 }
     
+export interface TraktSyncAddToCollectionRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
+}
+    
 export interface TraktSyncAddToCollectionResponse { 
 	added: {
 		movies: number;
@@ -4980,10 +4491,29 @@ export interface TraktSyncAddToCollectionResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncRemoveFromCollectionRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncRemoveFromCollectionResponse { 
@@ -4997,20 +4527,46 @@ export interface TraktSyncRemoveFromCollectionResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncGetWatchedRequest { 
+	type: "movies"|"shows";
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetWatchedResponse { 
 	plays: number;
 	last_watched_at: string;
 	last_updated_at: string;
-	reset_at: {
-	};
+	reset_at: string;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktSyncGetHistoryRequest { 
+	type?: "movies"|"shows"|"seasons"|"episodes";
+	id?: number;
+	start_at?: string;
+	end_at?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetHistoryResponse { 
@@ -5021,6 +4577,13 @@ export interface TraktSyncGetHistoryResponse {
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktSyncAddToHistoryRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncAddToHistoryResponse { 
@@ -5034,10 +4597,30 @@ export interface TraktSyncAddToHistoryResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncRemoveFromHistoryRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
+	ids?: Array<any>;
 }
     
 export interface TraktSyncRemoveFromHistoryResponse { 
@@ -5051,11 +4634,31 @@ export interface TraktSyncRemoveFromHistoryResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 		ids: number[];
 	}; 
+}
+    
+export interface TraktSyncGetRatingsRequest { 
+	type?: "movies"|"shows"|"seasons"|"episodes"|"all";
+	rating?: number;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetRatingsResponse { 
@@ -5065,6 +4668,13 @@ export interface TraktSyncGetRatingsResponse {
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktSyncAddRatingsRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncAddRatingsResponse { 
@@ -5081,10 +4691,32 @@ export interface TraktSyncAddRatingsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			rating: number;
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			rating: number;
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			rating: number;
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncRemoveRatingsRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncRemoveRatingsResponse { 
@@ -5100,10 +4732,30 @@ export interface TraktSyncRemoveRatingsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncGetWatchlistRequest { 
+	type?: "movies"|"shows"|"seasons"|"episodes";
+	sort?: "rank"|"added"|"released"|"title";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetWatchlistResponse { 
@@ -5113,6 +4765,13 @@ export interface TraktSyncGetWatchlistResponse {
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktSyncAddToWatchlistRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncAddToWatchlistResponse { 
@@ -5134,10 +4793,29 @@ export interface TraktSyncAddToWatchlistResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncRemoveFromWatchlistRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
 }
     
 export interface TraktSyncRemoveFromWatchlistResponse { 
@@ -5153,15 +4831,35 @@ export interface TraktSyncRemoveFromWatchlistResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
 }
     
 export interface TraktSyncReorderWatchlistResponse { 
 	updated: number;
 	skipped_ids: number[]; 
+}
+    
+export interface TraktSyncGetPersonalRecommendationsRequest { 
+	type?: "movies"|"shows";
+	sort?: "rank"|"added"|"released"|"title";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktSyncGetPersonalRecommendationsResponse { 
@@ -5171,6 +4869,11 @@ export interface TraktSyncGetPersonalRecommendationsResponse {
 	notes: string;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktSyncAddToPersonalRecommendationsRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
 }
     
 export interface TraktSyncAddToPersonalRecommendationsResponse { 
@@ -5188,8 +4891,17 @@ export interface TraktSyncAddToPersonalRecommendationsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktSyncRemoveFromPersonalRecommendationsRequest { 
+	movies?: Array<any>;
+	shows?: Array<any>;
 }
     
 export interface TraktSyncRemoveFromPersonalRecommendationsResponse { 
@@ -5203,7 +4915,11 @@ export interface TraktSyncRemoveFromPersonalRecommendationsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
 }
     
@@ -5236,11 +4952,19 @@ export interface TraktUsersSettingsResponse {
 	}; 
 }
     
+export interface TraktUsersFollowingRequestsRequest { 
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersFollowingRequestsResponse { 
 	id: number;
 	requested_at: string;
 	user: TraktUser; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersFollowerRequestsRequest { 
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersFollowerRequestsResponse { 
@@ -5250,11 +4974,31 @@ export interface TraktUsersFollowerRequestsResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersApproveOrDenyFollowerRequestsRequest { 
+	id: number;
+}
+    
+export interface TraktUsersHiddenItemsRequest { 
+	section: "calendar"|"recommendations"|"comments";
+	type?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersHiddenItemsResponse { 
 	hidden_at: string;
 	type: string;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersAddHiddenItemsRequest { 
+	section: "calendar"|"recommendations";
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	users?: Array<any>;
 }
     
 export interface TraktUsersAddHiddenItemsResponse { 
@@ -5270,10 +5014,30 @@ export interface TraktUsersAddHiddenItemsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		users: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		users: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktUsersRemoveHiddenItemsRequest { 
+	section: "calendar"|"recommendations"|"comments";
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	users?: Array<any>;
 }
     
 export interface TraktUsersRemoveHiddenItemsResponse { 
@@ -5289,10 +5053,27 @@ export interface TraktUsersRemoveHiddenItemsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		users: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		users: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktUsersProfileRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersProfileResponse { 
@@ -5310,10 +5091,23 @@ export interface TraktUsersProfileResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersLikesRequest { 
+	id: string;
+	type?: "comments"|"lists";
+	page?: number;
+	limit?: number;
+}
+    
 export interface TraktUsersLikesResponse { 
 	liked_at: string;
 	type: string;
 	list: TraktList; 
+}
+    
+export interface TraktUsersCollectionRequest { 
+	id: string;
+	type: "movies"|"shows";
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersCollectionResponse { 
@@ -5338,11 +5132,36 @@ export interface TraktUsersCollectionResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersCommentsRequest { 
+	id: string;
+	comment_type?: "all"|"reviews"|"shouts";
+	type?: "all"|"movies"|"shows"|"seasons"|"episodes"|"lists";
+	include_replies?: "true"|"false"|"only";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersCommentsResponse { 
 	type: string;
-	movie: TraktMovie;
-	comment: TraktComment; 
+	movie?: TraktMovie;
+	comment: TraktComment;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	list?: TraktList; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersListsRequest { 
+	id: string;
+	name: string;
+	description?: string;
+	privacy?: "private"|"friends"|"public";
+	display_numbers?: boolean;
+	allow_comments?: boolean;
+	sort_by?: "rank"|"added"|"title"|"released"|"runtime"|"popularity"|"percentage"|"votes"|"my_rating"|"random"|"watched"|"collected";
+	sort_how?: "asc"|"desc";
 }
     
 export interface TraktUsersListsResponse { 
@@ -5364,9 +5183,25 @@ export interface TraktUsersListsResponse {
 	}; 
 }
     
+export interface TraktUsersReorderListsRequest { 
+	id: string;
+}
+    
 export interface TraktUsersReorderListsResponse { 
 	updated: number;
 	skipped_ids: number[]; 
+}
+    
+export interface TraktUsersListRequest { 
+	id: string;
+	list_id: string;
+}
+    
+export interface TraktUsersListLikesRequest { 
+	id: string;
+	list_id: string;
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktUsersListLikesResponse { 
@@ -5374,13 +5209,41 @@ export interface TraktUsersListLikesResponse {
 	user: TraktUser; 
 }
     
+export interface TraktUsersListLikeRequest { 
+	id: string;
+	list_id: string;
+}
+    
+export interface TraktUsersListItemsRequest { 
+	id: string;
+	list_id: string;
+	type?: "movie"|"show"|"season"|"episode"|"person";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersListItemsResponse { 
 	rank: number;
 	id: number;
 	listed_at: string;
 	type: string;
-	movie: TraktMovie; 
+	movie?: TraktMovie;
+	show?: TraktShow;
+	season?: TraktSeason;
+	episode?: TraktEpisode;
+	person?: TraktPerson; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersAddListItemsRequest { 
+	id: string;
+	list_id: string;
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
+	people?: Array<any>;
 }
     
 export interface TraktUsersAddListItemsResponse { 
@@ -5404,11 +5267,37 @@ export interface TraktUsersAddListItemsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
-		people: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		people: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktUsersRemoveListItemsRequest { 
+	id: string;
+	list_id: string;
+	movies?: Array<any>;
+	shows?: Array<any>;
+	seasons?: Array<any>;
+	episodes?: Array<any>;
+	people?: Array<any>;
 }
     
 export interface TraktUsersRemoveListItemsResponse { 
@@ -5425,16 +5314,45 @@ export interface TraktUsersRemoveListItemsResponse {
 				imdb: string;
 			};
 		}[];
-		shows: undefined[];
-		seasons: undefined[];
-		episodes: undefined[];
-		people: undefined[];
+		shows: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		seasons: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		episodes: {
+			ids: {
+				imdb: string;
+			};
+		}[];
+		people: {
+			ids: {
+				imdb: string;
+			};
+		}[];
 	}; 
+}
+    
+export interface TraktUsersReorderListItemsRequest { 
+	id: string;
+	list_id: string;
 }
     
 export interface TraktUsersReorderListItemsResponse { 
 	updated: number;
 	skipped_ids: number[]; 
+}
+    
+export interface TraktUsersListCommentsRequest { 
+	id: string;
+	list_id: string;
+	sort?: "newest"|"oldest"|"likes"|"replies";
+	page?: number;
+	limit?: number;
 }
     
 export interface TraktUsersListCommentsResponse { 
@@ -5456,10 +5374,24 @@ export interface TraktUsersListCommentsResponse {
 	user: TraktUser; 
 }
     
+export interface TraktUsersFollowRequest { 
+	id: string;
+}
+    
+export interface TraktUsersFollowersRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersFollowersResponse { 
 	followed_at: string;
 	user: TraktUser; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersFollowingRequest { 
+	id: string;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersFollowingResponse { 
@@ -5468,10 +5400,26 @@ export interface TraktUsersFollowingResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersFriendsRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersFriendsResponse { 
 	friends_at: string;
 	user: TraktUser; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersHistoryRequest { 
+	id: string;
+	type?: "movies"|"shows"|"seasons"|"episodes";
+	item_id?: number;
+	start_at?: string;
+	end_at?: string;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersHistoryResponse { 
@@ -5484,6 +5432,15 @@ export interface TraktUsersHistoryResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersRatingsRequest { 
+	id: string;
+	type?: "movies"|"shows"|"seasons"|"episodes"|"all";
+	rating?: number;
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersRatingsResponse { 
 	rated_at: string;
 	rating: number;
@@ -5491,6 +5448,15 @@ export interface TraktUsersRatingsResponse {
 	episode: TraktEpisode;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersWatchlistRequest { 
+	id: string;
+	type?: "movies"|"shows"|"seasons"|"episodes";
+	sort?: "rank"|"added"|"released"|"title";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
 }
     
 export interface TraktUsersWatchlistResponse { 
@@ -5502,6 +5468,15 @@ export interface TraktUsersWatchlistResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersPersonalRecommendationsRequest { 
+	id: string;
+	type?: "movies"|"shows";
+	sort?: "rank"|"added"|"released"|"title";
+	page?: number;
+	limit?: number;
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersPersonalRecommendationsResponse { 
 	rank: number;
 	listed_at: string;
@@ -5511,14 +5486,28 @@ export interface TraktUsersPersonalRecommendationsResponse {
 	[key: string]: any;
 }
     
+export interface TraktUsersWatchingRequest { 
+	id: string;
+	extended?: "full"|"metadata";
+}
+    
+export interface TraktUsersWatchedRequest { 
+	id: string;
+	type: "movies"|"shows";
+	extended?: "full"|"metadata";
+}
+    
 export interface TraktUsersWatchedResponse { 
 	plays: number;
 	last_watched_at: string;
 	last_updated_at: string;
-	reset_at: {
-	};
+	reset_at: string;
 	show: TraktShow; 
 	[key: string]: any;
+}
+    
+export interface TraktUsersStatsRequest { 
+	id: string;
 }
     
 export interface TraktUsersStatsResponse { 
@@ -5568,4 +5557,14 @@ export interface TraktUsersStatsResponse {
 			"10": number;
 		};
 	}; 
+}
+
+export interface TraktCrew extends Record<string, TraktDepartment> { }
+    
+export interface TraktDepartment extends Array<TraktStaff> { }
+
+export interface TraktStaff {
+    jobs: Array<string>;
+    episode_count: number;
+    person: TraktPerson;
 }

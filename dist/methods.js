@@ -10,8 +10,7 @@ class TraktMethods extends base_1.default {
         super(options);
         this.authentication = {
             authorize: async (params) => {
-                const endpoint = "/oauth/authorize{?response_type,client_id,redirect_uri,state}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/oauth/authorize{?response_type,client_id,redirect_uri,state}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -19,8 +18,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getToken: async (params) => {
-                const endpoint = "/oauth/device/token";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/oauth/device/token", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -33,8 +31,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             refreshToken: async (params) => {
-                const endpoint = "/oauth/token";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/oauth/token", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -49,8 +46,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             revokeToken: async (params) => {
-                const endpoint = "/oauth/revoke";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/oauth/revoke", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -63,8 +59,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             deviceCode: async () => {
-                const endpoint = "/oauth/device/code";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/oauth/device/code";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -77,8 +72,7 @@ class TraktMethods extends base_1.default {
         };
         this.calendars = {
             myShows: async (params) => {
-                const endpoint = "/calendars/my/shows/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -91,8 +85,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             myNewShows: async (params) => {
-                const endpoint = "/calendars/my/shows/new/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/new/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -105,8 +98,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             mySeasonPremieres: async (params) => {
-                const endpoint = "/calendars/my/shows/premieres/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/my/shows/premieres/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -119,8 +111,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             myMovies: async (params) => {
-                const endpoint = "/calendars/my/movies/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/my/movies/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -133,8 +124,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             myDVD: async (params) => {
-                const endpoint = "/calendars/my/dvd/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/my/dvd/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -147,8 +137,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             allShows: async (params) => {
-                const endpoint = "/calendars/all/shows/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -160,8 +149,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             allNewShows: async (params) => {
-                const endpoint = "/calendars/all/shows/new/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/new/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -173,8 +161,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             allSeasonPremieres: async (params) => {
-                const endpoint = "/calendars/all/shows/premieres/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/all/shows/premieres/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -186,8 +173,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             allMovies: async (params) => {
-                const endpoint = "/calendars/all/movies/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/all/movies/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -199,8 +185,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             allDVD: async (params) => {
-                const endpoint = "/calendars/all/dvd/{start_date}/{days}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/calendars/all/dvd/{start_date}/{days}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -214,8 +199,7 @@ class TraktMethods extends base_1.default {
         };
         this.checkin = {
             checkin: async () => {
-                const endpoint = "/checkin";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/checkin";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -230,8 +214,7 @@ class TraktMethods extends base_1.default {
         };
         this.certifications = {
             list: async (params) => {
-                const endpoint = "/certifications/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/certifications/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -245,8 +228,7 @@ class TraktMethods extends base_1.default {
         };
         this.comments = {
             comments: async (params) => {
-                const endpoint = "/comments";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -265,8 +247,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comment: async (params) => {
-                const endpoint = "/comments/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -279,8 +260,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             replies: async (params) => {
-                const endpoint = "/comments/{id}/replies";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -297,8 +277,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             item: async (params) => {
-                const endpoint = "/comments/{id}/item";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/item", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -310,8 +289,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             likes: async (params) => {
-                const endpoint = "/comments/{id}/likes";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/likes", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -323,8 +301,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             like: async (params) => {
-                const endpoint = "/comments/{id}/like";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -337,8 +314,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             trending: async (params) => {
-                const endpoint = "/comments/trending/{comment_type}/{type}{?include_replies}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/trending/{comment_type}/{type}{?include_replies}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -350,8 +326,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             recent: async (params) => {
-                const endpoint = "/comments/recent/{comment_type}/{type}{?include_replies}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/recent/{comment_type}/{type}{?include_replies}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -363,8 +338,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             updates: async (params) => {
-                const endpoint = "/comments/updates/{comment_type}/{type}{?include_replies}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/comments/updates/{comment_type}/{type}{?include_replies}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -378,8 +352,7 @@ class TraktMethods extends base_1.default {
         };
         this.countries = {
             list: async (params) => {
-                const endpoint = "/countries/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/countries/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -393,8 +366,7 @@ class TraktMethods extends base_1.default {
         };
         this.genres = {
             list: async (params) => {
-                const endpoint = "/genres/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/genres/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -408,8 +380,7 @@ class TraktMethods extends base_1.default {
         };
         this.languages = {
             list: async (params) => {
-                const endpoint = "/languages/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/languages/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -423,8 +394,7 @@ class TraktMethods extends base_1.default {
         };
         this.lists = {
             trending: async (params) => {
-                const endpoint = "/lists/trending";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/trending", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -436,8 +406,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             popular: async (params) => {
-                const endpoint = "/lists/popular";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/popular", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -449,8 +418,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             list: async (params) => {
-                const endpoint = "/lists/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -462,8 +430,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listLikes: async (params) => {
-                const endpoint = "/lists/{id}/likes";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/{id}/likes", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -475,8 +442,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listItems: async (params) => {
-                const endpoint = "/lists/{id}/items/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/{id}/items/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -488,8 +454,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listComments: async (params) => {
-                const endpoint = "/lists/{id}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/lists/{id}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -503,8 +468,7 @@ class TraktMethods extends base_1.default {
         };
         this.movies = {
             trending: async (params) => {
-                const endpoint = "/movies/trending";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/trending", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -516,8 +480,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             popular: async (params) => {
-                const endpoint = "/movies/popular";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/popular", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -529,8 +492,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             recommended: async (params) => {
-                const endpoint = "/movies/recommended/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/recommended/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -542,8 +504,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             played: async (params) => {
-                const endpoint = "/movies/played/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/played/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -555,8 +516,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watched: async (params) => {
-                const endpoint = "/movies/watched/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/watched/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -568,8 +528,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             collected: async (params) => {
-                const endpoint = "/movies/collected/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/collected/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -581,8 +540,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             anticipated: async (params) => {
-                const endpoint = "/movies/anticipated";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/anticipated", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -594,8 +552,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             boxOffice: async (params) => {
-                const endpoint = "/movies/boxoffice";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/boxoffice", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -607,8 +564,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             updates: async (params) => {
-                const endpoint = "/movies/updates/{start_date}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/updates/{start_date}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -620,8 +576,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             updatedIDs: async (params) => {
-                const endpoint = "/movies/updates/id/{start_date}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/updates/id/{start_date}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -633,8 +588,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             summary: async (params) => {
-                const endpoint = "/movies/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -646,8 +600,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             aliases: async (params) => {
-                const endpoint = "/movies/{id}/aliases";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/aliases", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -659,8 +612,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             releases: async (params) => {
-                const endpoint = "/movies/{id}/releases/{country}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/releases/{country}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -672,8 +624,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             translations: async (params) => {
-                const endpoint = "/movies/{id}/translations/{language}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/translations/{language}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -685,8 +636,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comments: async (params) => {
-                const endpoint = "/movies/{id}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -698,8 +648,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/movies/{id}/lists/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/lists/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -711,8 +660,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             people: async (params) => {
-                const endpoint = "/movies/{id}/people";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/people", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -724,8 +672,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             ratings: async (params) => {
-                const endpoint = "/movies/{id}/ratings";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/ratings", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -737,8 +684,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             related: async (params) => {
-                const endpoint = "/movies/{id}/related";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/related", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -750,8 +696,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stats: async (params) => {
-                const endpoint = "/movies/{id}/stats";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/stats", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -763,8 +708,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watching: async (params) => {
-                const endpoint = "/movies/{id}/watching";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/movies/{id}/watching", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -778,8 +722,7 @@ class TraktMethods extends base_1.default {
         };
         this.networks = {
             list: async () => {
-                const endpoint = "/networks";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/networks";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -793,8 +736,7 @@ class TraktMethods extends base_1.default {
         };
         this.people = {
             summary: async (params) => {
-                const endpoint = "/people/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/people/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -806,8 +748,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             movies: async (params) => {
-                const endpoint = "/people/{id}/movies";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/people/{id}/movies", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -819,8 +760,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             shows: async (params) => {
-                const endpoint = "/people/{id}/shows";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/people/{id}/shows", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -832,8 +772,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/people/{id}/lists/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/people/{id}/lists/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -847,8 +786,7 @@ class TraktMethods extends base_1.default {
         };
         this.recommendations = {
             movies: async (params) => {
-                const endpoint = "/recommendations/movies{?ignore_collected}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/recommendations/movies{?ignore_collected}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -861,8 +799,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             hideMovie: async (params) => {
-                const endpoint = "/recommendations/movies/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/recommendations/movies/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -875,8 +812,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             shows: async (params) => {
-                const endpoint = "/recommendations/shows{?ignore_collected}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/recommendations/shows{?ignore_collected}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -889,8 +825,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             hideShow: async (params) => {
-                const endpoint = "/recommendations/shows/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/recommendations/shows/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -905,8 +840,7 @@ class TraktMethods extends base_1.default {
         };
         this.scrobble = {
             start: async (params) => {
-                const endpoint = "/scrobble/start";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/scrobble/start", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -925,8 +859,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             pause: async (params) => {
-                const endpoint = "/scrobble/pause";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/scrobble/pause", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -945,8 +878,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stop: async (params) => {
-                const endpoint = "/scrobble/stop";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/scrobble/stop", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -967,8 +899,7 @@ class TraktMethods extends base_1.default {
         };
         this.search = {
             textQuery: async (params) => {
-                const endpoint = "/search/{type}{?query}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/search/{type}{?query}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -980,8 +911,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             iDLookup: async (params) => {
-                const endpoint = "/search/{id_type}/{id}{?type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/search/{id_type}/{id}{?type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -995,8 +925,7 @@ class TraktMethods extends base_1.default {
         };
         this.shows = {
             trending: async (params) => {
-                const endpoint = "/shows/trending";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/trending", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1008,8 +937,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             popular: async (params) => {
-                const endpoint = "/shows/popular";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/popular", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1021,8 +949,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             recommended: async (params) => {
-                const endpoint = "/shows/recommended/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/recommended/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1034,8 +961,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             played: async (params) => {
-                const endpoint = "/shows/played/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/played/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1047,8 +973,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watched: async (params) => {
-                const endpoint = "/shows/watched/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/watched/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1060,8 +985,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             collected: async (params) => {
-                const endpoint = "/shows/collected/{period}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/collected/{period}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1073,8 +997,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             anticipated: async (params) => {
-                const endpoint = "/shows/anticipated";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/anticipated", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1086,8 +1009,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             updates: async (params) => {
-                const endpoint = "/shows/updates/{start_date}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/updates/{start_date}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1099,8 +1021,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             updatedIDs: async (params) => {
-                const endpoint = "/shows/updates/id/{start_date}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/updates/id/{start_date}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1112,8 +1033,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             summary: async (params) => {
-                const endpoint = "/shows/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1125,8 +1045,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             aliases: async (params) => {
-                const endpoint = "/shows/{id}/aliases";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/aliases", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1138,8 +1057,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             certifications: async (params) => {
-                const endpoint = "/shows/{id}/certifications";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/certifications", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1151,8 +1069,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             translations: async (params) => {
-                const endpoint = "/shows/{id}/translations/{language}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/translations/{language}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1164,8 +1081,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comments: async (params) => {
-                const endpoint = "/shows/{id}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1177,8 +1093,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/shows/{id}/lists/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/lists/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1190,8 +1105,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             collectionProgress: async (params) => {
-                const endpoint = "/shows/{id}/progress/collection{?hidden,specials,count_specials,last_activity}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/collection{?hidden,specials,count_specials,last_activity}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1204,8 +1118,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watchedProgress: async (params) => {
-                const endpoint = "/shows/{id}/progress/watched{?hidden,specials,count_specials,last_activity}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched{?hidden,specials,count_specials,last_activity}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1218,8 +1131,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             resetWatchedProgress: async (params) => {
-                const endpoint = "/shows/{id}/progress/watched/reset";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched/reset", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1232,8 +1144,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             people: async (params) => {
-                const endpoint = "/shows/{id}/people";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/people", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1245,8 +1156,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             ratings: async (params) => {
-                const endpoint = "/shows/{id}/ratings";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/ratings", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1258,8 +1168,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             related: async (params) => {
-                const endpoint = "/shows/{id}/related";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/related", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1271,8 +1180,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stats: async (params) => {
-                const endpoint = "/shows/{id}/stats";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/stats", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1284,8 +1192,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watching: async (params) => {
-                const endpoint = "/shows/{id}/watching";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/watching", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1297,8 +1204,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             nextEpisode: async (params) => {
-                const endpoint = "/shows/{id}/next_episode";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/next_episode", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1310,8 +1216,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lastEpisode: async (params) => {
-                const endpoint = "/shows/{id}/last_episode";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/last_episode", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1325,8 +1230,7 @@ class TraktMethods extends base_1.default {
         };
         this.seasons = {
             summary: async (params) => {
-                const endpoint = "/shows/{id}/seasons";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1338,8 +1242,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             season: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}{?translations}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}{?translations}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1351,8 +1254,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comments: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1364,8 +1266,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/lists/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/lists/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1377,8 +1278,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             people: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/people";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/people", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1390,8 +1290,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             ratings: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/ratings";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/ratings", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1403,8 +1302,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stats: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/stats";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/stats", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1416,8 +1314,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watching: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/watching";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/watching", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1431,8 +1328,7 @@ class TraktMethods extends base_1.default {
         };
         this.episodes = {
             summary: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1444,8 +1340,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             translations: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/translations/{language}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1457,8 +1352,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comments: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1470,8 +1364,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/lists/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1483,8 +1376,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             people: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/people";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/people", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1496,8 +1388,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             ratings: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/ratings";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/ratings", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1509,8 +1400,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stats: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/stats";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/stats", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1522,8 +1412,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watching: async (params) => {
-                const endpoint = "/shows/{id}/seasons/{season}/episodes/{episode}/watching";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/seasons/{season}/episodes/{episode}/watching", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1537,8 +1426,7 @@ class TraktMethods extends base_1.default {
         };
         this.sync = {
             lastActivities: async () => {
-                const endpoint = "/sync/last_activities";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/sync/last_activities";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1551,8 +1439,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             playback: async (params) => {
-                const endpoint = "/sync/playback/{type}{?start_at,end_at}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/playback/{type}{?start_at,end_at}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1565,8 +1452,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removePlayback: async (params) => {
-                const endpoint = "/sync/playback/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/playback/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1579,8 +1465,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getCollection: async (params) => {
-                const endpoint = "/sync/collection/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/collection/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1593,8 +1478,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addToCollection: async (params) => {
-                const endpoint = "/sync/collection";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/collection", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1613,8 +1497,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeFromCollection: async (params) => {
-                const endpoint = "/sync/collection/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/collection/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1633,8 +1516,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getWatched: async (params) => {
-                const endpoint = "/sync/watched/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/watched/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1647,8 +1529,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getHistory: async (params) => {
-                const endpoint = "/sync/history/{type}/{id}{?start_at,end_at}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/history/{type}/{id}{?start_at,end_at}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1661,8 +1542,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addToHistory: async (params) => {
-                const endpoint = "/sync/history";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/history", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1681,8 +1561,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeFromHistory: async (params) => {
-                const endpoint = "/sync/history/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/history/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1702,8 +1581,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getRatings: async (params) => {
-                const endpoint = "/sync/ratings/{type}/{rating}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/ratings/{type}/{rating}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1716,8 +1594,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addRatings: async (params) => {
-                const endpoint = "/sync/ratings";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/ratings", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1736,8 +1613,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeRatings: async (params) => {
-                const endpoint = "/sync/ratings/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/ratings/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1756,8 +1632,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getWatchlist: async (params) => {
-                const endpoint = "/sync/watchlist/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/watchlist/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1770,8 +1645,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addToWatchlist: async (params) => {
-                const endpoint = "/sync/watchlist";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/watchlist", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1790,8 +1664,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeFromWatchlist: async (params) => {
-                const endpoint = "/sync/watchlist/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/watchlist/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1810,8 +1683,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             reorderWatchlist: async () => {
-                const endpoint = "/sync/watchlist/reorder";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/sync/watchlist/reorder";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1824,8 +1696,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             getPersonalRecommendations: async (params) => {
-                const endpoint = "/sync/recommendations/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/recommendations/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1838,8 +1709,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addToPersonalRecommendations: async (params) => {
-                const endpoint = "/sync/recommendations";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/recommendations", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1856,8 +1726,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeFromPersonalRecommendations: async (params) => {
-                const endpoint = "/sync/recommendations/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/sync/recommendations/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1874,8 +1743,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             reorderPersonalRecommendations: async () => {
-                const endpoint = "/sync/recommendations/reorder";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/sync/recommendations/reorder";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1890,8 +1758,7 @@ class TraktMethods extends base_1.default {
         };
         this.users = {
             settings: async () => {
-                const endpoint = "/users/settings";
-                const route = this.baseUrl + endpoint;
+                const route = this.baseUrl + "/users/settings";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1904,8 +1771,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             followingRequests: async (params) => {
-                const endpoint = "/users/requests/following";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/requests/following", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1918,8 +1784,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             followerRequests: async (params) => {
-                const endpoint = "/users/requests";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/requests", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1932,8 +1797,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             approveOrDenyFollowerRequests: async (params) => {
-                const endpoint = "/users/requests/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/requests/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1946,8 +1810,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             hiddenItems: async (params) => {
-                const endpoint = "/users/hidden/{section}{?type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}{?type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1960,8 +1823,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addHiddenItems: async (params) => {
-                const endpoint = "/users/hidden/{section}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -1980,8 +1842,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeHiddenItems: async (params) => {
-                const endpoint = "/users/hidden/{section}/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/hidden/{section}/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2000,8 +1861,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             profile: async (params) => {
-                const endpoint = "/users/{id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2013,8 +1873,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             likes: async (params) => {
-                const endpoint = "/users/{id}/likes/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/likes/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2027,8 +1886,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             collection: async (params) => {
-                const endpoint = "/users/{id}/collection/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/collection/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2040,8 +1898,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             comments: async (params) => {
-                const endpoint = "/users/{id}/comments/{comment_type}/{type}{?include_replies}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/comments/{comment_type}/{type}{?include_replies}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2053,8 +1910,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             lists: async (params) => {
-                const endpoint = "/users/{id}/lists";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2076,8 +1932,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             reorderLists: async (params) => {
-                const endpoint = "/users/{id}/lists/reorder";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/reorder", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2090,8 +1945,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             list: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2104,8 +1958,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listLikes: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/likes";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/likes", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2117,8 +1970,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listLike: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/like";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2131,8 +1983,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listItems: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/items/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2144,8 +1995,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             addListItems: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/items";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2165,8 +2015,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             removeListItems: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/items/remove";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/remove", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2186,8 +2035,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             reorderListItems: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/items/reorder";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/items/reorder", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2200,8 +2048,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             listComments: async (params) => {
-                const endpoint = "/users/{id}/lists/{list_id}/comments/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/comments/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2213,8 +2060,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             follow: async (params) => {
-                const endpoint = "/users/{id}/follow";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2227,8 +2073,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             followers: async (params) => {
-                const endpoint = "/users/{id}/followers";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/followers", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2240,8 +2085,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             following: async (params) => {
-                const endpoint = "/users/{id}/following";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/following", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2253,8 +2097,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             friends: async (params) => {
-                const endpoint = "/users/{id}/friends";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/friends", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2266,8 +2109,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             history: async (params) => {
-                const endpoint = "/users/{id}/history/{type}/{item_id}{?start_at,end_at}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/history/{type}/{item_id}{?start_at,end_at}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2279,8 +2121,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             ratings: async (params) => {
-                const endpoint = "/users/{id}/ratings/{type}/{rating}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/ratings/{type}/{rating}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2292,8 +2133,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watchlist: async (params) => {
-                const endpoint = "/users/{id}/watchlist/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/watchlist/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2305,8 +2145,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             personalRecommendations: async (params) => {
-                const endpoint = "/users/{id}/recommendations/{type}/{sort}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/recommendations/{type}/{sort}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2319,8 +2158,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watching: async (params) => {
-                const endpoint = "/users/{id}/watching";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/watching", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2332,8 +2170,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             watched: async (params) => {
-                const endpoint = "/users/{id}/watched/{type}";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/watched/{type}", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
@@ -2345,8 +2182,7 @@ class TraktMethods extends base_1.default {
                 });
             },
             stats: async (params) => {
-                const endpoint = "/users/{id}/stats";
-                const route = this.baseUrl + this.parseEndpoint(endpoint, params);
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/stats", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",

@@ -25,8 +25,8 @@ class Trakt extends methods_1.default {
             const token = await this.authentication.getToken({
                 code: params.device_code,
             });
-            if (token.statusCode == 200 && token.body && token.body["access_token"]) {
-                this.access_token = token.body["access_token"];
+            if (token.statusCode == 200 && token.body && token.body.access_token) {
+                this.access_token = token.body.access_token;
                 return resolve(token);
             }
             else if (params.expires_in / params.interval <= attempts) {
@@ -40,7 +40,7 @@ class Trakt extends methods_1.default {
         return new Promise(poll);
     }
     async ensureToken(params) {
-        const expiry = new Date(params.created_at + params.expires_in);
+        const expiry = new Date((params.created_at + params.expires_in) * 1000);
         if (expiry < new Date()) {
             const token = await this.authentication.refreshToken({
                 refresh_token: params.refresh_token,
@@ -50,7 +50,7 @@ class Trakt extends methods_1.default {
             return token.body;
         }
         else {
-            this.access_token = params["access_token"];
+            this.access_token = params.access_token;
             return params;
         }
     }

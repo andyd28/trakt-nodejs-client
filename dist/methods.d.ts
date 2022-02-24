@@ -3,221 +3,233 @@ import { Response } from "got";
 declare class TraktMethods extends TraktBase {
     constructor(options: TraktOptions);
     authentication: {
-        authorize: (params: TraktAuthenticationAuthorizeParams) => Promise<Response<any>>;
-        getToken: (params: TraktAuthenticationGetTokenBody) => Promise<Response<TraktAuthenticationGetTokenResponse>>;
-        refreshToken: (params: TraktAuthenticationRefreshTokenBody) => Promise<Response<TraktAuthenticationGetTokenResponse>>;
-        revokeToken: (params: TraktAuthenticationRevokeTokenBody) => Promise<Response<any>>;
+        authorize: (params: TraktAuthenticationAuthorizeRequest) => Promise<Response<any>>;
+        getToken: (params: TraktAuthenticationGetTokenRequest) => Promise<Response<TraktAuthenticationGetTokenResponse>>;
+        refreshToken: (params: TraktAuthenticationRefreshTokenRequest) => Promise<Response<TraktAuthenticationGetTokenResponse>>;
+        revokeToken: (params: TraktAuthenticationRevokeTokenRequest) => Promise<Response<any>>;
         deviceCode: () => Promise<Response<TraktAuthenticationDeviceCodeResponse>>;
     };
     calendars: {
-        myShows: (params: TraktCalendarsMyShowsParams) => Promise<Response<TraktCalendarsMyShowsResponse[]>>;
-        myNewShows: (params: TraktCalendarsMyNewShowsParams) => Promise<Response<TraktCalendarsMyNewShowsResponse[]>>;
-        mySeasonPremieres: (params: TraktCalendarsMySeasonPremieresParams) => Promise<Response<TraktCalendarsMySeasonPremieresResponse[]>>;
-        myMovies: (params: TraktCalendarsMyMoviesParams) => Promise<Response<TraktCalendarsMyMoviesResponse[]>>;
-        myDVD: (params: TraktCalendarsMyDVDParams) => Promise<Response<TraktCalendarsMyDVDResponse[]>>;
-        allShows: (params: TraktCalendarsAllShowsParams) => Promise<Response<TraktCalendarsAllShowsResponse[]>>;
-        allNewShows: (params: TraktCalendarsAllNewShowsParams) => Promise<Response<TraktCalendarsAllNewShowsResponse[]>>;
-        allSeasonPremieres: (params: TraktCalendarsAllSeasonPremieresParams) => Promise<Response<TraktCalendarsAllSeasonPremieresResponse[]>>;
-        allMovies: (params: TraktCalendarsAllMoviesParams) => Promise<Response<TraktCalendarsAllMoviesResponse[]>>;
-        allDVD: (params: TraktCalendarsAllDVDParams) => Promise<Response<TraktCalendarsAllDVDResponse[]>>;
+        myShows: (params: TraktCalendarsMyShowsRequest) => Promise<Response<TraktCalendarsMyShowsResponse[]>>;
+        myNewShows: (params: TraktCalendarsMyNewShowsRequest) => Promise<Response<TraktCalendarsMyNewShowsResponse[]>>;
+        mySeasonPremieres: (params: TraktCalendarsMySeasonPremieresRequest) => Promise<Response<TraktCalendarsMySeasonPremieresResponse[]>>;
+        myMovies: (params: TraktCalendarsMyMoviesRequest) => Promise<Response<TraktCalendarsMyMoviesResponse[]>>;
+        myDVD: (params: TraktCalendarsMyDVDRequest) => Promise<Response<TraktCalendarsMyDVDResponse[]>>;
+        allShows: (params: TraktCalendarsAllShowsRequest) => Promise<Response<TraktCalendarsAllShowsResponse[]>>;
+        allNewShows: (params: TraktCalendarsAllNewShowsRequest) => Promise<Response<TraktCalendarsAllNewShowsResponse[]>>;
+        allSeasonPremieres: (params: TraktCalendarsAllSeasonPremieresRequest) => Promise<Response<TraktCalendarsAllSeasonPremieresResponse[]>>;
+        allMovies: (params: TraktCalendarsAllMoviesRequest) => Promise<Response<TraktCalendarsAllMoviesResponse[]>>;
+        allDVD: (params: TraktCalendarsAllDVDRequest) => Promise<Response<TraktCalendarsAllDVDResponse[]>>;
     };
     checkin: {
         checkin: () => Promise<Response<any>>;
     };
     certifications: {
-        list: (params: TraktCertificationsListParams) => Promise<Response<TraktCertificationsListResponse>>;
+        list: (params: TraktCertificationsListRequest) => Promise<Response<TraktCertificationsListResponse>>;
     };
     comments: {
-        comments: (params: TraktCommentsCommentsBody) => Promise<Response<TraktCommentsCommentsResponse>>;
-        comment: (params: TraktCommentsCommentParams) => Promise<Response<any>>;
-        replies: (params: TraktCommentsRepliesBody) => Promise<Response<TraktCommentsRepliesResponse>>;
-        item: (params: TraktCommentsItemParams) => Promise<Response<TraktCommentsItemResponse>>;
-        likes: (params: TraktCommentsLikesParams) => Promise<Response<TraktCommentsLikesResponse[]>>;
-        like: (params: TraktCommentsLikeParams) => Promise<Response<any>>;
-        trending: (params: TraktCommentsTrendingParams) => Promise<Response<TraktCommentsTrendingResponse[]>>;
-        recent: (params: TraktCommentsRecentParams) => Promise<Response<TraktCommentsRecentResponse[]>>;
-        updates: (params: TraktCommentsUpdatesParams) => Promise<Response<TraktCommentsUpdatesResponse[]>>;
+        comments: (params: TraktCommentsCommentsRequest) => Promise<Response<TraktCommentsCommentsResponse>>;
+        comment: (params: TraktCommentsCommentRequest) => Promise<Response<any>>;
+        replies: (params: TraktCommentsRepliesRequest) => Promise<Response<TraktCommentsRepliesResponse>>;
+        item: (params: TraktCommentsItemRequest) => Promise<Response<TraktCommentsItemResponse>>;
+        likes: (params: TraktCommentsLikesRequest) => Promise<Response<TraktCommentsLikesResponse[]>>;
+        like: (params: TraktCommentsLikeRequest) => Promise<Response<any>>;
+        trending: (params: TraktCommentsTrendingRequest) => Promise<Response<TraktCommentsTrendingResponse[]>>;
+        recent: (params: TraktCommentsRecentRequest) => Promise<Response<TraktCommentsRecentResponse[]>>;
+        updates: (params: TraktCommentsUpdatesRequest) => Promise<Response<TraktCommentsUpdatesResponse[]>>;
     };
     countries: {
-        list: (params: TraktCountriesListParams) => Promise<Response<TraktCountriesListResponse[]>>;
+        list: (params: TraktCountriesListRequest) => Promise<Response<TraktCountriesListResponse[]>>;
     };
     genres: {
-        list: (params: TraktGenresListParams) => Promise<Response<TraktGenresListResponse[]>>;
+        list: (params: TraktGenresListRequest) => Promise<Response<TraktGenresListResponse[]>>;
     };
     languages: {
-        list: (params: TraktLanguagesListParams) => Promise<Response<TraktLanguagesListResponse[]>>;
+        list: (params: TraktLanguagesListRequest) => Promise<Response<TraktLanguagesListResponse[]>>;
     };
     lists: {
-        trending: (params: TraktListsTrendingParams) => Promise<Response<TraktListsTrendingResponse[]>>;
-        popular: (params: TraktListsPopularParams) => Promise<Response<TraktListsPopularResponse[]>>;
-        list: (params: TraktListsListParams) => Promise<Response<TraktListsListResponse>>;
-        listLikes: (params: TraktListsListLikesParams) => Promise<Response<TraktListsListLikesResponse[]>>;
-        listItems: (params: TraktListsListItemsParams) => Promise<Response<TraktListsListItemsResponse[]>>;
-        listComments: (params: TraktListsListCommentsParams) => Promise<Response<TraktListsListCommentsResponse[]>>;
+        trending: (params: TraktListsTrendingRequest) => Promise<Response<TraktListsTrendingResponse[]>>;
+        popular: (params: TraktListsPopularRequest) => Promise<Response<TraktListsPopularResponse[]>>;
+        list: (params: TraktListsListRequest) => Promise<Response<TraktListsListResponse>>;
+        listLikes: (params: TraktListsListLikesRequest) => Promise<Response<TraktListsListLikesResponse[]>>;
+        listItems: (params: TraktListsListItemsRequest) => Promise<Response<TraktListsListItemsResponse[]>>;
+        listComments: (params: TraktListsListCommentsRequest) => Promise<Response<TraktListsListCommentsResponse[]>>;
     };
     movies: {
-        trending: (params: TraktMoviesTrendingParams) => Promise<Response<TraktMoviesTrendingResponse[]>>;
-        popular: (params: TraktMoviesPopularParams) => Promise<Response<TraktMoviesPopularResponse[]>>;
-        recommended: (params: TraktMoviesRecommendedParams) => Promise<Response<TraktMoviesRecommendedResponse[]>>;
-        played: (params: TraktMoviesPlayedParams) => Promise<Response<TraktMoviesPlayedResponse[]>>;
-        watched: (params: TraktMoviesWatchedParams) => Promise<Response<TraktMoviesWatchedResponse[]>>;
-        collected: (params: TraktMoviesCollectedParams) => Promise<Response<TraktMoviesCollectedResponse[]>>;
-        anticipated: (params: TraktMoviesAnticipatedParams) => Promise<Response<TraktMoviesAnticipatedResponse[]>>;
-        boxOffice: (params: TraktMoviesBoxOfficeParams) => Promise<Response<TraktMoviesBoxOfficeResponse[]>>;
-        updates: (params: TraktMoviesUpdatesParams) => Promise<Response<TraktMoviesUpdatesResponse[]>>;
-        updatedIDs: (params: TraktMoviesUpdatedIDsParams) => Promise<Response<TraktMoviesUpdatedIDsResponse[]>>;
-        summary: (params: TraktMoviesSummaryParams) => Promise<Response<TraktMoviesSummaryResponse>>;
-        aliases: (params: TraktMoviesAliasesParams) => Promise<Response<TraktMoviesAliasesResponse[]>>;
-        releases: (params: TraktMoviesReleasesParams) => Promise<Response<TraktMoviesReleasesResponse[]>>;
-        translations: (params: TraktMoviesTranslationsParams) => Promise<Response<TraktMoviesTranslationsResponse[]>>;
-        comments: (params: TraktMoviesCommentsParams) => Promise<Response<TraktMoviesCommentsResponse[]>>;
-        lists: (params: TraktMoviesListsParams) => Promise<Response<TraktMoviesListsResponse[]>>;
-        people: (params: TraktMoviesPeopleParams) => Promise<Response<TraktMoviesPeopleResponse>>;
-        ratings: (params: TraktMoviesRatingsParams) => Promise<Response<TraktMoviesRatingsResponse>>;
-        related: (params: TraktMoviesRelatedParams) => Promise<Response<TraktMoviesRelatedResponse[]>>;
-        stats: (params: TraktMoviesStatsParams) => Promise<Response<TraktMoviesStatsResponse>>;
-        watching: (params: TraktMoviesWatchingParams) => Promise<Response<TraktMoviesWatchingResponse[]>>;
+        trending: (params: TraktMoviesTrendingRequest) => Promise<Response<TraktMoviesTrendingResponse[]>>;
+        popular: (params: TraktMoviesPopularRequest) => Promise<Response<TraktMoviesPopularResponse[]>>;
+        recommended: (params: TraktMoviesRecommendedRequest) => Promise<Response<TraktMoviesRecommendedResponse[]>>;
+        played: (params: TraktMoviesPlayedRequest) => Promise<Response<TraktMoviesPlayedResponse[]>>;
+        watched: (params: TraktMoviesWatchedRequest) => Promise<Response<TraktMoviesWatchedResponse[]>>;
+        collected: (params: TraktMoviesCollectedRequest) => Promise<Response<TraktMoviesCollectedResponse[]>>;
+        anticipated: (params: TraktMoviesAnticipatedRequest) => Promise<Response<TraktMoviesAnticipatedResponse[]>>;
+        boxOffice: (params: TraktMoviesBoxOfficeRequest) => Promise<Response<TraktMoviesBoxOfficeResponse[]>>;
+        updates: (params: TraktMoviesUpdatesRequest) => Promise<Response<TraktMoviesUpdatesResponse[]>>;
+        updatedIDs: (params: TraktMoviesUpdatedIDsRequest) => Promise<Response<number[]>>;
+        summary: (params: TraktMoviesSummaryRequest) => Promise<Response<TraktMoviesSummaryResponse>>;
+        aliases: (params: TraktMoviesAliasesRequest) => Promise<Response<TraktMoviesAliasesResponse[]>>;
+        releases: (params: TraktMoviesReleasesRequest) => Promise<Response<TraktMoviesReleasesResponse[]>>;
+        translations: (params: TraktMoviesTranslationsRequest) => Promise<Response<TraktMoviesTranslationsResponse[]>>;
+        comments: (params: TraktMoviesCommentsRequest) => Promise<Response<TraktMoviesCommentsResponse[]>>;
+        lists: (params: TraktMoviesListsRequest) => Promise<Response<TraktMoviesListsResponse[]>>;
+        people: (params: TraktMoviesPeopleRequest) => Promise<Response<TraktMoviesPeopleResponse>>;
+        ratings: (params: TraktMoviesRatingsRequest) => Promise<Response<TraktMoviesRatingsResponse>>;
+        related: (params: TraktMoviesRelatedRequest) => Promise<Response<TraktMoviesRelatedResponse[]>>;
+        stats: (params: TraktMoviesStatsRequest) => Promise<Response<TraktMoviesStatsResponse>>;
+        watching: (params: TraktMoviesWatchingRequest) => Promise<Response<TraktMoviesWatchingResponse[]>>;
     };
     networks: {
         list: () => Promise<Response<TraktNetworksListResponse[]>>;
     };
     people: {
-        summary: (params: TraktPeopleSummaryParams) => Promise<Response<TraktPeopleSummaryResponse>>;
-        movies: (params: TraktPeopleMoviesParams) => Promise<Response<TraktPeopleMoviesResponse>>;
-        shows: (params: TraktPeopleShowsParams) => Promise<Response<TraktPeopleShowsResponse>>;
-        lists: (params: TraktPeopleListsParams) => Promise<Response<TraktPeopleListsResponse[]>>;
+        summary: (params: TraktPeopleSummaryRequest) => Promise<Response<TraktPeopleSummaryResponse>>;
+        movies: (params: TraktPeopleMoviesRequest) => Promise<Response<TraktPeopleMoviesResponse>>;
+        shows: (params: TraktPeopleShowsRequest) => Promise<Response<TraktPeopleShowsResponse>>;
+        lists: (params: TraktPeopleListsRequest) => Promise<Response<TraktPeopleListsResponse[]>>;
     };
     recommendations: {
-        movies: (params: TraktRecommendationsMoviesParams) => Promise<Response<TraktRecommendationsMoviesResponse[]>>;
-        hideMovie: (params: TraktRecommendationsHideMovieParams) => Promise<Response<any>>;
-        shows: (params: TraktRecommendationsShowsParams) => Promise<Response<TraktRecommendationsShowsResponse[]>>;
-        hideShow: (params: TraktRecommendationsHideShowParams) => Promise<Response<any>>;
+        movies: (params: TraktRecommendationsMoviesRequest) => Promise<Response<TraktRecommendationsMoviesResponse[]>>;
+        hideMovie: (params: TraktRecommendationsHideMovieRequest) => Promise<Response<any>>;
+        shows: (params: TraktRecommendationsShowsRequest) => Promise<Response<TraktRecommendationsShowsResponse[]>>;
+        hideShow: (params: TraktRecommendationsHideShowRequest) => Promise<Response<any>>;
     };
     scrobble: {
-        start: (params: TraktScrobbleStartBody) => Promise<Response<TraktScrobbleStartResponse>>;
-        pause: (params: TraktScrobblePauseBody) => Promise<Response<TraktScrobblePauseResponse>>;
-        stop: (params: TraktScrobbleStopBody) => Promise<Response<TraktScrobbleStopResponse>>;
+        start: (params: TraktScrobbleStartRequest) => Promise<Response<TraktScrobbleStartResponse>>;
+        pause: (params: TraktScrobblePauseRequest) => Promise<Response<TraktScrobblePauseResponse>>;
+        stop: (params: TraktScrobbleStopRequest) => Promise<Response<TraktScrobbleStopResponse>>;
     };
     search: {
-        textQuery: (params: TraktSearchTextQueryParams) => Promise<Response<TraktSearchTextQueryResponse[]>>;
-        iDLookup: (params: TraktSearchIDLookupParams) => Promise<Response<TraktSearchIDLookupResponse[]>>;
+        textQuery: (params: TraktSearchTextQueryRequest) => Promise<Response<TraktSearchTextQueryResponse[]>>;
+        iDLookup: (params: TraktSearchIDLookupRequest) => Promise<Response<TraktSearchIDLookupResponse[]>>;
     };
     shows: {
-        trending: (params: TraktShowsTrendingParams) => Promise<Response<TraktShowsTrendingResponse[]>>;
-        popular: (params: TraktShowsPopularParams) => Promise<Response<TraktShowsPopularResponse[]>>;
-        recommended: (params: TraktShowsRecommendedParams) => Promise<Response<TraktShowsRecommendedResponse[]>>;
-        played: (params: TraktShowsPlayedParams) => Promise<Response<TraktShowsPlayedResponse[]>>;
-        watched: (params: TraktShowsWatchedParams) => Promise<Response<TraktShowsWatchedResponse[]>>;
-        collected: (params: TraktShowsCollectedParams) => Promise<Response<TraktShowsCollectedResponse[]>>;
-        anticipated: (params: TraktShowsAnticipatedParams) => Promise<Response<TraktShowsAnticipatedResponse[]>>;
-        updates: (params: TraktShowsUpdatesParams) => Promise<Response<TraktShowsUpdatesResponse[]>>;
-        updatedIDs: (params: TraktShowsUpdatedIDsParams) => Promise<Response<TraktShowsUpdatedIDsResponse[]>>;
-        summary: (params: TraktShowsSummaryParams) => Promise<Response<TraktShowsSummaryResponse>>;
-        aliases: (params: TraktShowsAliasesParams) => Promise<Response<TraktShowsAliasesResponse[]>>;
-        certifications: (params: TraktShowsCertificationsParams) => Promise<Response<TraktShowsCertificationsResponse[]>>;
-        translations: (params: TraktShowsTranslationsParams) => Promise<Response<TraktShowsTranslationsResponse[]>>;
-        comments: (params: TraktShowsCommentsParams) => Promise<Response<TraktShowsCommentsResponse[]>>;
-        lists: (params: TraktShowsListsParams) => Promise<Response<TraktShowsListsResponse[]>>;
-        collectionProgress: (params: TraktShowsCollectionProgressParams) => Promise<Response<TraktShowsCollectionProgressResponse>>;
-        watchedProgress: (params: TraktShowsWatchedProgressParams) => Promise<Response<TraktShowsWatchedProgressResponse>>;
-        resetWatchedProgress: (params: TraktShowsResetWatchedProgressParams) => Promise<Response<any>>;
-        people: (params: TraktShowsPeopleParams) => Promise<Response<TraktShowsPeopleResponse>>;
-        ratings: (params: TraktShowsRatingsParams) => Promise<Response<TraktShowsRatingsResponse>>;
-        related: (params: TraktShowsRelatedParams) => Promise<Response<TraktShowsRelatedResponse[]>>;
-        stats: (params: TraktShowsStatsParams) => Promise<Response<TraktShowsStatsResponse>>;
-        watching: (params: TraktShowsWatchingParams) => Promise<Response<TraktShowsWatchingResponse[]>>;
-        nextEpisode: (params: TraktShowsNextEpisodeParams) => Promise<Response<TraktShowsNextEpisodeResponse>>;
-        lastEpisode: (params: TraktShowsLastEpisodeParams) => Promise<Response<TraktShowsLastEpisodeResponse>>;
+        trending: (params: TraktShowsTrendingRequest) => Promise<Response<TraktShowsTrendingResponse[]>>;
+        popular: (params: TraktShowsPopularRequest) => Promise<Response<TraktShowsPopularResponse[]>>;
+        recommended: (params: TraktShowsRecommendedRequest) => Promise<Response<TraktShowsRecommendedResponse[]>>;
+        played: (params: TraktShowsPlayedRequest) => Promise<Response<TraktShowsPlayedResponse[]>>;
+        watched: (params: TraktShowsWatchedRequest) => Promise<Response<TraktShowsWatchedResponse[]>>;
+        collected: (params: TraktShowsCollectedRequest) => Promise<Response<TraktShowsCollectedResponse[]>>;
+        anticipated: (params: TraktShowsAnticipatedRequest) => Promise<Response<TraktShowsAnticipatedResponse[]>>;
+        updates: (params: TraktShowsUpdatesRequest) => Promise<Response<TraktShowsUpdatesResponse[]>>;
+        updatedIDs: (params: TraktShowsUpdatedIDsRequest) => Promise<Response<number[]>>;
+        summary: (params: TraktShowsSummaryRequest) => Promise<Response<TraktShowsSummaryResponse>>;
+        aliases: (params: TraktShowsAliasesRequest) => Promise<Response<TraktShowsAliasesResponse[]>>;
+        certifications: (params: TraktShowsCertificationsRequest) => Promise<Response<TraktShowsCertificationsResponse[]>>;
+        translations: (params: TraktShowsTranslationsRequest) => Promise<Response<TraktShowsTranslationsResponse[]>>;
+        comments: (params: TraktShowsCommentsRequest) => Promise<Response<TraktShowsCommentsResponse[]>>;
+        lists: (params: TraktShowsListsRequest) => Promise<Response<TraktShowsListsResponse[]>>;
+        collectionProgress: (params: TraktShowsCollectionProgressRequest) => Promise<Response<TraktShowsCollectionProgressResponse>>;
+        watchedProgress: (params: TraktShowsWatchedProgressRequest) => Promise<Response<TraktShowsWatchedProgressResponse>>;
+        resetWatchedProgress: (params: TraktShowsResetWatchedProgressRequest) => Promise<Response<any>>;
+        people: (params: TraktShowsPeopleRequest) => Promise<Response<TraktShowsPeopleResponse>>;
+        ratings: (params: TraktShowsRatingsRequest) => Promise<Response<TraktShowsRatingsResponse>>;
+        related: (params: TraktShowsRelatedRequest) => Promise<Response<TraktShowsRelatedResponse[]>>;
+        stats: (params: TraktShowsStatsRequest) => Promise<Response<TraktShowsStatsResponse>>;
+        watching: (params: TraktShowsWatchingRequest) => Promise<Response<TraktShowsWatchingResponse[]>>;
+        nextEpisode: (params: TraktShowsNextEpisodeRequest) => Promise<Response<TraktShowsNextEpisodeResponse>>;
+        lastEpisode: (params: TraktShowsLastEpisodeRequest) => Promise<Response<TraktShowsLastEpisodeResponse>>;
     };
     seasons: {
-        summary: (params: TraktSeasonsSummaryParams) => Promise<Response<TraktSeasonsSummaryResponse[]>>;
-        season: (params: TraktSeasonsSeasonParams) => Promise<Response<TraktSeasonsSeasonResponse[]>>;
-        comments: (params: TraktSeasonsCommentsParams) => Promise<Response<TraktSeasonsCommentsResponse[]>>;
-        lists: (params: TraktSeasonsListsParams) => Promise<Response<TraktSeasonsListsResponse[]>>;
-        people: (params: TraktSeasonsPeopleParams) => Promise<Response<TraktSeasonsPeopleResponse>>;
-        ratings: (params: TraktSeasonsRatingsParams) => Promise<Response<TraktSeasonsRatingsResponse>>;
-        stats: (params: TraktSeasonsStatsParams) => Promise<Response<TraktSeasonsStatsResponse>>;
-        watching: (params: TraktSeasonsWatchingParams) => Promise<Response<TraktSeasonsWatchingResponse[]>>;
+        summary: (params: TraktSeasonsSummaryRequest) => Promise<Response<TraktSeasonsSummaryResponse[]>>;
+        season: (params: TraktSeasonsSeasonRequest) => Promise<Response<TraktSeasonsSeasonResponse[]>>;
+        comments: (params: TraktSeasonsCommentsRequest) => Promise<Response<TraktSeasonsCommentsResponse[]>>;
+        lists: (params: TraktSeasonsListsRequest) => Promise<Response<TraktSeasonsListsResponse[]>>;
+        people: (params: TraktSeasonsPeopleRequest) => Promise<Response<TraktSeasonsPeopleResponse>>;
+        ratings: (params: TraktSeasonsRatingsRequest) => Promise<Response<TraktSeasonsRatingsResponse>>;
+        stats: (params: TraktSeasonsStatsRequest) => Promise<Response<TraktSeasonsStatsResponse>>;
+        watching: (params: TraktSeasonsWatchingRequest) => Promise<Response<TraktSeasonsWatchingResponse[]>>;
     };
     episodes: {
-        summary: (params: TraktEpisodesSummaryParams) => Promise<Response<TraktEpisodesSummaryResponse>>;
-        translations: (params: TraktEpisodesTranslationsParams) => Promise<Response<TraktEpisodesTranslationsResponse[]>>;
-        comments: (params: TraktEpisodesCommentsParams) => Promise<Response<TraktEpisodesCommentsResponse[]>>;
-        lists: (params: TraktEpisodesListsParams) => Promise<Response<TraktEpisodesListsResponse[]>>;
-        people: (params: TraktEpisodesPeopleParams) => Promise<Response<TraktEpisodesPeopleResponse>>;
-        ratings: (params: TraktEpisodesRatingsParams) => Promise<Response<TraktEpisodesRatingsResponse>>;
-        stats: (params: TraktEpisodesStatsParams) => Promise<Response<TraktEpisodesStatsResponse>>;
-        watching: (params: TraktEpisodesWatchingParams) => Promise<Response<TraktEpisodesWatchingResponse[]>>;
+        summary: (params: TraktEpisodesSummaryRequest) => Promise<Response<TraktEpisodesSummaryResponse>>;
+        translations: (params: TraktEpisodesTranslationsRequest) => Promise<Response<TraktEpisodesTranslationsResponse[]>>;
+        comments: (params: TraktEpisodesCommentsRequest) => Promise<Response<TraktEpisodesCommentsResponse[]>>;
+        lists: (params: TraktEpisodesListsRequest) => Promise<Response<TraktEpisodesListsResponse[]>>;
+        people: (params: TraktEpisodesPeopleRequest) => Promise<Response<TraktEpisodesPeopleResponse>>;
+        ratings: (params: TraktEpisodesRatingsRequest) => Promise<Response<TraktEpisodesRatingsResponse>>;
+        stats: (params: TraktEpisodesStatsRequest) => Promise<Response<TraktEpisodesStatsResponse>>;
+        watching: (params: TraktEpisodesWatchingRequest) => Promise<Response<TraktEpisodesWatchingResponse[]>>;
     };
     sync: {
         lastActivities: () => Promise<Response<TraktSyncLastActivitiesResponse>>;
-        playback: (params: TraktSyncPlaybackParams) => Promise<Response<TraktSyncPlaybackResponse[]>>;
-        removePlayback: (params: TraktSyncRemovePlaybackParams) => Promise<Response<any>>;
-        getCollection: (params: TraktSyncGetCollectionParams) => Promise<Response<TraktSyncGetCollectionResponse[]>>;
-        addToCollection: (params: TraktSyncAddToCollectionBody) => Promise<Response<TraktSyncAddToCollectionResponse>>;
-        removeFromCollection: (params: TraktSyncRemoveFromCollectionBody) => Promise<Response<TraktSyncRemoveFromCollectionResponse>>;
-        getWatched: (params: TraktSyncGetWatchedParams) => Promise<Response<TraktSyncGetWatchedResponse[]>>;
-        getHistory: (params: TraktSyncGetHistoryParams) => Promise<Response<TraktSyncGetHistoryResponse[]>>;
-        addToHistory: (params: TraktSyncAddToHistoryBody) => Promise<Response<TraktSyncAddToHistoryResponse>>;
-        removeFromHistory: (params: TraktSyncRemoveFromHistoryBody) => Promise<Response<TraktSyncRemoveFromHistoryResponse>>;
-        getRatings: (params: TraktSyncGetRatingsParams) => Promise<Response<TraktSyncGetRatingsResponse[]>>;
-        addRatings: (params: TraktSyncAddRatingsBody) => Promise<Response<TraktSyncAddRatingsResponse>>;
-        removeRatings: (params: TraktSyncRemoveRatingsBody) => Promise<Response<TraktSyncRemoveRatingsResponse>>;
-        getWatchlist: (params: TraktSyncGetWatchlistParams) => Promise<Response<TraktSyncGetWatchlistResponse[]>>;
-        addToWatchlist: (params: TraktSyncAddToWatchlistBody) => Promise<Response<TraktSyncAddToWatchlistResponse>>;
-        removeFromWatchlist: (params: TraktSyncRemoveFromWatchlistBody) => Promise<Response<TraktSyncRemoveFromWatchlistResponse>>;
+        playback: (params: TraktSyncPlaybackRequest) => Promise<Response<TraktSyncPlaybackResponse[]>>;
+        removePlayback: (params: TraktSyncRemovePlaybackRequest) => Promise<Response<any>>;
+        getCollection: (params: TraktSyncGetCollectionRequest) => Promise<Response<TraktSyncGetCollectionResponse[]>>;
+        addToCollection: (params: TraktSyncAddToCollectionRequest) => Promise<Response<TraktSyncAddToCollectionResponse>>;
+        removeFromCollection: (params: TraktSyncRemoveFromCollectionRequest) => Promise<Response<TraktSyncRemoveFromCollectionResponse>>;
+        getWatched: (params: TraktSyncGetWatchedRequest) => Promise<Response<TraktSyncGetWatchedResponse[]>>;
+        getHistory: (params: TraktSyncGetHistoryRequest) => Promise<Response<TraktSyncGetHistoryResponse[]>>;
+        addToHistory: (params: TraktSyncAddToHistoryRequest) => Promise<Response<TraktSyncAddToHistoryResponse>>;
+        removeFromHistory: (params: TraktSyncRemoveFromHistoryRequest) => Promise<Response<TraktSyncRemoveFromHistoryResponse>>;
+        getRatings: (params: TraktSyncGetRatingsRequest) => Promise<Response<TraktSyncGetRatingsResponse[]>>;
+        addRatings: (params: TraktSyncAddRatingsRequest) => Promise<Response<TraktSyncAddRatingsResponse>>;
+        removeRatings: (params: TraktSyncRemoveRatingsRequest) => Promise<Response<TraktSyncRemoveRatingsResponse>>;
+        getWatchlist: (params: TraktSyncGetWatchlistRequest) => Promise<Response<TraktSyncGetWatchlistResponse[]>>;
+        addToWatchlist: (params: TraktSyncAddToWatchlistRequest) => Promise<Response<TraktSyncAddToWatchlistResponse>>;
+        removeFromWatchlist: (params: TraktSyncRemoveFromWatchlistRequest) => Promise<Response<TraktSyncRemoveFromWatchlistResponse>>;
         reorderWatchlist: () => Promise<Response<TraktSyncReorderWatchlistResponse>>;
-        getPersonalRecommendations: (params: TraktSyncGetPersonalRecommendationsParams) => Promise<Response<TraktSyncGetPersonalRecommendationsResponse[]>>;
-        addToPersonalRecommendations: (params: TraktSyncAddToPersonalRecommendationsBody) => Promise<Response<TraktSyncAddToPersonalRecommendationsResponse>>;
-        removeFromPersonalRecommendations: (params: TraktSyncRemoveFromPersonalRecommendationsBody) => Promise<Response<TraktSyncRemoveFromPersonalRecommendationsResponse>>;
+        getPersonalRecommendations: (params: TraktSyncGetPersonalRecommendationsRequest) => Promise<Response<TraktSyncGetPersonalRecommendationsResponse[]>>;
+        addToPersonalRecommendations: (params: TraktSyncAddToPersonalRecommendationsRequest) => Promise<Response<TraktSyncAddToPersonalRecommendationsResponse>>;
+        removeFromPersonalRecommendations: (params: TraktSyncRemoveFromPersonalRecommendationsRequest) => Promise<Response<TraktSyncRemoveFromPersonalRecommendationsResponse>>;
         reorderPersonalRecommendations: () => Promise<Response<TraktSyncReorderPersonalRecommendationsResponse>>;
     };
     users: {
         settings: () => Promise<Response<TraktUsersSettingsResponse>>;
-        followingRequests: (params: TraktUsersFollowingRequestsParams) => Promise<Response<TraktUsersFollowingRequestsResponse[]>>;
-        followerRequests: (params: TraktUsersFollowerRequestsParams) => Promise<Response<TraktUsersFollowerRequestsResponse[]>>;
-        approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsParams) => Promise<Response<any>>;
-        hiddenItems: (params: TraktUsersHiddenItemsParams) => Promise<Response<TraktUsersHiddenItemsResponse[]>>;
-        addHiddenItems: (params: TraktUsersAddHiddenItemsBody) => Promise<Response<TraktUsersAddHiddenItemsResponse>>;
-        removeHiddenItems: (params: TraktUsersRemoveHiddenItemsBody) => Promise<Response<TraktUsersRemoveHiddenItemsResponse>>;
-        profile: (params: TraktUsersProfileParams) => Promise<Response<TraktUsersProfileResponse>>;
-        likes: (params: TraktUsersLikesParams) => Promise<Response<TraktUsersLikesResponse[]>>;
-        collection: (params: TraktUsersCollectionParams) => Promise<Response<TraktUsersCollectionResponse[]>>;
-        comments: (params: TraktUsersCommentsParams) => Promise<Response<TraktUsersCommentsResponse[]>>;
-        lists: (params: TraktUsersListsBody) => Promise<Response<TraktUsersListsResponse>>;
-        reorderLists: (params: TraktUsersReorderListsParams) => Promise<Response<TraktUsersReorderListsResponse>>;
-        list: (params: TraktUsersListParams) => Promise<Response<any>>;
-        listLikes: (params: TraktUsersListLikesParams) => Promise<Response<TraktUsersListLikesResponse[]>>;
-        listLike: (params: TraktUsersListLikeParams) => Promise<Response<any>>;
-        listItems: (params: TraktUsersListItemsParams) => Promise<Response<TraktUsersListItemsResponse[]>>;
-        addListItems: (params: TraktUsersAddListItemsBody) => Promise<Response<TraktUsersAddListItemsResponse>>;
-        removeListItems: (params: TraktUsersRemoveListItemsBody) => Promise<Response<TraktUsersRemoveListItemsResponse>>;
-        reorderListItems: (params: TraktUsersReorderListItemsParams) => Promise<Response<TraktUsersReorderListItemsResponse>>;
-        listComments: (params: TraktUsersListCommentsParams) => Promise<Response<TraktUsersListCommentsResponse[]>>;
-        follow: (params: TraktUsersFollowParams) => Promise<Response<any>>;
-        followers: (params: TraktUsersFollowersParams) => Promise<Response<TraktUsersFollowersResponse[]>>;
-        following: (params: TraktUsersFollowingParams) => Promise<Response<TraktUsersFollowingResponse[]>>;
-        friends: (params: TraktUsersFriendsParams) => Promise<Response<TraktUsersFriendsResponse[]>>;
-        history: (params: TraktUsersHistoryParams) => Promise<Response<TraktUsersHistoryResponse[]>>;
-        ratings: (params: TraktUsersRatingsParams) => Promise<Response<TraktUsersRatingsResponse[]>>;
-        watchlist: (params: TraktUsersWatchlistParams) => Promise<Response<TraktUsersWatchlistResponse[]>>;
-        personalRecommendations: (params: TraktUsersPersonalRecommendationsParams) => Promise<Response<TraktUsersPersonalRecommendationsResponse[]>>;
-        watching: (params: TraktUsersWatchingParams) => Promise<Response<any>>;
-        watched: (params: TraktUsersWatchedParams) => Promise<Response<TraktUsersWatchedResponse[]>>;
-        stats: (params: TraktUsersStatsParams) => Promise<Response<TraktUsersStatsResponse>>;
+        followingRequests: (params: TraktUsersFollowingRequestsRequest) => Promise<Response<TraktUsersFollowingRequestsResponse[]>>;
+        followerRequests: (params: TraktUsersFollowerRequestsRequest) => Promise<Response<TraktUsersFollowerRequestsResponse[]>>;
+        approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsRequest) => Promise<Response<any>>;
+        hiddenItems: (params: TraktUsersHiddenItemsRequest) => Promise<Response<TraktUsersHiddenItemsResponse[]>>;
+        addHiddenItems: (params: TraktUsersAddHiddenItemsRequest) => Promise<Response<TraktUsersAddHiddenItemsResponse>>;
+        removeHiddenItems: (params: TraktUsersRemoveHiddenItemsRequest) => Promise<Response<TraktUsersRemoveHiddenItemsResponse>>;
+        profile: (params: TraktUsersProfileRequest) => Promise<Response<TraktUsersProfileResponse>>;
+        likes: (params: TraktUsersLikesRequest) => Promise<Response<TraktUsersLikesResponse[]>>;
+        collection: (params: TraktUsersCollectionRequest) => Promise<Response<TraktUsersCollectionResponse[]>>;
+        comments: (params: TraktUsersCommentsRequest) => Promise<Response<TraktUsersCommentsResponse[]>>;
+        lists: (params: TraktUsersListsRequest) => Promise<Response<TraktUsersListsResponse>>;
+        reorderLists: (params: TraktUsersReorderListsRequest) => Promise<Response<TraktUsersReorderListsResponse>>;
+        list: (params: TraktUsersListRequest) => Promise<Response<any>>;
+        listLikes: (params: TraktUsersListLikesRequest) => Promise<Response<TraktUsersListLikesResponse[]>>;
+        listLike: (params: TraktUsersListLikeRequest) => Promise<Response<any>>;
+        listItems: (params: TraktUsersListItemsRequest) => Promise<Response<TraktUsersListItemsResponse[]>>;
+        addListItems: (params: TraktUsersAddListItemsRequest) => Promise<Response<TraktUsersAddListItemsResponse>>;
+        removeListItems: (params: TraktUsersRemoveListItemsRequest) => Promise<Response<TraktUsersRemoveListItemsResponse>>;
+        reorderListItems: (params: TraktUsersReorderListItemsRequest) => Promise<Response<TraktUsersReorderListItemsResponse>>;
+        listComments: (params: TraktUsersListCommentsRequest) => Promise<Response<TraktUsersListCommentsResponse[]>>;
+        follow: (params: TraktUsersFollowRequest) => Promise<Response<any>>;
+        followers: (params: TraktUsersFollowersRequest) => Promise<Response<TraktUsersFollowersResponse[]>>;
+        following: (params: TraktUsersFollowingRequest) => Promise<Response<TraktUsersFollowingResponse[]>>;
+        friends: (params: TraktUsersFriendsRequest) => Promise<Response<TraktUsersFriendsResponse[]>>;
+        history: (params: TraktUsersHistoryRequest) => Promise<Response<TraktUsersHistoryResponse[]>>;
+        ratings: (params: TraktUsersRatingsRequest) => Promise<Response<TraktUsersRatingsResponse[]>>;
+        watchlist: (params: TraktUsersWatchlistRequest) => Promise<Response<TraktUsersWatchlistResponse[]>>;
+        personalRecommendations: (params: TraktUsersPersonalRecommendationsRequest) => Promise<Response<TraktUsersPersonalRecommendationsResponse[]>>;
+        watching: (params: TraktUsersWatchingRequest) => Promise<Response<any>>;
+        watched: (params: TraktUsersWatchedRequest) => Promise<Response<TraktUsersWatchedResponse[]>>;
+        stats: (params: TraktUsersStatsRequest) => Promise<Response<TraktUsersStatsResponse>>;
     };
 }
 export default TraktMethods;
-export interface TraktEpisode {
-    season: number;
-    number: number;
-    title: string;
+export interface TraktUser {
+    username: string;
+    private: boolean;
+    name: string;
+    vip: boolean;
+    vip_ep: boolean;
     ids: {
-        trakt: number;
-        tvdb: number;
-        imdb: string;
-        tmdb: number;
+        slug: string;
     };
+    joined_at: string;
+    location: string;
+    about: string;
+    gender: string;
+    age: number;
+    images: {
+        avatar: {
+            full: string;
+        };
+    };
+    vip_og: boolean;
+    vip_years: number;
+    [key: string]: any;
 }
 export interface TraktShow {
     title: string;
@@ -229,6 +241,7 @@ export interface TraktShow {
         imdb: string;
         tmdb: number;
     };
+    [key: string]: any;
 }
 export interface TraktMovie {
     title: string;
@@ -239,16 +252,27 @@ export interface TraktMovie {
         imdb: string;
         tmdb: number;
     };
+    [key: string]: any;
 }
-export interface TraktUser {
-    username: string;
-    private: boolean;
-    name: string;
-    vip: boolean;
-    vip_ep: boolean;
+export interface TraktSeason {
+    number: number;
     ids: {
-        slug: string;
+        tvdb: number;
+        tmdb: number;
     };
+    [key: string]: any;
+}
+export interface TraktEpisode {
+    season: number;
+    number: number;
+    title: string;
+    ids: {
+        trakt: number;
+        tvdb: number;
+        imdb: string;
+        tmdb: number;
+    };
+    [key: string]: any;
 }
 export interface TraktComment {
     id: number;
@@ -261,11 +285,12 @@ export interface TraktComment {
     replies: number;
     likes: number;
     user_stats: {
-        rating: number;
+        rating: {};
         play_count: number;
         completed_count: number;
     };
     user: TraktUser;
+    [key: string]: any;
 }
 export interface TraktList {
     name: string;
@@ -273,9 +298,6 @@ export interface TraktList {
     privacy: string;
     display_numbers: boolean;
     allow_comments: boolean;
-    sort_by: string;
-    sort_how: string;
-    created_at: string;
     updated_at: string;
     item_count: number;
     comment_count: number;
@@ -284,7 +306,11 @@ export interface TraktList {
         trakt: number;
         slug: string;
     };
+    sort_by: string;
+    sort_how: string;
+    created_at: string;
     user: TraktUser;
+    [key: string]: any;
 }
 export interface TraktPerson {
     name: string;
@@ -294,930 +320,15 @@ export interface TraktPerson {
         imdb: string;
         tmdb: number;
     };
+    [key: string]: any;
 }
-export interface TraktAuthenticationAuthorizeParams {
+export interface TraktAuthenticationAuthorizeRequest {
     response_type: string;
     state?: string;
     signup?: string;
 }
-export interface TraktCalendarsMyShowsParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsMyNewShowsParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsMySeasonPremieresParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsMyMoviesParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsMyDVDParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsAllShowsParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsAllNewShowsParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsAllSeasonPremieresParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsAllMoviesParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCalendarsAllDVDParams {
-    start_date?: string;
-    days?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktCertificationsListParams {
-    type: "movies" | "shows";
-}
-export interface TraktCommentsCommentParams {
-    id: number;
-}
-export interface TraktCommentsRepliesParams {
-    id: number;
-    page?: number;
-    limit?: number;
-}
-export interface TraktCommentsItemParams {
-    id: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktCommentsLikesParams {
-    id: number;
-    page?: number;
-    limit?: number;
-}
-export interface TraktCommentsLikeParams {
-    id: number;
-}
-export interface TraktCommentsTrendingParams {
-    comment_type?: "all" | "reviews" | "shouts";
-    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
-    include_replies?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktCommentsRecentParams {
-    comment_type?: "all" | "reviews" | "shouts";
-    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
-    include_replies?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktCommentsUpdatesParams {
-    comment_type?: "all" | "reviews" | "shouts";
-    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
-    include_replies?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktCountriesListParams {
-    type: "movies" | "shows";
-}
-export interface TraktGenresListParams {
-    type: "movies" | "shows";
-}
-export interface TraktLanguagesListParams {
-    type: "movies" | "shows";
-}
-export interface TraktListsTrendingParams {
-    page?: number;
-    limit?: number;
-}
-export interface TraktListsPopularParams {
-    page?: number;
-    limit?: number;
-}
-export interface TraktListsListParams {
-    id: number;
-}
-export interface TraktListsListLikesParams {
-    id: string;
-    page?: number;
-    limit?: number;
-}
-export interface TraktListsListItemsParams {
-    id: string;
-    type?: "movie" | "show" | "season" | "episode" | "person";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktListsListCommentsParams {
-    id: number;
-    sort?: "newest" | "oldest" | "likes" | "replies";
-    page?: number;
-    limit?: number;
-}
-export interface TraktMoviesTrendingParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesPopularParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesRecommendedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesPlayedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesWatchedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesCollectedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesAnticipatedParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktMoviesBoxOfficeParams {
-    extended?: "full" | "metadata";
-}
-export interface TraktMoviesUpdatesParams {
-    start_date?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktMoviesUpdatedIDsParams {
-    start_date?: string;
-    page?: number;
-    limit?: number;
-}
-export interface TraktMoviesSummaryParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktMoviesAliasesParams {
-    id: string;
-}
-export interface TraktMoviesReleasesParams {
-    id: string;
-    country?: string;
-}
-export interface TraktMoviesTranslationsParams {
-    id: string;
-    language?: string;
-}
-export interface TraktMoviesCommentsParams {
-    id: string;
-    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays";
-    page?: number;
-    limit?: number;
-}
-export interface TraktMoviesListsParams {
-    id: string;
-    type?: "all" | "personal" | "official" | "watchlists" | "recommendations";
-    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
-    page?: number;
-    limit?: number;
-}
-export interface TraktMoviesPeopleParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktMoviesRatingsParams {
-    id: string;
-}
-export interface TraktMoviesRelatedParams {
-    id: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktMoviesStatsParams {
-    id: string;
-}
-export interface TraktMoviesWatchingParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktPeopleSummaryParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktPeopleMoviesParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktPeopleShowsParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktPeopleListsParams {
-    id: string;
-    type?: "all" | "personal" | "official";
-    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
-    page?: number;
-    limit?: number;
-}
-export interface TraktRecommendationsMoviesParams {
-    ignore_collected?: "true" | "false";
-    extended?: "full" | "metadata";
-}
-export interface TraktRecommendationsHideMovieParams {
-    id: string;
-}
-export interface TraktRecommendationsShowsParams {
-    ignore_collected?: "true" | "false";
-    extended?: "full" | "metadata";
-}
-export interface TraktRecommendationsHideShowParams {
-    id: string;
-}
-export interface TraktSearchTextQueryParams {
-    type: string;
-    query: string;
-    fields?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktSearchIDLookupParams {
-    id_type: string;
-    id: string;
-    type?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsTrendingParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsPopularParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsRecommendedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsPlayedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsWatchedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsCollectedParams {
-    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsAnticipatedParams {
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-    filters?: {
-        [key in TraktFilter]?: string;
-    };
-}
-export interface TraktShowsUpdatesParams {
-    start_date?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsUpdatedIDsParams {
-    start_date?: string;
-    page?: number;
-    limit?: number;
-}
-export interface TraktShowsSummaryParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsAliasesParams {
-    id: string;
-}
-export interface TraktShowsCertificationsParams {
-    id: string;
-}
-export interface TraktShowsTranslationsParams {
-    id: string;
-    language?: string;
-}
-export interface TraktShowsCommentsParams {
-    id: string;
-    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays" | "watched";
-    page?: number;
-    limit?: number;
-}
-export interface TraktShowsListsParams {
-    id: string;
-    type?: "all" | "personal" | "official" | "watchlists" | "recommendations";
-    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
-    page?: number;
-    limit?: number;
-}
-export interface TraktShowsCollectionProgressParams {
-    id: string;
-    hidden?: string;
-    specials?: string;
-    count_specials?: string;
-    last_activity?: "aired" | "collected";
-}
-export interface TraktShowsWatchedProgressParams {
-    id: string;
-    hidden?: string;
-    specials?: string;
-    count_specials?: string;
-    last_activity?: "aired" | "watched";
-}
-export interface TraktShowsResetWatchedProgressParams {
-    id: string;
-}
-export interface TraktShowsPeopleParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsRatingsParams {
-    id: string;
-}
-export interface TraktShowsRelatedParams {
-    id: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsStatsParams {
-    id: string;
-}
-export interface TraktShowsWatchingParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsNextEpisodeParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktShowsLastEpisodeParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktSeasonsSummaryParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktSeasonsSeasonParams {
-    id: string;
-    season: number;
-    translations?: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktSeasonsCommentsParams {
-    id: string;
-    season: number;
-    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays" | "watched";
-    page?: number;
-    limit?: number;
-}
-export interface TraktSeasonsListsParams {
-    id: string;
-    season: number;
-    type?: "all" | "personal" | "official" | "watchlists";
-    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
-    page?: number;
-    limit?: number;
-}
-export interface TraktSeasonsPeopleParams {
-    id: string;
-    season: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktSeasonsRatingsParams {
-    id: string;
-    season: number;
-}
-export interface TraktSeasonsStatsParams {
-    id: string;
-    season: number;
-}
-export interface TraktSeasonsWatchingParams {
-    id: string;
-    season: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktEpisodesSummaryParams {
-    id: string;
-    season: number;
-    episode: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktEpisodesTranslationsParams {
-    id: string;
-    season: number;
-    episode: number;
-    language?: string;
-}
-export interface TraktEpisodesCommentsParams {
-    id: string;
-    season: number;
-    episode: number;
-    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays";
-    page?: number;
-    limit?: number;
-}
-export interface TraktEpisodesListsParams {
-    id: string;
-    season: number;
-    episode: number;
-    type?: "all" | "personal" | "official" | "watchlists";
-    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
-    page?: number;
-    limit?: number;
-}
-export interface TraktEpisodesPeopleParams {
-    id: string;
-    season: number;
-    episode: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktEpisodesRatingsParams {
-    id: string;
-    season: number;
-    episode: number;
-}
-export interface TraktEpisodesStatsParams {
-    id: string;
-    season: number;
-    episode: number;
-}
-export interface TraktEpisodesWatchingParams {
-    id: string;
-    season: number;
-    episode: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncPlaybackParams {
-    type?: "movies" | "episodes";
-    start_at?: string;
-    end_at?: string;
-    page?: number;
-    limit?: number;
-}
-export interface TraktSyncRemovePlaybackParams {
-    id: number;
-}
-export interface TraktSyncGetCollectionParams {
-    type: "movies" | "shows";
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncGetWatchedParams {
-    type: "movies" | "shows";
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncGetHistoryParams {
-    type?: "movies" | "shows" | "seasons" | "episodes";
-    id?: number;
-    start_at?: string;
-    end_at?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncGetRatingsParams {
-    type?: "movies" | "shows" | "seasons" | "episodes" | "all";
-    rating?: number;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncGetWatchlistParams {
-    type?: "movies" | "shows" | "seasons" | "episodes";
-    sort?: "rank" | "added" | "released" | "title";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktSyncGetPersonalRecommendationsParams {
-    type?: "movies" | "shows";
-    sort?: "rank" | "added" | "released" | "title";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersFollowingRequestsParams {
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersFollowerRequestsParams {
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersApproveOrDenyFollowerRequestsParams {
-    id: number;
-}
-export interface TraktUsersHiddenItemsParams {
-    section: "calendar" | "recommendations" | "comments";
-    type?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersAddHiddenItemsParams {
-    section: "calendar" | "recommendations";
-}
-export interface TraktUsersRemoveHiddenItemsParams {
-    section: "calendar" | "recommendations" | "comments";
-}
-export interface TraktUsersProfileParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersLikesParams {
-    id: string;
-    type?: "comments" | "lists";
-    page?: number;
-    limit?: number;
-}
-export interface TraktUsersCollectionParams {
-    id: string;
-    type: "movies" | "shows";
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersCommentsParams {
-    id: string;
-    comment_type?: "all" | "reviews" | "shouts";
-    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
-    include_replies?: "true" | "false" | "only";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersListsParams {
-    id: string;
-}
-export interface TraktUsersReorderListsParams {
-    id: string;
-}
-export interface TraktUsersListParams {
-    id: string;
-    list_id: string;
-}
-export interface TraktUsersListLikesParams {
-    id: string;
-    list_id: string;
-    page?: number;
-    limit?: number;
-}
-export interface TraktUsersListLikeParams {
-    id: string;
-    list_id: string;
-}
-export interface TraktUsersListItemsParams {
-    id: string;
-    list_id: string;
-    type?: "movie" | "show" | "season" | "episode" | "person";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersAddListItemsParams {
-    id: string;
-    list_id: string;
-}
-export interface TraktUsersRemoveListItemsParams {
-    id: string;
-    list_id: string;
-}
-export interface TraktUsersReorderListItemsParams {
-    id: string;
-    list_id: string;
-}
-export interface TraktUsersListCommentsParams {
-    id: string;
-    list_id: string;
-    sort?: "newest" | "oldest" | "likes" | "replies";
-    page?: number;
-    limit?: number;
-}
-export interface TraktUsersFollowParams {
-    id: string;
-}
-export interface TraktUsersFollowersParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersFollowingParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersFriendsParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersHistoryParams {
-    id: string;
-    type?: "movies" | "shows" | "seasons" | "episodes";
-    item_id?: number;
-    start_at?: string;
-    end_at?: string;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersRatingsParams {
-    id: string;
-    type?: "movies" | "shows" | "seasons" | "episodes" | "all";
-    rating?: number;
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersWatchlistParams {
-    id: string;
-    type?: "movies" | "shows" | "seasons" | "episodes";
-    sort?: "rank" | "added" | "released" | "title";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersPersonalRecommendationsParams {
-    id: string;
-    type?: "movies" | "shows";
-    sort?: "rank" | "added" | "released" | "title";
-    page?: number;
-    limit?: number;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersWatchingParams {
-    id: string;
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersWatchedParams {
-    id: string;
-    type: "movies" | "shows";
-    extended?: "full" | "metadata";
-}
-export interface TraktUsersStatsParams {
-    id: string;
-}
-export interface TraktAuthenticationGetTokenBody {
+export interface TraktAuthenticationGetTokenRequest {
     code: string;
-}
-export interface TraktAuthenticationRefreshTokenBody {
-    refresh_token: string;
-    grant_type?: string;
-}
-export interface TraktAuthenticationRevokeTokenBody {
-    token: string;
-}
-export interface TraktAuthenticationDeviceCodeBody {
-}
-export interface TraktCommentsCommentsBody {
-    item: "movie" | "show" | "season" | "episode" | "or list object. (see examples &#8594;)";
-    comment: string;
-    spoiler?: boolean;
-    sharing?: object;
-}
-export interface TraktCommentsRepliesBody {
-    comment: string;
-    spoiler?: boolean;
-}
-export interface TraktScrobbleStartBody {
-    item: object;
-    progress: number;
-    app_version?: string;
-    app_date?: string;
-}
-export interface TraktScrobblePauseBody {
-    item: object;
-    progress: number;
-    app_version?: string;
-    app_date?: string;
-}
-export interface TraktScrobbleStopBody {
-    item: object;
-    progress: number;
-    app_version?: string;
-    app_date?: string;
-}
-export interface TraktSyncAddToCollectionBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncRemoveFromCollectionBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncAddToHistoryBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncRemoveFromHistoryBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-    ids?: Array<any>;
-}
-export interface TraktSyncAddRatingsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncRemoveRatingsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncAddToWatchlistBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncRemoveFromWatchlistBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-}
-export interface TraktSyncAddToPersonalRecommendationsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-}
-export interface TraktSyncRemoveFromPersonalRecommendationsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-}
-export interface TraktUsersAddHiddenItemsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    users?: Array<any>;
-}
-export interface TraktUsersRemoveHiddenItemsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    users?: Array<any>;
-}
-export interface TraktUsersListsBody {
-    name: string;
-    description?: string;
-    privacy?: "private" | "friends" | "public";
-    display_numbers?: boolean;
-    allow_comments?: boolean;
-    sort_by?: "rank" | "added" | "title" | "released" | "runtime" | "popularity" | "percentage" | "votes" | "my_rating" | "random" | "watched" | "collected";
-    sort_how?: "asc" | "desc";
-}
-export interface TraktUsersAddListItemsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-    people?: Array<any>;
-}
-export interface TraktUsersRemoveListItemsBody {
-    movies?: Array<any>;
-    shows?: Array<any>;
-    seasons?: Array<any>;
-    episodes?: Array<any>;
-    people?: Array<any>;
-}
-export interface TraktCrew extends Record<string, TraktDepartment> {
-}
-export interface TraktDepartment extends Array<TraktStaff> {
-}
-export interface TraktStaff {
-    jobs: Array<string>;
-    episode_count: number;
-    person: TraktPerson;
 }
 export interface TraktAuthenticationGetTokenResponse {
     access_token: string;
@@ -1227,9 +338,16 @@ export interface TraktAuthenticationGetTokenResponse {
     scope: string;
     created_at: number;
 }
+export interface TraktAuthenticationRefreshTokenRequest {
+    refresh_token: string;
+    grant_type?: string;
+}
 export interface TraktAuthenticationRefreshTokenResponse {
     error: string;
     error_description: string;
+}
+export interface TraktAuthenticationRevokeTokenRequest {
+    token: string;
 }
 export interface TraktAuthenticationDeviceCodeResponse {
     device_code: string;
@@ -1238,11 +356,27 @@ export interface TraktAuthenticationDeviceCodeResponse {
     expires_in: number;
     interval: number;
 }
+export interface TraktCalendarsMyShowsRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsMyShowsResponse {
     first_aired: string;
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktCalendarsMyNewShowsRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsMyNewShowsResponse {
     first_aired: string;
@@ -1250,21 +384,53 @@ export interface TraktCalendarsMyNewShowsResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktCalendarsMySeasonPremieresRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsMySeasonPremieresResponse {
     first_aired: string;
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktCalendarsMyMoviesRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsMyMoviesResponse {
     released: string;
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktCalendarsMyDVDRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsMyDVDResponse {
     released: string;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktCalendarsAllShowsRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllShowsResponse {
     first_aired: string;
@@ -1272,11 +438,27 @@ export interface TraktCalendarsAllShowsResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktCalendarsAllNewShowsRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsAllNewShowsResponse {
     first_aired: string;
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktCalendarsAllSeasonPremieresRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktCalendarsAllSeasonPremieresResponse {
     first_aired: string;
@@ -1284,15 +466,34 @@ export interface TraktCalendarsAllSeasonPremieresResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktCalendarsAllMoviesRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsAllMoviesResponse {
     released: string;
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktCalendarsAllDVDRequest {
+    start_date?: string;
+    days?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktCalendarsAllDVDResponse {
     released: string;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktCertificationsListRequest {
+    type: "movies" | "shows";
 }
 export interface TraktCertificationsListResponse {
     us: {
@@ -1300,6 +501,12 @@ export interface TraktCertificationsListResponse {
         slug: string;
         description: string;
     }[];
+}
+export interface TraktCommentsCommentsRequest {
+    item: "movie" | "show" | "season" | "episode" | "or list object. (see examples &#8594;)";
+    comment: string;
+    spoiler?: boolean;
+    sharing?: object;
 }
 export interface TraktCommentsCommentsResponse {
     id: number;
@@ -1318,6 +525,16 @@ export interface TraktCommentsCommentsResponse {
     };
     user: TraktUser;
 }
+export interface TraktCommentsCommentRequest {
+    id: number;
+}
+export interface TraktCommentsRepliesRequest {
+    id: number;
+    comment: string;
+    spoiler?: boolean;
+    page?: number;
+    limit?: number;
+}
 export interface TraktCommentsRepliesResponse {
     id: number;
     parent_id: number;
@@ -1335,54 +552,122 @@ export interface TraktCommentsRepliesResponse {
     };
     user: TraktUser;
 }
+export interface TraktCommentsItemRequest {
+    id: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktCommentsItemResponse {
     type: string;
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktCommentsLikesRequest {
+    id: number;
+    page?: number;
+    limit?: number;
+}
 export interface TraktCommentsLikesResponse {
     liked_at: string;
     user: TraktUser;
 }
+export interface TraktCommentsLikeRequest {
+    id: number;
+}
+export interface TraktCommentsTrendingRequest {
+    comment_type?: "all" | "reviews" | "shouts";
+    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
+    include_replies?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktCommentsTrendingResponse {
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
     comment: TraktComment;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    list?: TraktList;
     [key: string]: any;
+}
+export interface TraktCommentsRecentRequest {
+    comment_type?: "all" | "reviews" | "shouts";
+    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
+    include_replies?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktCommentsRecentResponse {
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
     comment: TraktComment;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    list?: TraktList;
     [key: string]: any;
+}
+export interface TraktCommentsUpdatesRequest {
+    comment_type?: "all" | "reviews" | "shouts";
+    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
+    include_replies?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktCommentsUpdatesResponse {
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
     comment: TraktComment;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    list?: TraktList;
     [key: string]: any;
+}
+export interface TraktCountriesListRequest {
+    type: "movies" | "shows";
 }
 export interface TraktCountriesListResponse {
     name: string;
     code: string;
 }
+export interface TraktGenresListRequest {
+    type: "movies" | "shows";
+}
 export interface TraktGenresListResponse {
     name: string;
     slug: string;
 }
+export interface TraktLanguagesListRequest {
+    type: "movies" | "shows";
+}
 export interface TraktLanguagesListResponse {
     name: string;
     code: string;
+}
+export interface TraktListsTrendingRequest {
+    page?: number;
+    limit?: number;
 }
 export interface TraktListsTrendingResponse {
     like_count: number;
     comment_count: number;
     list: TraktList;
 }
+export interface TraktListsPopularRequest {
+    page?: number;
+    limit?: number;
+}
 export interface TraktListsPopularResponse {
     like_count: number;
     comment_count: number;
     list: TraktList;
+}
+export interface TraktListsListRequest {
+    id: number;
 }
 export interface TraktListsListResponse {
     name: string;
@@ -1403,16 +688,38 @@ export interface TraktListsListResponse {
     };
     user: TraktUser;
 }
+export interface TraktListsListLikesRequest {
+    id: string;
+    page?: number;
+    limit?: number;
+}
 export interface TraktListsListLikesResponse {
     liked_at: string;
     user: TraktUser;
+}
+export interface TraktListsListItemsRequest {
+    id: string;
+    type?: "movie" | "show" | "season" | "episode" | "person";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktListsListItemsResponse {
     rank: number;
     listed_at: string;
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    person?: TraktPerson;
     [key: string]: any;
+}
+export interface TraktListsListCommentsRequest {
+    id: number;
+    sort?: "newest" | "oldest" | "likes" | "replies";
+    page?: number;
+    limit?: number;
 }
 export interface TraktListsListCommentsResponse {
     id: number;
@@ -1431,10 +738,26 @@ export interface TraktListsListCommentsResponse {
     };
     user: TraktUser;
 }
+export interface TraktMoviesTrendingRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktMoviesTrendingResponse {
     watchers: number;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktMoviesPopularRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesPopularResponse {
     title: string;
@@ -1447,10 +770,28 @@ export interface TraktMoviesPopularResponse {
     };
     [key: string]: any;
 }
+export interface TraktMoviesRecommendedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktMoviesRecommendedResponse {
     user_count: number;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktMoviesPlayedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesPlayedResponse {
     watcher_count: number;
@@ -1459,12 +800,30 @@ export interface TraktMoviesPlayedResponse {
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktMoviesWatchedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktMoviesWatchedResponse {
     watcher_count: number;
     play_count: number;
     collected_count: number;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktMoviesCollectedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktMoviesCollectedResponse {
     watcher_count: number;
@@ -1473,22 +832,48 @@ export interface TraktMoviesCollectedResponse {
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktMoviesAnticipatedRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktMoviesAnticipatedResponse {
     list_count: number;
     movie: TraktMovie;
     [key: string]: any;
+}
+export interface TraktMoviesBoxOfficeRequest {
+    extended?: "full" | "metadata";
 }
 export interface TraktMoviesBoxOfficeResponse {
     revenue: number;
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktMoviesUpdatesRequest {
+    start_date?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktMoviesUpdatesResponse {
     updated_at: string;
     movie: TraktMovie;
     [key: string]: any;
 }
-export interface TraktMoviesUpdatedIDsResponse extends Array<number> {
+export interface TraktMoviesUpdatedIDsRequest {
+    start_date?: string;
+    page?: number;
+    limit?: number;
+}
+export interface TraktMoviesUpdatedIDsResponse {
+}
+export interface TraktMoviesSummaryRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktMoviesSummaryResponse {
     title: string;
@@ -1517,9 +902,16 @@ export interface TraktMoviesSummaryResponse {
     certification: string;
     [key: string]: any;
 }
+export interface TraktMoviesAliasesRequest {
+    id: string;
+}
 export interface TraktMoviesAliasesResponse {
     title: string;
     country: string;
+}
+export interface TraktMoviesReleasesRequest {
+    id: string;
+    country?: string;
 }
 export interface TraktMoviesReleasesResponse {
     country: string;
@@ -1528,11 +920,21 @@ export interface TraktMoviesReleasesResponse {
     release_type: string;
     note: {};
 }
+export interface TraktMoviesTranslationsRequest {
+    id: string;
+    language?: string;
+}
 export interface TraktMoviesTranslationsResponse {
     title: string;
     overview: string;
     tagline: string;
     language: string;
+}
+export interface TraktMoviesCommentsRequest {
+    id: string;
+    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays";
+    page?: number;
+    limit?: number;
 }
 export interface TraktMoviesCommentsResponse {
     id: number;
@@ -1550,6 +952,13 @@ export interface TraktMoviesCommentsResponse {
         completed_count: number;
     };
     user: TraktUser;
+}
+export interface TraktMoviesListsRequest {
+    id: string;
+    type?: "all" | "personal" | "official" | "watchlists" | "recommendations";
+    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
+    page?: number;
+    limit?: number;
 }
 export interface TraktMoviesListsResponse {
     name: string;
@@ -1570,6 +979,10 @@ export interface TraktMoviesListsResponse {
     };
     user: TraktUser;
 }
+export interface TraktMoviesPeopleRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktMoviesPeopleResponse {
     cast: {
         characters: string[];
@@ -1577,6 +990,9 @@ export interface TraktMoviesPeopleResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktMoviesRatingsRequest {
+    id: string;
 }
 export interface TraktMoviesRatingsResponse {
     rating: number;
@@ -1594,6 +1010,12 @@ export interface TraktMoviesRatingsResponse {
         "10": number;
     };
 }
+export interface TraktMoviesRelatedRequest {
+    id: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktMoviesRelatedResponse {
     title: string;
     year: number;
@@ -1605,6 +1027,9 @@ export interface TraktMoviesRelatedResponse {
     };
     [key: string]: any;
 }
+export interface TraktMoviesStatsRequest {
+    id: string;
+}
 export interface TraktMoviesStatsResponse {
     watchers: number;
     plays: number;
@@ -1613,6 +1038,10 @@ export interface TraktMoviesStatsResponse {
     lists: number;
     votes: number;
     recommended: number;
+}
+export interface TraktMoviesWatchingRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktMoviesWatchingResponse {
     username: string;
@@ -1627,6 +1056,10 @@ export interface TraktMoviesWatchingResponse {
 }
 export interface TraktNetworksListResponse {
     name: string;
+}
+export interface TraktPeopleSummaryRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktPeopleSummaryResponse {
     name: string;
@@ -1649,6 +1082,10 @@ export interface TraktPeopleSummaryResponse {
     homepage: string;
     [key: string]: any;
 }
+export interface TraktPeopleMoviesRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktPeopleMoviesResponse {
     cast: {
         characters: string[];
@@ -1656,6 +1093,10 @@ export interface TraktPeopleMoviesResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktPeopleShowsRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktPeopleShowsResponse {
     cast: {
@@ -1666,6 +1107,13 @@ export interface TraktPeopleShowsResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktPeopleListsRequest {
+    id: string;
+    type?: "all" | "personal" | "official";
+    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
+    page?: number;
+    limit?: number;
 }
 export interface TraktPeopleListsResponse {
     name: string;
@@ -1686,6 +1134,10 @@ export interface TraktPeopleListsResponse {
     };
     user: TraktUser;
 }
+export interface TraktRecommendationsMoviesRequest {
+    ignore_collected?: "true" | "false";
+    extended?: "full" | "metadata";
+}
 export interface TraktRecommendationsMoviesResponse {
     title: string;
     year: number;
@@ -1696,6 +1148,13 @@ export interface TraktRecommendationsMoviesResponse {
         tmdb: number;
     };
     [key: string]: any;
+}
+export interface TraktRecommendationsHideMovieRequest {
+    id: string;
+}
+export interface TraktRecommendationsShowsRequest {
+    ignore_collected?: "true" | "false";
+    extended?: "full" | "metadata";
 }
 export interface TraktRecommendationsShowsResponse {
     title: string;
@@ -1709,6 +1168,15 @@ export interface TraktRecommendationsShowsResponse {
     };
     [key: string]: any;
 }
+export interface TraktRecommendationsHideShowRequest {
+    id: string;
+}
+export interface TraktScrobbleStartRequest {
+    item: object;
+    progress: number;
+    app_version?: string;
+    app_date?: string;
+}
 export interface TraktScrobbleStartResponse {
     id: number;
     action: string;
@@ -1720,6 +1188,12 @@ export interface TraktScrobbleStartResponse {
     episode: TraktEpisode;
     show: TraktShow;
 }
+export interface TraktScrobblePauseRequest {
+    item: object;
+    progress: number;
+    app_version?: string;
+    app_date?: string;
+}
 export interface TraktScrobblePauseResponse {
     id: number;
     action: string;
@@ -1730,15 +1204,44 @@ export interface TraktScrobblePauseResponse {
     };
     movie: TraktMovie;
 }
+export interface TraktScrobbleStopRequest {
+    item: object;
+    progress: number;
+    app_version?: string;
+    app_date?: string;
+}
 export interface TraktScrobbleStopResponse {
     watched_at: string;
     expires_at: string;
 }
+export interface TraktSearchTextQueryRequest {
+    type: string;
+    query: string;
+    fields?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktSearchTextQueryResponse {
     type: string;
     score: number;
-    movie: TraktMovie;
+    movie?: TraktMovie;
+    show?: TraktShow;
+    episode?: TraktEpisode;
+    person?: TraktPerson;
+    list?: TraktList;
     [key: string]: any;
+}
+export interface TraktSearchIDLookupRequest {
+    id_type: string;
+    id: string;
+    type?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSearchIDLookupResponse {
     type: string;
@@ -1746,10 +1249,26 @@ export interface TraktSearchIDLookupResponse {
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktShowsTrendingRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktShowsTrendingResponse {
     watchers: number;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktShowsPopularRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsPopularResponse {
     title: string;
@@ -1763,10 +1282,28 @@ export interface TraktShowsPopularResponse {
     };
     [key: string]: any;
 }
+export interface TraktShowsRecommendedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktShowsRecommendedResponse {
     user_count: number;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktShowsPlayedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsPlayedResponse {
     watcher_count: number;
@@ -1776,6 +1313,15 @@ export interface TraktShowsPlayedResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktShowsWatchedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktShowsWatchedResponse {
     watcher_count: number;
     play_count: number;
@@ -1783,6 +1329,15 @@ export interface TraktShowsWatchedResponse {
     collector_count: number;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktShowsCollectedRequest {
+    period?: "daily" | "weekly" | "monthly" | "yearly" | "all";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
 }
 export interface TraktShowsCollectedResponse {
     watcher_count: number;
@@ -1792,17 +1347,40 @@ export interface TraktShowsCollectedResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktShowsAnticipatedRequest {
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+    filters?: {
+        [key in TraktFilter]?: string;
+    };
+}
 export interface TraktShowsAnticipatedResponse {
     list_count: number;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktShowsUpdatesRequest {
+    start_date?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktShowsUpdatesResponse {
     updated_at: string;
     show: TraktShow;
     [key: string]: any;
 }
-export interface TraktShowsUpdatedIDsResponse extends Array<number> {
+export interface TraktShowsUpdatedIDsRequest {
+    start_date?: string;
+    page?: number;
+    limit?: number;
+}
+export interface TraktShowsUpdatedIDsResponse {
+}
+export interface TraktShowsSummaryRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktShowsSummaryResponse {
     title: string;
@@ -1838,18 +1416,34 @@ export interface TraktShowsSummaryResponse {
     aired_episodes: number;
     [key: string]: any;
 }
+export interface TraktShowsAliasesRequest {
+    id: string;
+}
 export interface TraktShowsAliasesResponse {
     title: string;
     country: string;
+}
+export interface TraktShowsCertificationsRequest {
+    id: string;
 }
 export interface TraktShowsCertificationsResponse {
     certification: string;
     country: string;
 }
+export interface TraktShowsTranslationsRequest {
+    id: string;
+    language?: string;
+}
 export interface TraktShowsTranslationsResponse {
     title: string;
     overview: string;
     language: string;
+}
+export interface TraktShowsCommentsRequest {
+    id: string;
+    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays" | "watched";
+    page?: number;
+    limit?: number;
 }
 export interface TraktShowsCommentsResponse {
     id: number;
@@ -1867,6 +1461,13 @@ export interface TraktShowsCommentsResponse {
         completed_count: number;
     };
     user: TraktUser;
+}
+export interface TraktShowsListsRequest {
+    id: string;
+    type?: "all" | "personal" | "official" | "watchlists" | "recommendations";
+    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
+    page?: number;
+    limit?: number;
 }
 export interface TraktShowsListsResponse {
     name: string;
@@ -1887,6 +1488,13 @@ export interface TraktShowsListsResponse {
     };
     user: TraktUser;
 }
+export interface TraktShowsCollectionProgressRequest {
+    id: string;
+    hidden?: string;
+    specials?: string;
+    count_specials?: string;
+    last_activity?: "aired" | "collected";
+}
 export interface TraktShowsCollectionProgressResponse {
     aired: number;
     completed: number;
@@ -1899,7 +1507,7 @@ export interface TraktShowsCollectionProgressResponse {
         episodes: {
             number: number;
             completed: boolean;
-            collected_at: string;
+            collected_at: {};
         }[];
     }[];
     hidden_seasons: {
@@ -1932,6 +1540,13 @@ export interface TraktShowsCollectionProgressResponse {
             tmdb: {};
         };
     };
+}
+export interface TraktShowsWatchedProgressRequest {
+    id: string;
+    hidden?: string;
+    specials?: string;
+    count_specials?: string;
+    last_activity?: "aired" | "watched";
 }
 export interface TraktShowsWatchedProgressResponse {
     aired: number;
@@ -1946,7 +1561,7 @@ export interface TraktShowsWatchedProgressResponse {
         episodes: {
             number: number;
             completed: boolean;
-            last_watched_at: string;
+            last_watched_at: {};
         }[];
     }[];
     hidden_seasons: {
@@ -1980,6 +1595,13 @@ export interface TraktShowsWatchedProgressResponse {
         };
     };
 }
+export interface TraktShowsResetWatchedProgressRequest {
+    id: string;
+}
+export interface TraktShowsPeopleRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktShowsPeopleResponse {
     cast: {
         characters: string[];
@@ -1993,6 +1615,9 @@ export interface TraktShowsPeopleResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktShowsRatingsRequest {
+    id: string;
 }
 export interface TraktShowsRatingsResponse {
     rating: number;
@@ -2010,6 +1635,12 @@ export interface TraktShowsRatingsResponse {
         "10": number;
     };
 }
+export interface TraktShowsRelatedRequest {
+    id: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktShowsRelatedResponse {
     title: string;
     year: number;
@@ -2022,6 +1653,9 @@ export interface TraktShowsRelatedResponse {
     };
     [key: string]: any;
 }
+export interface TraktShowsStatsRequest {
+    id: string;
+}
 export interface TraktShowsStatsResponse {
     watchers: number;
     plays: number;
@@ -2031,6 +1665,10 @@ export interface TraktShowsStatsResponse {
     lists: number;
     votes: number;
     recommended: number;
+}
+export interface TraktShowsWatchingRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktShowsWatchingResponse {
     username: string;
@@ -2042,6 +1680,10 @@ export interface TraktShowsWatchingResponse {
         slug: string;
     };
     [key: string]: any;
+}
+export interface TraktShowsNextEpisodeRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktShowsNextEpisodeResponse {
     season: number;
@@ -2055,6 +1697,10 @@ export interface TraktShowsNextEpisodeResponse {
     };
     [key: string]: any;
 }
+export interface TraktShowsLastEpisodeRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktShowsLastEpisodeResponse {
     season: number;
     number: number;
@@ -2067,11 +1713,15 @@ export interface TraktShowsLastEpisodeResponse {
     };
     [key: string]: any;
 }
+export interface TraktSeasonsSummaryRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktSeasonsSummaryResponse {
     number: number;
     ids: {
         trakt: number;
-        tvdb: number;
+        tvdb: {};
         tmdb: number;
     };
     episodes: {
@@ -2080,12 +1730,18 @@ export interface TraktSeasonsSummaryResponse {
         title: string;
         ids: {
             trakt: number;
-            tvdb: number;
+            tvdb: {};
             imdb: string;
             tmdb: number;
         };
     }[];
     [key: string]: any;
+}
+export interface TraktSeasonsSeasonRequest {
+    id: string;
+    season: number;
+    translations?: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktSeasonsSeasonResponse {
     season: number;
@@ -2098,6 +1754,13 @@ export interface TraktSeasonsSeasonResponse {
         tmdb: number;
     };
     [key: string]: any;
+}
+export interface TraktSeasonsCommentsRequest {
+    id: string;
+    season: number;
+    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays" | "watched";
+    page?: number;
+    limit?: number;
 }
 export interface TraktSeasonsCommentsResponse {
     id: number;
@@ -2115,6 +1778,14 @@ export interface TraktSeasonsCommentsResponse {
         completed_count: number;
     };
     user: TraktUser;
+}
+export interface TraktSeasonsListsRequest {
+    id: string;
+    season: number;
+    type?: "all" | "personal" | "official" | "watchlists";
+    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
+    page?: number;
+    limit?: number;
 }
 export interface TraktSeasonsListsResponse {
     name: string;
@@ -2135,6 +1806,11 @@ export interface TraktSeasonsListsResponse {
     };
     user: TraktUser;
 }
+export interface TraktSeasonsPeopleRequest {
+    id: string;
+    season: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktSeasonsPeopleResponse {
     cast: {
         characters: string[];
@@ -2148,6 +1824,10 @@ export interface TraktSeasonsPeopleResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktSeasonsRatingsRequest {
+    id: string;
+    season: number;
 }
 export interface TraktSeasonsRatingsResponse {
     rating: number;
@@ -2165,6 +1845,10 @@ export interface TraktSeasonsRatingsResponse {
         "10": number;
     };
 }
+export interface TraktSeasonsStatsRequest {
+    id: string;
+    season: number;
+}
 export interface TraktSeasonsStatsResponse {
     watchers: number;
     plays: number;
@@ -2173,6 +1857,11 @@ export interface TraktSeasonsStatsResponse {
     comments: number;
     lists: number;
     votes: number;
+}
+export interface TraktSeasonsWatchingRequest {
+    id: string;
+    season: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSeasonsWatchingResponse {
     username: string;
@@ -2184,6 +1873,12 @@ export interface TraktSeasonsWatchingResponse {
         slug: string;
     };
     [key: string]: any;
+}
+export interface TraktEpisodesSummaryRequest {
+    id: string;
+    season: number;
+    episode: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktEpisodesSummaryResponse {
     season: number;
@@ -2206,10 +1901,24 @@ export interface TraktEpisodesSummaryResponse {
     runtime: number;
     [key: string]: any;
 }
+export interface TraktEpisodesTranslationsRequest {
+    id: string;
+    season: number;
+    episode: number;
+    language?: string;
+}
 export interface TraktEpisodesTranslationsResponse {
     title: string;
     overview: string;
     language: string;
+}
+export interface TraktEpisodesCommentsRequest {
+    id: string;
+    season: number;
+    episode: number;
+    sort?: "newest" | "oldest" | "likes" | "replies" | "highest" | "lowest" | "plays";
+    page?: number;
+    limit?: number;
 }
 export interface TraktEpisodesCommentsResponse {
     id: number;
@@ -2227,6 +1936,15 @@ export interface TraktEpisodesCommentsResponse {
         completed_count: number;
     };
     user: TraktUser;
+}
+export interface TraktEpisodesListsRequest {
+    id: string;
+    season: number;
+    episode: number;
+    type?: "all" | "personal" | "official" | "watchlists";
+    sort?: "popular" | "likes" | "comments" | "items" | "added" | "updated";
+    page?: number;
+    limit?: number;
 }
 export interface TraktEpisodesListsResponse {
     name: string;
@@ -2247,6 +1965,12 @@ export interface TraktEpisodesListsResponse {
     };
     user: TraktUser;
 }
+export interface TraktEpisodesPeopleRequest {
+    id: string;
+    season: number;
+    episode: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktEpisodesPeopleResponse {
     cast: {
         characters: string[];
@@ -2258,6 +1982,11 @@ export interface TraktEpisodesPeopleResponse {
     }[];
     crew: TraktCrew;
     [key: string]: any;
+}
+export interface TraktEpisodesRatingsRequest {
+    id: string;
+    season: number;
+    episode: number;
 }
 export interface TraktEpisodesRatingsResponse {
     rating: number;
@@ -2275,6 +2004,11 @@ export interface TraktEpisodesRatingsResponse {
         "10": number;
     };
 }
+export interface TraktEpisodesStatsRequest {
+    id: string;
+    season: number;
+    episode: number;
+}
 export interface TraktEpisodesStatsResponse {
     watchers: number;
     plays: number;
@@ -2283,6 +2017,12 @@ export interface TraktEpisodesStatsResponse {
     comments: number;
     lists: number;
     votes: number;
+}
+export interface TraktEpisodesWatchingRequest {
+    id: string;
+    season: number;
+    episode: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktEpisodesWatchingResponse {
     username: string;
@@ -2349,12 +2089,28 @@ export interface TraktSyncLastActivitiesResponse {
         pending_at: string;
     };
 }
+export interface TraktSyncPlaybackRequest {
+    type?: "movies" | "episodes";
+    start_at?: string;
+    end_at?: string;
+    page?: number;
+    limit?: number;
+}
 export interface TraktSyncPlaybackResponse {
     progress: number;
     paused_at: string;
     id: number;
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
+    episode?: TraktEpisode;
+    show?: TraktShow;
+}
+export interface TraktSyncRemovePlaybackRequest {
+    id: number;
+}
+export interface TraktSyncGetCollectionRequest {
+    type: "movies" | "shows";
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetCollectionResponse {
     last_collected_at: string;
@@ -2377,6 +2133,12 @@ export interface TraktSyncGetCollectionResponse {
     }[];
     [key: string]: any;
 }
+export interface TraktSyncAddToCollectionRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
+}
 export interface TraktSyncAddToCollectionResponse {
     added: {
         movies: number;
@@ -2396,10 +2158,28 @@ export interface TraktSyncAddToCollectionResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncRemoveFromCollectionRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncRemoveFromCollectionResponse {
     deleted: {
@@ -2412,18 +2192,43 @@ export interface TraktSyncRemoveFromCollectionResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncGetWatchedRequest {
+    type: "movies" | "shows";
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetWatchedResponse {
     plays: number;
     last_watched_at: string;
     last_updated_at: string;
-    reset_at: {};
+    reset_at: string;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktSyncGetHistoryRequest {
+    type?: "movies" | "shows" | "seasons" | "episodes";
+    id?: number;
+    start_at?: string;
+    end_at?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetHistoryResponse {
     id: number;
@@ -2433,6 +2238,12 @@ export interface TraktSyncGetHistoryResponse {
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktSyncAddToHistoryRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncAddToHistoryResponse {
     added: {
@@ -2445,10 +2256,29 @@ export interface TraktSyncAddToHistoryResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncRemoveFromHistoryRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
+    ids?: Array<any>;
 }
 export interface TraktSyncRemoveFromHistoryResponse {
     deleted: {
@@ -2461,11 +2291,30 @@ export interface TraktSyncRemoveFromHistoryResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
         ids: number[];
     };
+}
+export interface TraktSyncGetRatingsRequest {
+    type?: "movies" | "shows" | "seasons" | "episodes" | "all";
+    rating?: number;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetRatingsResponse {
     rated_at: string;
@@ -2474,6 +2323,12 @@ export interface TraktSyncGetRatingsResponse {
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktSyncAddRatingsRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncAddRatingsResponse {
     added: {
@@ -2489,10 +2344,31 @@ export interface TraktSyncAddRatingsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            rating: number;
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            rating: number;
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            rating: number;
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncRemoveRatingsRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncRemoveRatingsResponse {
     deleted: {
@@ -2507,10 +2383,29 @@ export interface TraktSyncRemoveRatingsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncGetWatchlistRequest {
+    type?: "movies" | "shows" | "seasons" | "episodes";
+    sort?: "rank" | "added" | "released" | "title";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetWatchlistResponse {
     rank: number;
@@ -2519,6 +2414,12 @@ export interface TraktSyncGetWatchlistResponse {
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktSyncAddToWatchlistRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncAddToWatchlistResponse {
     added: {
@@ -2539,10 +2440,28 @@ export interface TraktSyncAddToWatchlistResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncRemoveFromWatchlistRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
 }
 export interface TraktSyncRemoveFromWatchlistResponse {
     deleted: {
@@ -2557,14 +2476,33 @@ export interface TraktSyncRemoveFromWatchlistResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
 }
 export interface TraktSyncReorderWatchlistResponse {
     updated: number;
     skipped_ids: number[];
+}
+export interface TraktSyncGetPersonalRecommendationsRequest {
+    type?: "movies" | "shows";
+    sort?: "rank" | "added" | "released" | "title";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktSyncGetPersonalRecommendationsResponse {
     rank: number;
@@ -2573,6 +2511,10 @@ export interface TraktSyncGetPersonalRecommendationsResponse {
     notes: string;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktSyncAddToPersonalRecommendationsRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
 }
 export interface TraktSyncAddToPersonalRecommendationsResponse {
     added: {
@@ -2589,8 +2531,16 @@ export interface TraktSyncAddToPersonalRecommendationsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktSyncRemoveFromPersonalRecommendationsRequest {
+    movies?: Array<any>;
+    shows?: Array<any>;
 }
 export interface TraktSyncRemoveFromPersonalRecommendationsResponse {
     deleted: {
@@ -2603,7 +2553,11 @@ export interface TraktSyncRemoveFromPersonalRecommendationsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
 }
 export interface TraktSyncReorderPersonalRecommendationsResponse {
@@ -2633,11 +2587,17 @@ export interface TraktUsersSettingsResponse {
         rated: string;
     };
 }
+export interface TraktUsersFollowingRequestsRequest {
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersFollowingRequestsResponse {
     id: number;
     requested_at: string;
     user: TraktUser;
     [key: string]: any;
+}
+export interface TraktUsersFollowerRequestsRequest {
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersFollowerRequestsResponse {
     id: number;
@@ -2645,11 +2605,28 @@ export interface TraktUsersFollowerRequestsResponse {
     user: TraktUser;
     [key: string]: any;
 }
+export interface TraktUsersApproveOrDenyFollowerRequestsRequest {
+    id: number;
+}
+export interface TraktUsersHiddenItemsRequest {
+    section: "calendar" | "recommendations" | "comments";
+    type?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersHiddenItemsResponse {
     hidden_at: string;
     type: string;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktUsersAddHiddenItemsRequest {
+    section: "calendar" | "recommendations";
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    users?: Array<any>;
 }
 export interface TraktUsersAddHiddenItemsResponse {
     added: {
@@ -2664,10 +2641,29 @@ export interface TraktUsersAddHiddenItemsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        users: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        users: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktUsersRemoveHiddenItemsRequest {
+    section: "calendar" | "recommendations" | "comments";
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    users?: Array<any>;
 }
 export interface TraktUsersRemoveHiddenItemsResponse {
     deleted: {
@@ -2682,10 +2678,26 @@ export interface TraktUsersRemoveHiddenItemsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        users: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        users: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktUsersProfileRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersProfileResponse {
     username: string;
@@ -2701,10 +2713,21 @@ export interface TraktUsersProfileResponse {
     vip_cover_image: string;
     [key: string]: any;
 }
+export interface TraktUsersLikesRequest {
+    id: string;
+    type?: "comments" | "lists";
+    page?: number;
+    limit?: number;
+}
 export interface TraktUsersLikesResponse {
     liked_at: string;
     type: string;
     list: TraktList;
+}
+export interface TraktUsersCollectionRequest {
+    id: string;
+    type: "movies" | "shows";
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersCollectionResponse {
     last_collected_at: string;
@@ -2727,11 +2750,34 @@ export interface TraktUsersCollectionResponse {
     }[];
     [key: string]: any;
 }
+export interface TraktUsersCommentsRequest {
+    id: string;
+    comment_type?: "all" | "reviews" | "shouts";
+    type?: "all" | "movies" | "shows" | "seasons" | "episodes" | "lists";
+    include_replies?: "true" | "false" | "only";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersCommentsResponse {
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
     comment: TraktComment;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    list?: TraktList;
     [key: string]: any;
+}
+export interface TraktUsersListsRequest {
+    id: string;
+    name: string;
+    description?: string;
+    privacy?: "private" | "friends" | "public";
+    display_numbers?: boolean;
+    allow_comments?: boolean;
+    sort_by?: "rank" | "added" | "title" | "released" | "runtime" | "popularity" | "percentage" | "votes" | "my_rating" | "random" | "watched" | "collected";
+    sort_how?: "asc" | "desc";
 }
 export interface TraktUsersListsResponse {
     name: string;
@@ -2751,21 +2797,59 @@ export interface TraktUsersListsResponse {
         slug: string;
     };
 }
+export interface TraktUsersReorderListsRequest {
+    id: string;
+}
 export interface TraktUsersReorderListsResponse {
     updated: number;
     skipped_ids: number[];
 }
+export interface TraktUsersListRequest {
+    id: string;
+    list_id: string;
+}
+export interface TraktUsersListLikesRequest {
+    id: string;
+    list_id: string;
+    page?: number;
+    limit?: number;
+}
 export interface TraktUsersListLikesResponse {
     liked_at: string;
     user: TraktUser;
+}
+export interface TraktUsersListLikeRequest {
+    id: string;
+    list_id: string;
+}
+export interface TraktUsersListItemsRequest {
+    id: string;
+    list_id: string;
+    type?: "movie" | "show" | "season" | "episode" | "person";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersListItemsResponse {
     rank: number;
     id: number;
     listed_at: string;
     type: string;
-    movie: TraktMovie;
+    movie?: TraktMovie;
+    show?: TraktShow;
+    season?: TraktSeason;
+    episode?: TraktEpisode;
+    person?: TraktPerson;
     [key: string]: any;
+}
+export interface TraktUsersAddListItemsRequest {
+    id: string;
+    list_id: string;
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
+    people?: Array<any>;
 }
 export interface TraktUsersAddListItemsResponse {
     added: {
@@ -2788,11 +2872,36 @@ export interface TraktUsersAddListItemsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
-        people: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        people: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktUsersRemoveListItemsRequest {
+    id: string;
+    list_id: string;
+    movies?: Array<any>;
+    shows?: Array<any>;
+    seasons?: Array<any>;
+    episodes?: Array<any>;
+    people?: Array<any>;
 }
 export interface TraktUsersRemoveListItemsResponse {
     deleted: {
@@ -2808,15 +2917,42 @@ export interface TraktUsersRemoveListItemsResponse {
                 imdb: string;
             };
         }[];
-        shows: undefined[];
-        seasons: undefined[];
-        episodes: undefined[];
-        people: undefined[];
+        shows: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        seasons: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        episodes: {
+            ids: {
+                imdb: string;
+            };
+        }[];
+        people: {
+            ids: {
+                imdb: string;
+            };
+        }[];
     };
+}
+export interface TraktUsersReorderListItemsRequest {
+    id: string;
+    list_id: string;
 }
 export interface TraktUsersReorderListItemsResponse {
     updated: number;
     skipped_ids: number[];
+}
+export interface TraktUsersListCommentsRequest {
+    id: string;
+    list_id: string;
+    sort?: "newest" | "oldest" | "likes" | "replies";
+    page?: number;
+    limit?: number;
 }
 export interface TraktUsersListCommentsResponse {
     id: number;
@@ -2835,20 +2971,45 @@ export interface TraktUsersListCommentsResponse {
     };
     user: TraktUser;
 }
+export interface TraktUsersFollowRequest {
+    id: string;
+}
+export interface TraktUsersFollowersRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersFollowersResponse {
     followed_at: string;
     user: TraktUser;
     [key: string]: any;
+}
+export interface TraktUsersFollowingRequest {
+    id: string;
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersFollowingResponse {
     followed_at: string;
     user: TraktUser;
     [key: string]: any;
 }
+export interface TraktUsersFriendsRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersFriendsResponse {
     friends_at: string;
     user: TraktUser;
     [key: string]: any;
+}
+export interface TraktUsersHistoryRequest {
+    id: string;
+    type?: "movies" | "shows" | "seasons" | "episodes";
+    item_id?: number;
+    start_at?: string;
+    end_at?: string;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersHistoryResponse {
     id: number;
@@ -2859,6 +3020,14 @@ export interface TraktUsersHistoryResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktUsersRatingsRequest {
+    id: string;
+    type?: "movies" | "shows" | "seasons" | "episodes" | "all";
+    rating?: number;
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersRatingsResponse {
     rated_at: string;
     rating: number;
@@ -2866,6 +3035,14 @@ export interface TraktUsersRatingsResponse {
     episode: TraktEpisode;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktUsersWatchlistRequest {
+    id: string;
+    type?: "movies" | "shows" | "seasons" | "episodes";
+    sort?: "rank" | "added" | "released" | "title";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
 }
 export interface TraktUsersWatchlistResponse {
     rank: number;
@@ -2875,6 +3052,14 @@ export interface TraktUsersWatchlistResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktUsersPersonalRecommendationsRequest {
+    id: string;
+    type?: "movies" | "shows";
+    sort?: "rank" | "added" | "released" | "title";
+    page?: number;
+    limit?: number;
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersPersonalRecommendationsResponse {
     rank: number;
     listed_at: string;
@@ -2883,13 +3068,25 @@ export interface TraktUsersPersonalRecommendationsResponse {
     show: TraktShow;
     [key: string]: any;
 }
+export interface TraktUsersWatchingRequest {
+    id: string;
+    extended?: "full" | "metadata";
+}
+export interface TraktUsersWatchedRequest {
+    id: string;
+    type: "movies" | "shows";
+    extended?: "full" | "metadata";
+}
 export interface TraktUsersWatchedResponse {
     plays: number;
     last_watched_at: string;
     last_updated_at: string;
-    reset_at: {};
+    reset_at: string;
     show: TraktShow;
     [key: string]: any;
+}
+export interface TraktUsersStatsRequest {
+    id: string;
 }
 export interface TraktUsersStatsResponse {
     movies: {
@@ -2938,4 +3135,13 @@ export interface TraktUsersStatsResponse {
             "10": number;
         };
     };
+}
+export interface TraktCrew extends Record<string, TraktDepartment> {
+}
+export interface TraktDepartment extends Array<TraktStaff> {
+}
+export interface TraktStaff {
+    jobs: Array<string>;
+    episode_count: number;
+    person: TraktPerson;
 }

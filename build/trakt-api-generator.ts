@@ -1,363 +1,9 @@
+import { count } from "console";
 import fs from "fs";
-import { arrayBuffer } from "stream/consumers";
-import { isatty } from "tty";
 
-// TODO
-// create get and post methods with gotOptions
-// import got, {Options} from 'got';
-// Then in those methods we can handle failed responses, etc.
-
-const output = fs.readFileSync("data.json", { encoding: "utf8", flag: "r" });
-const data: Record<string, MethodGroup> = JSON.parse(output);
-
-const classRequiredOptions = ["client_id", "client_secret"];
-const classOptionalOptions = ["access_token", "redirect_uri"];
-const classOptionalValues = ["", "urn:ietf:wg:oauth:2.0:oob", "code", "", ""];
-const classStaticValues: string[] = [];
-const classAllValues = [...classRequiredOptions, ...classOptionalOptions];
-
-const toTabs = (n: number) => "\t".repeat(n);
-
-const toPascalCase = (...args: string[]) =>
-    args
-        .map((s) => {
-            if (!s[0]) return "";
-
-            return s[0].toUpperCase() + s.substring(1);
-        })
-        .join("");
-
-const openGroup = (groupName: string) => "\t" + groupName + " = {";
-
-const closeBrace = (tabs: number = 0, suffix: string = "") => `${toTabs(tabs)}}${suffix}\n\n`;
-
-const createInterfaceName = (groupName: string, methodName: string, suffix: string) => "Trakt" + toPascalCase(groupName, methodName) + suffix;
-
-const addParametersInterface = (interfaceName: string, params: Record<string, MethodParameter>) => {
-    var paramString = Object.keys(params)
-        .filter((key) => classAllValues.indexOf(key) < 0)
-        .map((key) => {
-            const value = params[key];
-            let t = value?.type ?? "any";
-
-            switch (t) {
-                case "integer":
-                case "float":
-                case "flloat":
-                    t = "number";
-                    break;
-                case "array":
-                    t = "Array<any>";
-                    break;
-            }
-
-            if (value && value.values && value.values.length > 0) {
-                t = t == "number" ? value.values.join("|") : '"' + value.values.join('"|"') + '"';
-            }
-
-            return "\n\t" + key + (value?.required ?? false ? ": " : "?: ") + t + ";";
-        })
-        .join("");
-
-    return `    
-export interface ${interfaceName} { ${paramString}
-}
-`;
-};
-
-const addApiMethod = (groupName: string, methodName: string, method: Method) => {
-    let paramsDeclaration: string = "";
-    let routeMethod = "endpoint";
-
-    // headers - body - query
-    // headers "KEY": "VALUE [PARAM]"
-    // body "KEY": "value"
-    // parameters: if class property then update
-
-    // Querystring Parameters
-    if (!!method.parameters || method.extended || method.pagination || method.filters) {
-        routeMethod = "this.parseEndpoint(endpoint, params)";
-        paramsDeclaration = "params: " + createInterfaceName(groupName, methodName, "Params");
-    }
-
-    // Body Parameters
-    let body = "";
-    const sourceBody = method.request.body ?? {};
-    if (Object.keys(sourceBody).length > 0) {
-        paramsDeclaration = "params: " + createInterfaceName(groupName, methodName, "Body");
-        routeMethod = "this.parseEndpoint(endpoint, params)";
-        body = Object.keys(sourceBody)
-            .map((key) => {
-                if (classAllValues.indexOf(key) >= 0) return `"${key}": this.${key}`;
-                else if (classStaticValues.indexOf(key) >= 0) return `"${key}": "${sourceBody[key]}"`;
-                else return `"${key}": params.${key}`;
-            })
-            .join(",\n\t\t\t\t\t");
-
-        body = `
-                json: {
-                    ${body}
-                },`;
-    }
-
-    // If all params are in the class props then do not use as params
-    if (!!sourceBody && Object.keys(sourceBody).length > 0 && Object.keys(sourceBody).filter((f) => classAllValues.indexOf(f) < 0).length == 0) {
-        paramsDeclaration = "";
-        routeMethod = "endpoint";
-    }
-
-    // Header Parameters
-    let headers = "";
-    const sourceHeaders = method.request.headers ?? {};
-    if (Object.keys(sourceHeaders).length > 0) {
-        headers = Object.keys(sourceHeaders)
-            .map((key) => {
-                const rx = /([\w\s]+)?\[([^\]]+)\]/;
-                let value = sourceHeaders[key];
-
-                if (!rx.test(value)) return `"${key}": "${value}"`;
-
-                value = value.replace(rx, (match: any, p1: any, p2: any) => {
-                    if (match && !!p1) return `"${p1}" + this.${p2}`;
-
-                    return `this.${p2}`;
-                });
-
-                return `"${key}": ${value}`;
-            })
-            .join(",\n\t\t\t\t\t");
-
-        headers = `
-                headers: {
-                    ${headers}
-                },`;
-    }
-
-    // Check for response
-    let responseDeclaration = "any";
-    if (method.response.body && Object.keys(method.response.body).length > 0) {
-        responseDeclaration = createInterfaceName(groupName, methodName, "Response");
-        if (Array.isArray(method.response.body)) responseDeclaration += "[]";
-    }
-
-    // HACK refreshToken response type is for errors in apib
-    if (methodName == "refreshToken") responseDeclaration = createInterfaceName(groupName, "getToken", "Response");
-
-    return `
-        ${methodName}: async (${paramsDeclaration}): Promise<Response<${responseDeclaration}>> => {
-            const endpoint = "${method.endpoint}";
-            const route = this.baseUrl + ${routeMethod};
-            
-            return await got(route, {
-                throwHttpErrors: false,
-                responseType: "json",
-                method: "${method.verb}",${headers}${body}                          
-            });   
-        },`;
-};
-
-const openClass = () => `import TraktBase, { TraktOptions, TraktFilter } from "./base";
-import got, { Response } from "got";
-
-class TraktMethods extends TraktBase {    
-    constructor(options: TraktOptions) {
-        super(options);
-    }
-`;
-
-let commonInterfaces = "";
-let interfaces = "";
-
-const generateParameterInterfaces = () => {
-    for (const groupName in data) {
-        const group = data[groupName];
-
-        for (const methodName in group) {
-            const method = group[methodName];
-            const paramsInterface = createInterfaceName(groupName, methodName, "Params");
-            const params = method.parameters ?? {};
-
-            if (method.pagination) {
-                params["page"] = { required: false, type: "number", values: [] };
-                params["limit"] = { required: false, type: "number", values: [] };
-            }
-
-            if (method.extended) {
-                params["extended"] = { required: false, type: "string", values: ["full", "metadata"] };
-            }
-
-            if (method.filters) {
-                params["filters"] = { required: false, type: "{ [key in TraktFilter]?: string }", values: [] };
-            }
-
-            // TODO add to querystring part of endpoint
-
-            if (Object.keys(params).length > 0) interfaces += addParametersInterface(paramsInterface, params);
-        }
-    }
-};
-
-const generateBodyInterfaces = () => {
-    for (const groupName in data) {
-        const group = data[groupName];
-
-        for (const methodName in group) {
-            const method = group[methodName];
-            const paramsInterface = createInterfaceName(groupName, methodName, "Body");
-
-            if (!method.request) {
-                console.log(methodName);
-                continue;
-            }
-
-            const params = method.request.body ?? {};
-            if (Object.keys(params).length > 0) interfaces += addParametersInterface(paramsInterface, params);
-        }
-    }
-};
-
-const generateProblemInterfaces = () => {
-    interfaces += `
-export interface TraktCrew extends Record<string, TraktDepartment> { }
-    
-export interface TraktDepartment extends Array<TraktStaff> { }
-
-export interface TraktStaff {
-    jobs: Array<string>;
-    episode_count: number;
-    person: TraktPerson;
-}
-`;
-};
-
-const generateResponseInterfaces = () => {
-    const problems: Record<string, string> = {
-        crew: "TraktCrew",
-    };
-
-    const common: Record<string, boolean> = {
-        user: false,
-        show: false,
-        movie: false,
-        season: false,
-        episode: false,
-        comment: false,
-        list: false,
-        person: false,
-    };
-
-    const addCommonInterface = (name: string, obj: Record<string, any>) => {
-        common[name] = true;
-        return `    
-export interface Trakt${toPascalCase(name)} { ${propsToString(obj, 1)}
-}
-`;
-    };
-
-    const propsToString = (obj: Record<string, any>, depth: number): string => {
-        let interfaceProps: string = "";
-
-        for (let prop in obj) {
-            let isArray = false,
-                value: any = obj[prop],
-                arr = "";
-
-            if (/^[0-9].*/.test(prop)) prop = `"${prop}"`;
-
-            if (Array.isArray(value)) {
-                isArray = true;
-                value = value[0];
-                arr = "[]";
-            }
-
-            // TODO if array, loop through and compare the properties for differences,
-            // then add both as optional
-
-            if (typeof value == "object" && Object.keys(common).indexOf(prop) >= 0) {
-                if (!common[prop]) {
-                    commonInterfaces += addCommonInterface(prop, value);
-                    common[prop] = true;
-                }
-                interfaceProps += `\n${toTabs(depth)}${prop}: Trakt${toPascalCase(prop)};`;
-            } else if (typeof value == "object" && Object.keys(problems).indexOf(prop) >= 0) {
-                interfaceProps += `\n${toTabs(depth)}${prop}: ${problems[prop]};`;
-            } else if (typeof value == "object") {
-                interfaceProps += `\n${toTabs(depth)}${prop}: {`;
-                interfaceProps += propsToString(value, depth + 1);
-                interfaceProps += `\n${toTabs(depth)}}${arr};`;
-            } else {
-                interfaceProps += `\n${toTabs(depth)}${prop}: ${typeof value}${arr};`;
-            }
-        }
-
-        return interfaceProps;
-    };
-
-    for (const groupName in data) {
-        const group = data[groupName];
-
-        for (let methodName in group) {
-            const method = group[methodName];
-
-            const interfaceName = createInterfaceName(groupName, methodName, "Response");
-
-            if (!method.request) {
-                console.log(methodName);
-                continue;
-            }
-
-            let body = method.response.body ?? {};
-            const isArray = Array.isArray(body);
-            if (isArray) body = body[0];
-
-            if (typeof body !== "object") {
-                let ext: string = typeof body;
-                if (isArray) ext = "Array<" + ext + ">";
-                interfaces += `    
-export interface ${interfaceName} extends ${ext} { }
-`;
-            } else if (Object.keys(body).length > 0)
-                interfaces += `    
-export interface ${interfaceName} { ${propsToString(body, 1)} ${method.extended ? "\n\t[key: string]: any;" : ""}
-}
-`;
-        }
-    }
-};
-
-const generateMethods = () => {
-    const writer = fs.createWriteStream("../methods.ts");
-
-    writer.write(openClass());
-
-    for (const groupName in data) {
-        const group = data[groupName];
-
-        writer.write(openGroup(groupName));
-
-        for (const methodName in group) {
-            const method = group[methodName];
-
-            writer.write(addApiMethod(groupName, methodName, method));
-        }
-
-        // Close Method Group
-        writer.write("\n" + closeBrace(1, ";"));
-    }
-
-    // Close Class
-    writer.write(closeBrace());
-    writer.write("\nexport default TraktMethods;\n\n");
-
-    writer.write(commonInterfaces);
-    writer.write(interfaces);
-};
-
-generateParameterInterfaces();
-generateBodyInterfaces();
-generateProblemInterfaces();
-generateResponseInterfaces();
-generateMethods();
+/**
+ * Interfaces
+ */
 
 interface MethodGroup extends Record<string, Method> {}
 
@@ -387,10 +33,375 @@ interface MethodParameter {
     type: string;
 }
 
-// interface TraktRequest {
-//     body: string;
-// }
+/**
+ * Utility Classes
+ */
 
-// interface TraktResponse {
-//     body: string;
-// }
+const toTabs = (n: number) => "\t".repeat(n);
+
+const toPascalCase = (...args: string[]) =>
+    args
+        .map((s) => {
+            if (!s[0]) return "";
+
+            return s[0].toUpperCase() + s.substring(1);
+        })
+        .join("");
+
+const createInterfaceName = (groupName: string, methodName: string, suffix: string) =>
+    toPascalCase("Trakt", groupName, methodName, suffix);
+
+/**
+ * Read data from apib parsing
+ */
+
+const output = fs.readFileSync("data.json", { encoding: "utf8", flag: "r" });
+const data: Record<string, MethodGroup> = JSON.parse(output);
+const writer = fs.createWriteStream("../methods.ts");
+
+let interfaces = "";
+
+/**
+ * Class Open
+ */
+
+writer.write(`import TraktBase, { TraktOptions, TraktFilter } from "./base";
+import got, { Response } from "got";
+
+class TraktMethods extends TraktBase {    
+    constructor(options: TraktOptions) {
+        super(options);
+    }
+`);
+
+/**
+ * Class Methods
+ */
+
+const classRequiredOptions = ["client_id", "client_secret"];
+const classOptionalOptions = ["access_token", "redirect_uri"];
+const classAllValues = [...classRequiredOptions, ...classOptionalOptions];
+
+/**
+ * Crew departments have invalid characters for object properties - added manually
+ */
+const problemInterfaces: Record<string, string> = {
+    crew: "TraktCrew",
+};
+
+/**
+ * Just for ease of use in applications, the common object interfaces are separate
+ */
+const commonInterfaces: Record<string, any> = {
+    user: {},
+    show: {},
+    movie: {},
+    season: {},
+    episode: {},
+    comment: {},
+    list: {},
+    person: {},
+};
+
+/**
+ * Shorthand methods when parsing the Method object
+ */
+const hasParameters = (method: Method) => !!method.parameters || method.extended || method.pagination || method.filters;
+const hasRequestHeaders = (method: Method) => Object.keys(method.request.headers ?? {}).length > 0;
+const hasRequestBody = (method: Method) => Object.keys(method.request.body ?? {}).length > 0;
+const hasUserRequestBody = (method: Method) =>
+    Object.keys(method.request.body ?? {}).filter((f) => classAllValues.indexOf(f) < 0).length > 0;
+const hasResponseBody = (method: Method) => Object.keys(method.response.body ?? {}).length > 0;
+
+/**
+ * When merging response arrays, check for any props that do not appear in all items
+ */
+const getOptionalProperties = (objects: Array<Record<string, any>>): string[] => {
+    const len = objects.length;
+    const allProps = objects.map((o) => Object.keys(o)).flat();
+    const countProps: Record<string, number> = {};
+    allProps.forEach((p) => (countProps.hasOwnProperty(p) ? countProps[p]++ : (countProps[p] = 1)));
+
+    return Object.entries(countProps)
+        .filter(([key, value]) => value < len)
+        .map(([key, value]) => key);
+};
+
+/**
+ * Convert the response JSON into a typescript interface by analysing the prop values
+ */
+const propsToString = (obj: Record<string, any> | Array<Record<string, any>>, depth: number): string => {
+    let interfaceProps: string = "";
+    let optional: string[] = [];
+
+    if (!obj) return "";
+
+    // If array then merge the props - typing for arrays is done outside in responseInterface/declaration
+    if (Array.isArray(obj) && typeof obj[0] === "object" && depth == 1) {
+        optional = getOptionalProperties(obj);
+        obj = Object.assign({}, ...obj);
+    } else if (Array.isArray(obj) && depth == 1) {
+        obj = obj[0];
+    }
+
+    let lastValue;
+
+    for (let [prop, value] of Object.entries(obj)) {
+        let isArray = false,
+            opt = optional.indexOf(prop) >= 0 ? "?" : "",
+            outType = "object";
+
+        // If array then merge the props
+        if (Array.isArray(value) && typeof value[0] === "object") {
+            isArray = true;
+            value = Object.assign({}, ...value);
+        } else if (Array.isArray(value)) {
+            isArray = true;
+            value = value[0];
+
+            // If the value at zero is undefined (empty array) then use previous value
+            // as they will be the same
+            if (typeof value == "undefined") value = lastValue;
+        }
+
+        // If the props are numeric, then wrap
+        if (/^[0-9].*/.test(prop)) prop = `"${prop}"`;
+
+        // Get the type for the interface
+        outType = typeof value;
+
+        if (outType === "object") {
+            if (commonInterfaces.hasOwnProperty(prop)) {
+                commonInterfaces[prop] = { ...commonInterfaces[prop], ...value };
+                interfaceProps += `\n${toTabs(depth)}${prop}${opt}: ${toPascalCase("Trakt", prop)}`;
+            } else if (problemInterfaces.hasOwnProperty(prop)) {
+                interfaceProps += `\n${toTabs(depth)}${prop}${opt}: ${problemInterfaces[prop]}`;
+            } else {
+                interfaceProps += `\n${toTabs(depth)}${prop}${opt}: {`;
+                interfaceProps += propsToString(value, depth + 1);
+                interfaceProps += `\n${toTabs(depth)}}`;
+            }
+        } else {
+            interfaceProps += `\n${toTabs(depth)}${prop}${opt}: ${typeof value}`;
+        }
+
+        // isArray and semi-colon, save the last value for empty siblings
+        interfaceProps += isArray ? "[];" : ";";
+        lastValue = value;
+    }
+
+    return interfaceProps;
+};
+
+/**
+ * Converts the request JSON into an interface
+ */
+const addRequestInterface = (groupName: string, methodName: string, method: Method) => {
+    const params = { ...(method.parameters ?? {}), ...(method.request.body ?? {}) };
+
+    if (method.pagination) {
+        params["page"] = { required: false, type: "number", values: [] };
+        params["limit"] = { required: false, type: "number", values: [] };
+    }
+
+    if (method.extended) {
+        params["extended"] = { required: false, type: "string", values: ["full", "metadata"] };
+    }
+
+    if (method.filters) {
+        params["filters"] = { required: false, type: "{ [key in TraktFilter]?: string }", values: [] };
+    }
+
+    const interfaceName = createInterfaceName(groupName, methodName, "Request");
+
+    if (Object.keys(params).length == 0) return "";
+
+    const paramString = Object.entries(params)
+        .filter(([key, value]) => classAllValues.indexOf(key) < 0)
+        .map(([key, value]) => {
+            let t = value?.type ?? "any";
+
+            switch (t) {
+                case "integer":
+                case "float":
+                case "flloat":
+                    t = "number";
+                    break;
+                case "array":
+                    t = "Array<any>";
+                    break;
+            }
+
+            if (value && value.values && value.values.length > 0) {
+                t = t == "number" ? value.values.join("|") : '"' + value.values.join('"|"') + '"';
+            }
+
+            return "\n\t" + key + (value?.required ?? false ? ": " : "?: ") + t + ";";
+        })
+        .join("");
+
+    interfaces += `    
+export interface ${interfaceName} { ${paramString}
+}
+`;
+};
+
+/**
+ * Converts the response JSON body into an interface
+ */
+const addResponseInterface = (groupName: string, methodName: string, method: Method): string => {
+    const interfaceName = createInterfaceName(groupName, methodName, "Response");
+    let body = method.response.body ?? {};
+
+    const isArray = Array.isArray(body);
+    let oType = isArray ? typeof body[0] : typeof body;
+
+    interfaces += `    
+export interface ${interfaceName} { ${propsToString(body, 1)} ${method.extended ? "\n\t[key: string]: any;" : ""}
+}
+`;
+
+    return (oType === "object" ? interfaceName : oType) + (isArray ? "[]" : "");
+};
+
+/**
+ * Creates the interface and returns the name for the parameter declaration on the method
+ */
+const getParameterDeclaration = (groupName: string, methodName: string, method: Method): string => {
+    if (!hasParameters(method) && !hasUserRequestBody(method)) return "";
+
+    addRequestInterface(groupName, methodName, method);
+    return "params: " + createInterfaceName(groupName, methodName, "Request");
+};
+
+/**
+ * Creates the response interface and returns the response type of the method
+ */
+const getResponseDeclaration = (groupName: string, methodName: string, method: Method): string => {
+    let declaration = "any";
+
+    if (hasResponseBody(method)) {
+        declaration = addResponseInterface(groupName, methodName, method);
+    }
+
+    // HACK refreshToken response type is for errors in apib
+    if (methodName == "refreshToken") declaration = createInterfaceName(groupName, "getToken", "Response");
+
+    return declaration;
+};
+
+/**
+ * Checks if the route requires parsing and returns the appropiate method.
+ */
+const getMethodRoute = (method: Method): string => {
+    if (hasParameters(method) || hasUserRequestBody(method)) return `this.parseEndpoint("${method.endpoint}", params)`;
+
+    return `"${method.endpoint}"`;
+};
+
+/**
+ * Parses the request headers and replaces the variables with class properties of request parameters
+ */
+const getRequestHeaders = (method: Method): string => {
+    if (!hasRequestHeaders(method)) return "";
+
+    const rx = /([\w\s]+)?\[([^\]]+)\]/;
+
+    let headers = Object.entries(method.request.headers ?? {})
+        .map(([key, value]) => {
+            if (!rx.test(value)) return `"${key}": "${value}"`;
+
+            value = value.replace(rx, (match: any, p1: any, p2: any) => {
+                if (match && !!p1) return `"${p1}" + this.${p2}`;
+
+                return `this.${p2}`;
+            });
+
+            return `"${key}": ${value}`;
+        })
+        .join(",\n" + toTabs(5));
+
+    return `
+                headers: {
+                    ${headers}
+                },`;
+};
+
+/**
+ * If the POST requires a body, pull the information from the JSON object
+ */
+const getRequestBody = (method: Method): string => {
+    if (!hasRequestBody(method)) return "";
+
+    let body = Object.keys(method.request.body ?? {})
+        .map((key) => {
+            if (classAllValues.indexOf(key) >= 0) return `"${key}": this.${key}`;
+            else return `"${key}": params.${key}`;
+        })
+        .join(",\n" + toTabs(5));
+
+    return `
+                json: {
+                    ${body}
+                },`;
+};
+
+for (const [groupName, group] of Object.entries(data)) {
+    writer.write("\t" + groupName + " = {");
+
+    for (const [methodName, method] of Object.entries(group)) {
+        const paramsDeclaration = getParameterDeclaration(groupName, methodName, method);
+        const responseDeclaration = getResponseDeclaration(groupName, methodName, method);
+        const route = getMethodRoute(method);
+
+        writer.write(`
+        ${methodName}: async (${paramsDeclaration}): Promise<Response<${responseDeclaration}>> => {
+            const route = this.baseUrl + ${route};
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "${method.verb}",${getRequestHeaders(method)}${getRequestBody(method)}                          
+            });   
+        },`);
+    }
+
+    writer.write("\n\t};");
+}
+
+/**
+ * Class Close
+ */
+
+writer.write(`}
+export default TraktMethods;
+
+`);
+
+/**
+ * Non-Confirming Interfaces
+ */
+
+interfaces += `
+export interface TraktCrew extends Record<string, TraktDepartment> { }
+    
+export interface TraktDepartment extends Array<TraktStaff> { }
+
+export interface TraktStaff {
+    jobs: Array<string>;
+    episode_count: number;
+    person: TraktPerson;
+}
+`;
+
+/**
+ * Write the common interfaces to file
+ */
+for (const [key, value] of Object.entries(commonInterfaces))
+    writer.write(`    
+export interface ${toPascalCase("Trakt", key)} { ${propsToString(value, 1)} 
+    [key: string]: any;
+}
+`);
+
+writer.write(interfaces);
