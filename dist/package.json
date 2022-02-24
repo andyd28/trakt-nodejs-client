@@ -1,7 +1,7 @@
 {
     "name": "trakt-typed-api",
-    "version": "0.8.12",
-    "description": "Trakt.tv typed node api client",
+    "version": "0.9.0",
+    "description": "Trakt.tv typescript node api client",
     "keywords": [
         "trakt",
         "trakt.tv",
@@ -12,8 +12,20 @@
     "homepage": "https://github.com/andyd28/trakt-typed-api",
     "main": "index.js",
     "types": "index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "generate": "(cd build && ts-node trakt-apib-parser.ts && ts-node trakt-api-generator.ts && cd ../) && tsc",
+        "patch": "(npm version patch && copy /Y package.json && ./dist/package.json copy /Y README.md ./dist && cd dist)"
+    },
     "author": "",
     "license": "ISC",
+    "devDependencies": {
+        "@tsconfig/node16": "^1.0.2",
+        "@types/node": "^17.0.15",
+        "ts-node": "^10.4.0",
+        "tslib": "^2.3.1",
+        "typescript": "^4.5.5"
+    },
     "dependencies": {
         "got": "^11.8.3"
     }
