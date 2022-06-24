@@ -5,5 +5,10 @@ ts-node .\build\trakt-api-generator.ts
 
 TO PUBLISH
 -----
+delete README.md and package.json from /dist
+
 npm run generate
 npm run patch
+
+cd dist
+npm publish
