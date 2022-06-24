@@ -1,6 +1,6 @@
 {
     "name": "trakt-typed-api",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "description": "Trakt.tv typescript node api client",
     "keywords": [
         "trakt",
