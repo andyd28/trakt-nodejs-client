@@ -1,0 +1,9 @@
+TO BUILD
+-----
+ts-node .\build\trakt-apib-parser.ts
+ts-node .\build\trakt-api-generator.ts
+
+TO PUBLISH
+-----
+npm run generate
+npm run patch

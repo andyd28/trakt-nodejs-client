@@ -198,7 +198,29 @@ class TraktMethods extends base_1.default {
             },
         };
         this.checkin = {
-            checkin: async () => {
+            checkin: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/checkin", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                    json: {
+                        "item": params.item,
+                        "sharing": params.sharing,
+                        "message": params.message,
+                        "venue_id": params.venue_id,
+                        "venue_name": params.venue_name,
+                        "app_version": params.app_version,
+                        "app_date": params.app_date
+                    },
+                });
+            },
+            deleteAnyActiveCheckins: async () => {
                 const route = this.baseUrl + "/checkin";
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
@@ -251,6 +273,35 @@ class TraktMethods extends base_1.default {
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
+                    method: "GET",
+                    headers: {
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            updateACommentOrReply: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "PUT",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                    json: {
+                        "comment": params.comment,
+                        "spoiler": params.spoiler
+                    },
+                });
+            },
+            deleteACommentOrReply: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
                     method: "DELETE",
                     headers: {
                         "Authorization": "Bearer " + this.access_token,
@@ -260,6 +311,18 @@ class TraktMethods extends base_1.default {
                 });
             },
             replies: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "GET",
+                    headers: {
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            postAReplyForAComment: async (params) => {
                 const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
@@ -301,6 +364,19 @@ class TraktMethods extends base_1.default {
                 });
             },
             like: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            removeLikeOnAComment: async (params) => {
                 const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
@@ -1135,6 +1211,19 @@ class TraktMethods extends base_1.default {
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            undoResetShowProgress: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched/reset", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
                     method: "DELETE",
                     headers: {
                         "Authorization": "Bearer " + this.access_token,
@@ -1801,6 +1890,19 @@ class TraktMethods extends base_1.default {
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            denyFollowRequest: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/requests/{id}", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
                     method: "DELETE",
                     headers: {
                         "Authorization": "Bearer " + this.access_token,
@@ -1914,6 +2016,18 @@ class TraktMethods extends base_1.default {
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
+                    method: "GET",
+                    headers: {
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            createCustomList: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
                     method: "POST",
                     headers: {
                         "Authorization": "Bearer " + this.access_token,
@@ -1949,6 +2063,40 @@ class TraktMethods extends base_1.default {
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
                     responseType: "json",
+                    method: "GET",
+                    headers: {
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            updateCustomList: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "PUT",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                    json: {
+                        "name": params.name,
+                        "description": params.description,
+                        "privacy": params.privacy,
+                        "display_numbers": params.display_numbers,
+                        "allow_comments": params.allow_comments,
+                        "sort_by": params.sort_by,
+                        "sort_how": params.sort_how
+                    },
+                });
+            },
+            deleteAUsersCustomList: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
                     method: "DELETE",
                     headers: {
                         "Authorization": "Bearer " + this.access_token,
@@ -1970,6 +2118,19 @@ class TraktMethods extends base_1.default {
                 });
             },
             listLike: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            removeLikeOnAList: async (params) => {
                 const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,
@@ -2060,6 +2221,19 @@ class TraktMethods extends base_1.default {
                 });
             },
             follow: async (params) => {
+                const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
+                return await (0, got_1.default)(route, {
+                    throwHttpErrors: false,
+                    responseType: "json",
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + this.access_token,
+                        "trakt-api-version": "2",
+                        "trakt-api-key": this.client_id
+                    },
+                });
+            },
+            unfollowThisUser: async (params) => {
                 const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
                 return await (0, got_1.default)(route, {
                     throwHttpErrors: false,

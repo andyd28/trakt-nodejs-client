@@ -18,7 +18,7 @@ const fileStream = fs.createReadStream("trakt.apib");
 const RX_GROUP = /^#{1,2} Group\s(?<name>[a-z]+)/i;
 const RX_METHOD = /^## (?<name>[a-z\s]+) \[(?<endpoint>.+)\]$/i;
 const RX_OPTIONALS = /^\#{4}\s\&\#[0-9]+/i;
-const RX_VERB = /^###.+\[(?<verb>.+)\]$/i;
+const RX_VERB = /^### (?<name>.+) \[(?<verb>.+)\]$/i;
 const RX_METHODPROP = /^\+\s(?<name>[a-z]+)/i;
 const RX_PARAMETER = /^\s{4}\+ (?<name>[a-z_]+) \((?<props>.+)\) /i;
 const RX_PARAMETERVALUE = /^\s{12}\+?\s?`(?<value>[a-z]+)`/i;
@@ -101,7 +101,8 @@ const parse = async () => {
             currentParameterName = match5.groups["name"] ?? "";
             currentResponseBody = "";
 
-            if (currentParameterName == "Body" && currentMethodPropName == "Request") assignProperty(currentMethodProp, currentParameterName, currentRequestBody);
+            if (currentParameterName == "Body" && currentMethodPropName == "Request")
+                assignProperty(currentMethodProp, currentParameterName, currentRequestBody);
         }
 
         const match6 = RX_PARAMETERVALUE.exec(line);
@@ -116,7 +117,34 @@ const parse = async () => {
 
         const match8 = RX_VERB.exec(line);
         if (match8?.groups && currentMethod) {
-            currentMethod["verb"] = match8.groups["verb"] ?? "GET";
+            if (currentMethod["verb"].length === 0) {
+                currentMethod["verb"] = match8.groups["verb"] ?? "GET";
+            } else if (match8?.groups) {
+                match8.groups["endpoint"] = currentMethod["endpoint"];
+
+                const verb = match8.groups["verb"] ?? "GET";
+                const parameters = currentMethod["parameters"];
+
+                // If delete, then copy the method, change the name as uses previous params
+                if (verb === "DELETE") {
+                    currentMethod = cloneMethod(currentMethodGroup, match8.groups, currentMethod);
+
+                    if (currentMethod) currentMethod.response = {};
+                    if (currentMethod) currentMethod.body = {};
+                } else {
+                    currentMethod = addMethod(currentMethodGroup, match8.groups);
+                }
+
+                if (currentMethod) {
+                    currentMethod["parameters"] = parameters;
+                    currentMethod["verb"] = verb;
+                    currentMethodProp = null;
+                    currentMethodPropName = "";
+                    currentParameter = null;
+                    currentParameterName = "";
+                    currentRequestBody = {};
+                }
+            }
         }
 
         const match9 = RX_RESPONSEBODYSTART.test(line);
@@ -143,7 +171,8 @@ const parse = async () => {
             var name = match12.groups["name"].trim();
             var nameArr = name.split(" ");
 
-            if (name !== "---" && name !== "Key" && nameArr[0]) currentRequestBody[nameArr[0].replace(/`/g, "")] = addRequestParameter(match12.groups);
+            if (name !== "---" && name !== "Key" && nameArr[0])
+                currentRequestBody[nameArr[0].replace(/`/g, "")] = addRequestParameter(match12.groups);
         }
 
         if (line.length == 0 && isRequestBody) isRequestBody = false;
@@ -241,12 +270,29 @@ const addMethod = (methodGroup: KeyObjectPairs, groups: Record<string, string>):
 
     methodGroup[name] = {
         endpoint: groups["endpoint"],
+        verb: "",
         extended: false,
         pagination: false,
         filters: false,
         emojis: false,
         oauth: false,
     };
+
+    return methodGroup[name];
+};
+
+const cloneMethod = (
+    methodGroup: KeyObjectPairs,
+    groups: Record<string, string>,
+    method: KeyObjectPairs
+): KeyObjectPairs => {
+    if (!groups["name"] || !groups["endpoint"]) return null;
+
+    var name = sanitiseName(groups["name"]);
+
+    if (!methodGroup) return null;
+
+    methodGroup[name] = JSON.parse(JSON.stringify(method));
 
     return methodGroup[name];
 };
@@ -265,7 +311,7 @@ const ensureMethodGroup = (methodGroups: KeyObjectPairs, groups: Record<string, 
 };
 
 const sanitiseName = (name: string): string => {
-    const nameArr = name.split(" ");
+    const nameArr = name.replace(/[^\d\w\s]/gi, "").split(" ");
 
     for (var ix = 0; ix < nameArr.length; ix++) {
         var cur = nameArr[ix];

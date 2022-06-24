@@ -22,18 +22,23 @@ declare class TraktMethods extends TraktBase {
         allDVD: (params: TraktCalendarsAllDVDRequest) => Promise<Response<TraktCalendarsAllDVDResponse[]>>;
     };
     checkin: {
-        checkin: () => Promise<Response<any>>;
+        checkin: (params: TraktCheckinCheckinRequest) => Promise<Response<TraktCheckinCheckinResponse>>;
+        deleteAnyActiveCheckins: () => Promise<Response<any>>;
     };
     certifications: {
         list: (params: TraktCertificationsListRequest) => Promise<Response<TraktCertificationsListResponse>>;
     };
     comments: {
         comments: (params: TraktCommentsCommentsRequest) => Promise<Response<TraktCommentsCommentsResponse>>;
-        comment: (params: TraktCommentsCommentRequest) => Promise<Response<any>>;
-        replies: (params: TraktCommentsRepliesRequest) => Promise<Response<TraktCommentsRepliesResponse>>;
+        comment: (params: TraktCommentsCommentRequest) => Promise<Response<TraktCommentsCommentResponse>>;
+        updateACommentOrReply: (params: TraktCommentsUpdateACommentOrReplyRequest) => Promise<Response<TraktCommentsUpdateACommentOrReplyResponse>>;
+        deleteACommentOrReply: (params: TraktCommentsDeleteACommentOrReplyRequest) => Promise<Response<any>>;
+        replies: (params: TraktCommentsRepliesRequest) => Promise<Response<TraktCommentsRepliesResponse[]>>;
+        postAReplyForAComment: (params: TraktCommentsPostAReplyForACommentRequest) => Promise<Response<TraktCommentsPostAReplyForACommentResponse>>;
         item: (params: TraktCommentsItemRequest) => Promise<Response<TraktCommentsItemResponse>>;
         likes: (params: TraktCommentsLikesRequest) => Promise<Response<TraktCommentsLikesResponse[]>>;
         like: (params: TraktCommentsLikeRequest) => Promise<Response<any>>;
+        removeLikeOnAComment: (params: TraktCommentsRemoveLikeOnACommentRequest) => Promise<Response<any>>;
         trending: (params: TraktCommentsTrendingRequest) => Promise<Response<TraktCommentsTrendingResponse[]>>;
         recent: (params: TraktCommentsRecentRequest) => Promise<Response<TraktCommentsRecentResponse[]>>;
         updates: (params: TraktCommentsUpdatesRequest) => Promise<Response<TraktCommentsUpdatesResponse[]>>;
@@ -120,7 +125,8 @@ declare class TraktMethods extends TraktBase {
         lists: (params: TraktShowsListsRequest) => Promise<Response<TraktShowsListsResponse[]>>;
         collectionProgress: (params: TraktShowsCollectionProgressRequest) => Promise<Response<TraktShowsCollectionProgressResponse>>;
         watchedProgress: (params: TraktShowsWatchedProgressRequest) => Promise<Response<TraktShowsWatchedProgressResponse>>;
-        resetWatchedProgress: (params: TraktShowsResetWatchedProgressRequest) => Promise<Response<any>>;
+        resetWatchedProgress: (params: TraktShowsResetWatchedProgressRequest) => Promise<Response<TraktShowsResetWatchedProgressResponse>>;
+        undoResetShowProgress: (params: TraktShowsUndoResetShowProgressRequest) => Promise<Response<any>>;
         people: (params: TraktShowsPeopleRequest) => Promise<Response<TraktShowsPeopleResponse>>;
         ratings: (params: TraktShowsRatingsRequest) => Promise<Response<TraktShowsRatingsResponse>>;
         related: (params: TraktShowsRelatedRequest) => Promise<Response<TraktShowsRelatedResponse[]>>;
@@ -176,7 +182,8 @@ declare class TraktMethods extends TraktBase {
         settings: () => Promise<Response<TraktUsersSettingsResponse>>;
         followingRequests: (params: TraktUsersFollowingRequestsRequest) => Promise<Response<TraktUsersFollowingRequestsResponse[]>>;
         followerRequests: (params: TraktUsersFollowerRequestsRequest) => Promise<Response<TraktUsersFollowerRequestsResponse[]>>;
-        approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsRequest) => Promise<Response<any>>;
+        approveOrDenyFollowerRequests: (params: TraktUsersApproveOrDenyFollowerRequestsRequest) => Promise<Response<TraktUsersApproveOrDenyFollowerRequestsResponse>>;
+        denyFollowRequest: (params: TraktUsersDenyFollowRequestRequest) => Promise<Response<any>>;
         hiddenItems: (params: TraktUsersHiddenItemsRequest) => Promise<Response<TraktUsersHiddenItemsResponse[]>>;
         addHiddenItems: (params: TraktUsersAddHiddenItemsRequest) => Promise<Response<TraktUsersAddHiddenItemsResponse>>;
         removeHiddenItems: (params: TraktUsersRemoveHiddenItemsRequest) => Promise<Response<TraktUsersRemoveHiddenItemsResponse>>;
@@ -184,17 +191,22 @@ declare class TraktMethods extends TraktBase {
         likes: (params: TraktUsersLikesRequest) => Promise<Response<TraktUsersLikesResponse[]>>;
         collection: (params: TraktUsersCollectionRequest) => Promise<Response<TraktUsersCollectionResponse[]>>;
         comments: (params: TraktUsersCommentsRequest) => Promise<Response<TraktUsersCommentsResponse[]>>;
-        lists: (params: TraktUsersListsRequest) => Promise<Response<TraktUsersListsResponse>>;
+        lists: (params: TraktUsersListsRequest) => Promise<Response<TraktUsersListsResponse[]>>;
+        createCustomList: (params: TraktUsersCreateCustomListRequest) => Promise<Response<TraktUsersCreateCustomListResponse>>;
         reorderLists: (params: TraktUsersReorderListsRequest) => Promise<Response<TraktUsersReorderListsResponse>>;
-        list: (params: TraktUsersListRequest) => Promise<Response<any>>;
+        list: (params: TraktUsersListRequest) => Promise<Response<TraktUsersListResponse>>;
+        updateCustomList: (params: TraktUsersUpdateCustomListRequest) => Promise<Response<TraktUsersUpdateCustomListResponse>>;
+        deleteAUsersCustomList: (params: TraktUsersDeleteAUsersCustomListRequest) => Promise<Response<any>>;
         listLikes: (params: TraktUsersListLikesRequest) => Promise<Response<TraktUsersListLikesResponse[]>>;
         listLike: (params: TraktUsersListLikeRequest) => Promise<Response<any>>;
+        removeLikeOnAList: (params: TraktUsersRemoveLikeOnAListRequest) => Promise<Response<any>>;
         listItems: (params: TraktUsersListItemsRequest) => Promise<Response<TraktUsersListItemsResponse[]>>;
         addListItems: (params: TraktUsersAddListItemsRequest) => Promise<Response<TraktUsersAddListItemsResponse>>;
         removeListItems: (params: TraktUsersRemoveListItemsRequest) => Promise<Response<TraktUsersRemoveListItemsResponse>>;
         reorderListItems: (params: TraktUsersReorderListItemsRequest) => Promise<Response<TraktUsersReorderListItemsResponse>>;
         listComments: (params: TraktUsersListCommentsRequest) => Promise<Response<TraktUsersListCommentsResponse[]>>;
-        follow: (params: TraktUsersFollowRequest) => Promise<Response<any>>;
+        follow: (params: TraktUsersFollowRequest) => Promise<Response<TraktUsersFollowResponse>>;
+        unfollowThisUser: (params: TraktUsersUnfollowThisUserRequest) => Promise<Response<any>>;
         followers: (params: TraktUsersFollowersRequest) => Promise<Response<TraktUsersFollowersResponse[]>>;
         following: (params: TraktUsersFollowingRequest) => Promise<Response<TraktUsersFollowingResponse[]>>;
         friends: (params: TraktUsersFriendsRequest) => Promise<Response<TraktUsersFriendsResponse[]>>;
@@ -492,6 +504,18 @@ export interface TraktCalendarsAllDVDResponse {
     movie: TraktMovie;
     [key: string]: any;
 }
+export interface TraktCheckinCheckinRequest {
+    item: object;
+    sharing?: object;
+    message?: string;
+    venue_id?: string;
+    venue_name?: string;
+    app_version?: string;
+    app_date?: string;
+}
+export interface TraktCheckinCheckinResponse {
+    expires_at: string;
+}
 export interface TraktCertificationsListRequest {
     type: "movies" | "shows";
 }
@@ -528,14 +552,75 @@ export interface TraktCommentsCommentsResponse {
 export interface TraktCommentsCommentRequest {
     id: number;
 }
+export interface TraktCommentsCommentResponse {
+    id: number;
+    parent_id: number;
+    created_at: string;
+    comment: string;
+    spoiler: boolean;
+    review: boolean;
+    replies: number;
+    likes: number;
+    user_stats: {
+        rating: number;
+        play_count: number;
+        completed_count: number;
+    };
+    user: TraktUser;
+}
+export interface TraktCommentsUpdateACommentOrReplyRequest {
+    id: number;
+    comment?: string;
+    spoiler?: boolean;
+}
+export interface TraktCommentsUpdateACommentOrReplyResponse {
+    id: number;
+    parent_id: number;
+    created_at: string;
+    updated_at: string;
+    comment: string;
+    spoiler: boolean;
+    review: boolean;
+    replies: number;
+    likes: number;
+    user_stats: {
+        rating: {};
+        play_count: number;
+        completed_count: number;
+    };
+    user: TraktUser;
+}
+export interface TraktCommentsDeleteACommentOrReplyRequest {
+    id: number;
+}
 export interface TraktCommentsRepliesRequest {
     id: number;
-    comment: string;
-    spoiler?: boolean;
     page?: number;
     limit?: number;
 }
 export interface TraktCommentsRepliesResponse {
+    id: number;
+    parent_id: number;
+    created_at: string;
+    updated_at: string;
+    comment: string;
+    spoiler: boolean;
+    review: boolean;
+    replies: number;
+    likes: number;
+    user_stats: {
+        rating: number;
+        play_count: number;
+        completed_count: number;
+    };
+    user: TraktUser;
+}
+export interface TraktCommentsPostAReplyForACommentRequest {
+    id: number;
+    comment: string;
+    spoiler?: boolean;
+}
+export interface TraktCommentsPostAReplyForACommentResponse {
     id: number;
     parent_id: number;
     created_at: string;
@@ -571,6 +656,9 @@ export interface TraktCommentsLikesResponse {
     user: TraktUser;
 }
 export interface TraktCommentsLikeRequest {
+    id: number;
+}
+export interface TraktCommentsRemoveLikeOnACommentRequest {
     id: number;
 }
 export interface TraktCommentsTrendingRequest {
@@ -1598,6 +1686,12 @@ export interface TraktShowsWatchedProgressResponse {
 export interface TraktShowsResetWatchedProgressRequest {
     id: string;
 }
+export interface TraktShowsResetWatchedProgressResponse {
+    reset_at: string;
+}
+export interface TraktShowsUndoResetShowProgressRequest {
+    id: string;
+}
 export interface TraktShowsPeopleRequest {
     id: string;
     extended?: "full" | "metadata";
@@ -2608,6 +2702,13 @@ export interface TraktUsersFollowerRequestsResponse {
 export interface TraktUsersApproveOrDenyFollowerRequestsRequest {
     id: number;
 }
+export interface TraktUsersApproveOrDenyFollowerRequestsResponse {
+    followed_at: string;
+    user: TraktUser;
+}
+export interface TraktUsersDenyFollowRequestRequest {
+    id: number;
+}
 export interface TraktUsersHiddenItemsRequest {
     section: "calendar" | "recommendations" | "comments";
     type?: string;
@@ -2771,6 +2872,27 @@ export interface TraktUsersCommentsResponse {
 }
 export interface TraktUsersListsRequest {
     id: string;
+}
+export interface TraktUsersListsResponse {
+    name: string;
+    description: string;
+    privacy: string;
+    display_numbers: boolean;
+    allow_comments: boolean;
+    sort_by: string;
+    sort_how: string;
+    created_at: string;
+    updated_at: string;
+    item_count: number;
+    comment_count: number;
+    likes: number;
+    ids: {
+        trakt: number;
+        slug: string;
+    };
+}
+export interface TraktUsersCreateCustomListRequest {
+    id: string;
     name: string;
     description?: string;
     privacy?: "private" | "friends" | "public";
@@ -2779,7 +2901,7 @@ export interface TraktUsersListsRequest {
     sort_by?: "rank" | "added" | "title" | "released" | "runtime" | "popularity" | "percentage" | "votes" | "my_rating" | "random" | "watched" | "collected";
     sort_how?: "asc" | "desc";
 }
-export interface TraktUsersListsResponse {
+export interface TraktUsersCreateCustomListResponse {
     name: string;
     description: string;
     privacy: string;
@@ -2808,6 +2930,59 @@ export interface TraktUsersListRequest {
     id: string;
     list_id: string;
 }
+export interface TraktUsersListResponse {
+    name: string;
+    description: string;
+    privacy: string;
+    display_numbers: boolean;
+    allow_comments: boolean;
+    sort_by: string;
+    sort_how: string;
+    created_at: string;
+    updated_at: string;
+    item_count: number;
+    comment_count: number;
+    likes: number;
+    ids: {
+        trakt: number;
+        slug: string;
+    };
+    user: TraktUser;
+}
+export interface TraktUsersUpdateCustomListRequest {
+    id: string;
+    list_id: string;
+    name?: string;
+    description?: string;
+    privacy?: string;
+    display_numbers?: boolean;
+    allow_comments?: boolean;
+    sort_by?: string;
+    sort_how?: string;
+}
+export interface TraktUsersUpdateCustomListResponse {
+    name: string;
+    description: string;
+    privacy: string;
+    display_numbers: boolean;
+    allow_comments: boolean;
+    sort_by: string;
+    sort_how: string;
+    created_at: string;
+    updated_at: string;
+    item_count: number;
+    comment_count: number;
+    likes: number;
+    ids: {
+        trakt: number;
+        slug: string;
+    };
+    user: TraktUser;
+}
+export interface TraktUsersDeleteAUsersCustomListRequest {
+    id: string;
+    list_id: string;
+}
 export interface TraktUsersListLikesRequest {
     id: string;
     list_id: string;
@@ -2819,6 +2994,10 @@ export interface TraktUsersListLikesResponse {
     user: TraktUser;
 }
 export interface TraktUsersListLikeRequest {
+    id: string;
+    list_id: string;
+}
+export interface TraktUsersRemoveLikeOnAListRequest {
     id: string;
     list_id: string;
 }
@@ -2972,6 +3151,13 @@ export interface TraktUsersListCommentsResponse {
     user: TraktUser;
 }
 export interface TraktUsersFollowRequest {
+    id: string;
+}
+export interface TraktUsersFollowResponse {
+    approved_at: string;
+    user: TraktUser;
+}
+export interface TraktUsersUnfollowThisUserRequest {
     id: string;
 }
 export interface TraktUsersFollowersRequest {

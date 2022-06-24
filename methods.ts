@@ -208,7 +208,30 @@ class TraktMethods extends TraktBase {
             });   
         },
 	};	checkin = {
-        checkin: async (): Promise<Response<any>> => {
+        checkin: async (params: TraktCheckinCheckinRequest): Promise<Response<TraktCheckinCheckinResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/checkin", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },
+                json: {
+                    "item": params.item,
+					"sharing": params.sharing,
+					"message": params.message,
+					"venue_id": params.venue_id,
+					"venue_name": params.venue_name,
+					"app_version": params.app_version,
+					"app_date": params.app_date
+                },                          
+            });   
+        },
+        deleteAnyActiveCheckins: async (): Promise<Response<any>> => {
             const route = this.baseUrl + "/checkin";
             
             return await got(route, {
@@ -257,7 +280,38 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        comment: async (params: TraktCommentsCommentRequest): Promise<Response<any>> => {
+        comment: async (params: TraktCommentsCommentRequest): Promise<Response<TraktCommentsCommentResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "GET",
+                headers: {
+                    "trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        updateACommentOrReply: async (params: TraktCommentsUpdateACommentOrReplyRequest): Promise<Response<TraktCommentsUpdateACommentOrReplyResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },
+                json: {
+                    "comment": params.comment,
+					"spoiler": params.spoiler
+                },                          
+            });   
+        },
+        deleteACommentOrReply: async (params: TraktCommentsDeleteACommentOrReplyRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/comments/{id}", params);
             
             return await got(route, {
@@ -271,7 +325,20 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        replies: async (params: TraktCommentsRepliesRequest): Promise<Response<TraktCommentsRepliesResponse>> => {
+        replies: async (params: TraktCommentsRepliesRequest): Promise<Response<TraktCommentsRepliesResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "GET",
+                headers: {
+                    "trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        postAReplyForAComment: async (params: TraktCommentsPostAReplyForACommentRequest): Promise<Response<TraktCommentsPostAReplyForACommentResponse>> => {
             const route = this.baseUrl + this.parseEndpoint("/comments/{id}/replies", params);
             
             return await got(route, {
@@ -316,6 +383,20 @@ class TraktMethods extends TraktBase {
             });   
         },
         like: async (params: TraktCommentsLikeRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        removeLikeOnAComment: async (params: TraktCommentsRemoveLikeOnACommentRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/comments/{id}/like", params);
             
             return await got(route, {
@@ -1199,7 +1280,21 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        resetWatchedProgress: async (params: TraktShowsResetWatchedProgressRequest): Promise<Response<any>> => {
+        resetWatchedProgress: async (params: TraktShowsResetWatchedProgressRequest): Promise<Response<TraktShowsResetWatchedProgressResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched/reset", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        undoResetShowProgress: async (params: TraktShowsUndoResetShowProgressRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/shows/{id}/progress/watched/reset", params);
             
             return await got(route, {
@@ -1909,7 +2004,21 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        approveOrDenyFollowerRequests: async (params: TraktUsersApproveOrDenyFollowerRequestsRequest): Promise<Response<any>> => {
+        approveOrDenyFollowerRequests: async (params: TraktUsersApproveOrDenyFollowerRequestsRequest): Promise<Response<TraktUsersApproveOrDenyFollowerRequestsResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/requests/{id}", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        denyFollowRequest: async (params: TraktUsersDenyFollowRequestRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/users/requests/{id}", params);
             
             return await got(route, {
@@ -2030,7 +2139,20 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        lists: async (params: TraktUsersListsRequest): Promise<Response<TraktUsersListsResponse>> => {
+        lists: async (params: TraktUsersListsRequest): Promise<Response<TraktUsersListsResponse[]>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "GET",
+                headers: {
+                    "trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        createCustomList: async (params: TraktUsersCreateCustomListRequest): Promise<Response<TraktUsersCreateCustomListResponse>> => {
             const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists", params);
             
             return await got(route, {
@@ -2067,7 +2189,43 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        list: async (params: TraktUsersListRequest): Promise<Response<any>> => {
+        list: async (params: TraktUsersListRequest): Promise<Response<TraktUsersListResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "GET",
+                headers: {
+                    "trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        updateCustomList: async (params: TraktUsersUpdateCustomListRequest): Promise<Response<TraktUsersUpdateCustomListResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },
+                json: {
+                    "name": params.name,
+					"description": params.description,
+					"privacy": params.privacy,
+					"display_numbers": params.display_numbers,
+					"allow_comments": params.allow_comments,
+					"sort_by": params.sort_by,
+					"sort_how": params.sort_how
+                },                          
+            });   
+        },
+        deleteAUsersCustomList: async (params: TraktUsersDeleteAUsersCustomListRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}", params);
             
             return await got(route, {
@@ -2095,6 +2253,20 @@ class TraktMethods extends TraktBase {
             });   
         },
         listLike: async (params: TraktUsersListLikeRequest): Promise<Response<any>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        removeLikeOnAList: async (params: TraktUsersRemoveLikeOnAListRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/users/{id}/lists/{list_id}/like", params);
             
             return await got(route, {
@@ -2190,7 +2362,21 @@ class TraktMethods extends TraktBase {
                 },                          
             });   
         },
-        follow: async (params: TraktUsersFollowRequest): Promise<Response<any>> => {
+        follow: async (params: TraktUsersFollowRequest): Promise<Response<TraktUsersFollowResponse>> => {
+            const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
+            
+            return await got(route, {
+                throwHttpErrors: false,
+                responseType: "json",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + this.access_token,
+					"trakt-api-version": "2",
+					"trakt-api-key": this.client_id
+                },                          
+            });   
+        },
+        unfollowThisUser: async (params: TraktUsersUnfollowThisUserRequest): Promise<Response<any>> => {
             const route = this.baseUrl + this.parseEndpoint("/users/{id}/follow", params);
             
             return await got(route, {
@@ -2639,6 +2825,20 @@ export interface TraktCalendarsAllDVDResponse {
 	[key: string]: any;
 }
     
+export interface TraktCheckinCheckinRequest { 
+	item: object;
+	sharing?: object;
+	message?: string;
+	venue_id?: string;
+	venue_name?: string;
+	app_version?: string;
+	app_date?: string;
+}
+    
+export interface TraktCheckinCheckinResponse { 
+	expires_at: string; 
+}
+    
 export interface TraktCertificationsListRequest { 
 	type: "movies"|"shows";
 }
@@ -2681,15 +2881,83 @@ export interface TraktCommentsCommentRequest {
 	id: number;
 }
     
+export interface TraktCommentsCommentResponse { 
+	id: number;
+	parent_id: number;
+	created_at: string;
+	comment: string;
+	spoiler: boolean;
+	review: boolean;
+	replies: number;
+	likes: number;
+	user_stats: {
+		rating: number;
+		play_count: number;
+		completed_count: number;
+	};
+	user: TraktUser; 
+}
+    
+export interface TraktCommentsUpdateACommentOrReplyRequest { 
+	id: number;
+	comment?: string;
+	spoiler?: boolean;
+}
+    
+export interface TraktCommentsUpdateACommentOrReplyResponse { 
+	id: number;
+	parent_id: number;
+	created_at: string;
+	updated_at: string;
+	comment: string;
+	spoiler: boolean;
+	review: boolean;
+	replies: number;
+	likes: number;
+	user_stats: {
+		rating: {
+		};
+		play_count: number;
+		completed_count: number;
+	};
+	user: TraktUser; 
+}
+    
+export interface TraktCommentsDeleteACommentOrReplyRequest { 
+	id: number;
+}
+    
 export interface TraktCommentsRepliesRequest { 
 	id: number;
-	comment: string;
-	spoiler?: boolean;
 	page?: number;
 	limit?: number;
 }
     
 export interface TraktCommentsRepliesResponse { 
+	id: number;
+	parent_id: number;
+	created_at: string;
+	updated_at: string;
+	comment: string;
+	spoiler: boolean;
+	review: boolean;
+	replies: number;
+	likes: number;
+	user_stats: {
+		rating: number;
+		play_count: number;
+		completed_count: number;
+	};
+	user: TraktUser; 
+}
+    
+export interface TraktCommentsPostAReplyForACommentRequest { 
+	id: number;
+	comment: string;
+	spoiler?: boolean;
+}
+    
+export interface TraktCommentsPostAReplyForACommentResponse { 
 	id: number;
 	parent_id: number;
 	created_at: string;
@@ -2731,6 +2999,10 @@ export interface TraktCommentsLikesResponse {
 }
     
 export interface TraktCommentsLikeRequest { 
+	id: number;
+}
+    
+export interface TraktCommentsRemoveLikeOnACommentRequest { 
 	id: number;
 }
     
@@ -3873,6 +4145,14 @@ export interface TraktShowsResetWatchedProgressRequest {
 	id: string;
 }
     
+export interface TraktShowsResetWatchedProgressResponse { 
+	reset_at: string; 
+}
+    
+export interface TraktShowsUndoResetShowProgressRequest { 
+	id: string;
+}
+    
 export interface TraktShowsPeopleRequest { 
 	id: string;
 	extended?: "full"|"metadata";
@@ -4978,6 +5258,15 @@ export interface TraktUsersApproveOrDenyFollowerRequestsRequest {
 	id: number;
 }
     
+export interface TraktUsersApproveOrDenyFollowerRequestsResponse { 
+	followed_at: string;
+	user: TraktUser; 
+}
+    
+export interface TraktUsersDenyFollowRequestRequest { 
+	id: number;
+}
+    
 export interface TraktUsersHiddenItemsRequest { 
 	section: "calendar"|"recommendations"|"comments";
 	type?: string;
@@ -5155,6 +5444,29 @@ export interface TraktUsersCommentsResponse {
     
 export interface TraktUsersListsRequest { 
 	id: string;
+}
+    
+export interface TraktUsersListsResponse { 
+	name: string;
+	description: string;
+	privacy: string;
+	display_numbers: boolean;
+	allow_comments: boolean;
+	sort_by: string;
+	sort_how: string;
+	created_at: string;
+	updated_at: string;
+	item_count: number;
+	comment_count: number;
+	likes: number;
+	ids: {
+		trakt: number;
+		slug: string;
+	}; 
+}
+    
+export interface TraktUsersCreateCustomListRequest { 
+	id: string;
 	name: string;
 	description?: string;
 	privacy?: "private"|"friends"|"public";
@@ -5164,7 +5476,7 @@ export interface TraktUsersListsRequest {
 	sort_how?: "asc"|"desc";
 }
     
-export interface TraktUsersListsResponse { 
+export interface TraktUsersCreateCustomListResponse { 
 	name: string;
 	description: string;
 	privacy: string;
@@ -5197,6 +5509,63 @@ export interface TraktUsersListRequest {
 	list_id: string;
 }
     
+export interface TraktUsersListResponse { 
+	name: string;
+	description: string;
+	privacy: string;
+	display_numbers: boolean;
+	allow_comments: boolean;
+	sort_by: string;
+	sort_how: string;
+	created_at: string;
+	updated_at: string;
+	item_count: number;
+	comment_count: number;
+	likes: number;
+	ids: {
+		trakt: number;
+		slug: string;
+	};
+	user: TraktUser; 
+}
+    
+export interface TraktUsersUpdateCustomListRequest { 
+	id: string;
+	list_id: string;
+	name?: string;
+	description?: string;
+	privacy?: string;
+	display_numbers?: boolean;
+	allow_comments?: boolean;
+	sort_by?: string;
+	sort_how?: string;
+}
+    
+export interface TraktUsersUpdateCustomListResponse { 
+	name: string;
+	description: string;
+	privacy: string;
+	display_numbers: boolean;
+	allow_comments: boolean;
+	sort_by: string;
+	sort_how: string;
+	created_at: string;
+	updated_at: string;
+	item_count: number;
+	comment_count: number;
+	likes: number;
+	ids: {
+		trakt: number;
+		slug: string;
+	};
+	user: TraktUser; 
+}
+    
+export interface TraktUsersDeleteAUsersCustomListRequest { 
+	id: string;
+	list_id: string;
+}
+    
 export interface TraktUsersListLikesRequest { 
 	id: string;
 	list_id: string;
@@ -5210,6 +5579,11 @@ export interface TraktUsersListLikesResponse {
 }
     
 export interface TraktUsersListLikeRequest { 
+	id: string;
+	list_id: string;
+}
+    
+export interface TraktUsersRemoveLikeOnAListRequest { 
 	id: string;
 	list_id: string;
 }
@@ -5375,6 +5749,15 @@ export interface TraktUsersListCommentsResponse {
 }
     
 export interface TraktUsersFollowRequest { 
+	id: string;
+}
+    
+export interface TraktUsersFollowResponse { 
+	approved_at: string;
+	user: TraktUser; 
+}
+    
+export interface TraktUsersUnfollowThisUserRequest { 
 	id: string;
 }
     
