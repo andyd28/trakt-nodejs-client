@@ -307,7 +307,12 @@ const getRequestHeaders = (method: Method): string => {
 
     const rx = /([\w\s]+)?\[([^\]]+)\]/;
 
-    let headers = Object.entries(method.request.headers ?? {})
+    // HACK for users, add the authorization header
+    const requestHeaders = method.request.headers;
+    if (method.endpoint.startsWith("/users/") && requestHeaders)
+        requestHeaders["Authorization"] = "Bearer [access_token]";
+
+    let headers = Object.entries(requestHeaders ?? {})
         .map(([key, value]) => {
             if (!rx.test(value)) return `"${key}": "${value}"`;
 

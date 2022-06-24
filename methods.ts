@@ -2095,7 +2095,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2122,7 +2123,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2135,7 +2137,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2148,7 +2151,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2198,7 +2202,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2248,7 +2253,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2289,7 +2295,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2358,7 +2365,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2399,7 +2407,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2412,7 +2421,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2425,7 +2435,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2438,7 +2449,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2451,7 +2463,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2464,7 +2477,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2491,7 +2505,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2504,7 +2519,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
@@ -2517,7 +2533,8 @@ class TraktMethods extends TraktBase {
                 method: "GET",
                 headers: {
                     "trakt-api-version": "2",
-					"trakt-api-key": this.client_id
+					"trakt-api-key": this.client_id,
+					"Authorization": "Bearer " + this.access_token
                 },                          
             });   
         },
