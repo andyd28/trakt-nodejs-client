@@ -27,6 +27,7 @@ describe("Device Code Authentication", function () {
     } else {
         it("should return a device code for later use", async function () {
             deviceCodeResponse = (await trakt.authentication.deviceCode()).body;
+            console.log(deviceCodeResponse);
 
             assert.ok(deviceCodeResponse);
         });
