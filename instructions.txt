@@ -12,3 +12,8 @@ npm run patch
 
 cd dist
 npm publish
+
+TO IMPROVE
+-----
+https://socket.dev/npm/package/trakt-typed-api/issues/0.9.3
+If app parameters are optional then make the declaration optional in the methog (See movies trending)
