@@ -1,37 +1,6 @@
 import { count } from "console";
+import { Method, MethodGroup, MethodParameter } from "./api-types";
 import fs from "fs";
-
-/**
- * Interfaces
- */
-
-interface MethodGroup extends Record<string, Method> {}
-
-interface Method {
-    endpoint: string;
-    pagination: boolean;
-    extended: boolean;
-    filters: boolean;
-    oauth: boolean;
-    emojis: boolean;
-    parameters?: Record<string, MethodParameter>;
-    verb: "GET" | "POST" | "PUT" | "DELETE";
-    request: {
-        headers?: Record<string, string>;
-        body?: Record<string, MethodParameter>;
-    };
-    response: {
-        headers?: Record<string, string>;
-        body: any;
-    };
-}
-
-interface MethodParameter {
-    values: Array<string>;
-    required: boolean;
-    default?: string;
-    type: string;
-}
 
 /**
  * Utility Classes

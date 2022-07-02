@@ -1,5 +1,5 @@
 {
-    "name": "trakt-typed-api",
+    "name": "trakt-nodejs-client",
     "version": "0.9.4",
     "description": "Trakt.tv typescript node api client",
     "keywords": [
@@ -9,7 +9,7 @@
         "typescript",
         "node.js"
     ],
-    "homepage": "https://github.com/andyd28/trakt-typed-api",
+    "homepage": "https://github.com/andyd28/trakt-nodejs-client",
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
@@ -17,8 +17,9 @@
         "generate": "(cd build && ts-node trakt-apib-parser.ts && ts-node trakt-api-generator.ts && cd ../) && tsc",
         "patch": "(npm version patch && copy /Y package.json && ./dist/package.json copy /Y README.md ./dist && cd dist)"
     },
-    "author": "",
+    "author": "Andy Davis",
     "license": "ISC",
+    "repository": "github:andyd_28/trakt-nodejs-client",
     "devDependencies": {
         "@tsconfig/node16": "^1.0.2",
         "@types/mocha": "^9.1.1",
