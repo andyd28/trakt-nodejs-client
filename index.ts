@@ -1,10 +1,25 @@
-import TraktMethods, { TraktAuthenticationGetTokenResponse, TraktAuthenticationDeviceCodeResponse } from "./methods";
+import TraktMethods, {
+    TraktAuthenticationAuthorizeRequest,
+    TraktAuthenticationGetTokenResponse,
+    TraktAuthenticationDeviceCodeResponse,
+} from "./methods";
 import { TraktOptions } from "./base";
 
 class Trakt extends TraktMethods {
     constructor(options: TraktOptions) {
         super(options);
     }
+
+    authentication = {
+        ...super.authentication,
+        generateAuthorizeUrl: (params: TraktAuthenticationAuthorizeRequest) => {
+            const search = new URLSearchParams({ ...params });
+            return "https://trakt.tv/oauth/authorize?" + search.toString();
+        },
+        isAuthenticated: () => {
+            return this.access_token.length > 0;
+        },
+    };
 
     public pollToken(params: TraktAuthenticationDeviceCodeResponse) {
         let attempts = 0;
