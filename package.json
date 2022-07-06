@@ -15,7 +15,7 @@
     "scripts": {
         "test": "ts-mocha -p tsconfig.json test/*.ts",
         "generate": "(cd build && ts-node trakt-apib-parser.ts && ts-node trakt-api-generator.ts && cd ../) && tsc",
-        "patch": "(npm version patch && copy /Y package.json && ./dist/package.json copy /Y README.md ./dist && cd dist)"
+        "patch": "(npm version patch && copy /Y package.json ./dist/package.json && copy /Y README.md ./dist/README.md && cd dist)"
     },
     "author": "Andy Davis",
     "license": "ISC",
