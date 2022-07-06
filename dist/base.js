@@ -45,7 +45,6 @@ class TraktBase {
                 endpoint += common + "=" + params[common];
         }
         endpoint = endpoint.replace(/\/+/g, "/");
-        console.log(endpoint);
         return endpoint;
     }
 }

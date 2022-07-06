@@ -17,6 +17,16 @@ const methods_1 = __importDefault(require("./methods"));
 class Trakt extends methods_1.default {
     constructor(options) {
         super(options);
+        this.authentication = {
+            ...super.authentication,
+            generateAuthorizeUrl: (params) => {
+                const search = new URLSearchParams({ ...params });
+                return "https://trakt.tv/oauth/authorize?" + search.toString();
+            },
+            isAuthenticated: () => {
+                return this.access_token.length > 0;
+            },
+        };
     }
     pollToken(params) {
         let attempts = 0;
