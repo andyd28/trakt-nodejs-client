@@ -13,7 +13,11 @@ class Trakt extends TraktMethods {
     authentication = {
         ...super.authentication,
         generateAuthorizeUrl: (params: TraktAuthenticationAuthorizeRequest) => {
-            const search = new URLSearchParams({ ...params, client_id: super.client_id });
+            const search = new URLSearchParams({
+                ...params,
+                client_id: super.client_id,
+                redirect_uri: super.redirect_uri,
+            });
             return "https://trakt.tv/oauth/authorize?" + search.toString();
         },
         isAuthenticated: () => {

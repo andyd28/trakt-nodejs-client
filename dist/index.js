@@ -20,7 +20,11 @@ class Trakt extends methods_1.default {
         this.authentication = {
             ...super.authentication,
             generateAuthorizeUrl: (params) => {
-                const search = new URLSearchParams({ ...params, client_id: super.client_id });
+                const search = new URLSearchParams({
+                    ...params,
+                    client_id: super.client_id,
+                    redirect_uri: super.redirect_uri,
+                });
                 return "https://trakt.tv/oauth/authorize?" + search.toString();
             },
             isAuthenticated: () => {
